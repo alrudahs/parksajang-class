@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>신청 완료 · 오픈 D-7 체크리스트 · 박사장 클라쓰</title>
+  <meta name="description" content="오픈 D-7 체크리스트 신청이 완료됐어요. 체크리스트를 내려받고, 3일 한정 할인으로 매장 운영 템플릿을 확인해 보세요.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1F3A5A">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/tracking.js"></script>
+  <script src="js/checklist.js" defer></script>
+</head>
+<body data-page="checklist-done">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container container--wide">
+      <a class="brand" href="index.html" aria-label="박사장 클라쓰 홈"><span class="brand-mark" aria-hidden="true">박</span>박사장 클라쓰</a>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="container container--narrow">
+      <div class="page-head">
+        <div class="done-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="greet" id="done-greet" hidden></span>
+        <h1 class="page-title">신청 완료</h1>
+      </div>
+
+      <!-- 체크리스트 다운로드 (지금은 임시 PDF — 실제 파일이 생기면 files/ 에서 교체) -->
+      <section class="card" aria-labelledby="dl-title">
+        <div class="file">
+          <span class="file-icon" aria-hidden="true">PDF</span>
+          <div>
+            <h2 class="file-name" id="dl-title">오픈 D-7 체크리스트</h2>
+            <p class="file-meta">PDF · 임시 파일</p>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--navy btn--block" href="files/d7-checklist-sample.pdf" download="박사장클라쓰_오픈D-7체크리스트.pdf">체크리스트 다운로드</a>
+        </div>
+      </section>
+
+      <!-- H1 가설 블록: 템플릿 샘플 + 3일 한정 할인 배너 (?offer=off 이면 숨김) -->
+      <div class="stack" id="done-offer">
+        <!-- 이미지 교체: 아래 .placeholder 를 <img src="images/template-sample.png" alt="운영 템플릿 샘플 1장"> 로 바꾸기 -->
+        <figure class="media media--doc">
+          <div class="placeholder" role="img" aria-label="운영 템플릿 샘플 1장 미리보기 자리">운영 템플릿 샘플 1장 미리보기</div>
+        </figure>
+        <div class="offer-banner">
+          <span class="badge">3일 한정</span>
+          <p class="price-line"><s class="num">19,900원</s> → <b class="num sale">14,900원</b></p>
+          <p class="countdown" data-countdown></p>
+          <p class="plus-line">+ 무료 Zoom 라이브 우선 초대</p>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn--primary btn--block" href="template.html">템플릿 보러 가기</a>
+      </div>
+
+      <p class="survey-link"><a href="survey.html?type=checklist">만족도 설문 참여하기 (2문항)</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-info"><span class="footer-brand">박사장 클라쓰</span> · <span>대표 박미경</span> · <span data-channel="kakao">카카오톡 채널 '박사장 클라쓰'(예정)</span> · <span data-channel="instagram">인스타그램 @parksajang_class(예정)</span></p>
+      <p class="demo-notice">본 페이지의 결제는 프로젝트용 데모이며 실제 결제가 일어나지 않습니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

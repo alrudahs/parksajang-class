@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>1인 매장 운영 셀프 진단 · 박사장 클라쓰</title>
+  <meta name="description" content="이미 장사 중인 사장님을 위한 무료 1인 매장 운영 셀프 진단. 예/아니오 10문항으로 동선·배달앱·재고 문제를 먼저 확인해 보세요.">
+  <meta name="theme-color" content="#1F3A5A">
+  <link rel="canonical" href="https://YOUR-DOMAIN/diagnosis.html">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/tracking.js"></script>
+  <script src="js/diagnosis.js" defer></script>
+</head>
+<body data-page="diagnosis">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container container--wide">
+      <a class="brand" href="index.html" aria-label="박사장 클라쓰 홈"><span class="brand-mark" aria-hidden="true">박</span>박사장 클라쓰</a>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="container container--narrow">
+
+      <!-- ① 진단 시작 -->
+      <section id="view-start" aria-labelledby="start-title">
+        <a class="back-link" href="index.html">← 처음으로</a>
+
+        <!-- 배너 ③ (docs/banner-copy.md · 운영 단계 사장님) -->
+        <aside class="loss-banner" aria-label="박사장 클라쓰 배너">
+          <p class="loss-main">버리는 재고, 나가는 알바, 새는 매출</p>
+          <p class="loss-sub">혼자 시작해 월 매출 4천만 원을 만든 박사장이 먼저 잡아드려요</p>
+        </aside>
+
+        <div class="page-head">
+          <span class="eyebrow">이미 장사 중인 사장님</span>
+          <h1 class="page-title" id="start-title">1인 매장 운영 셀프 진단</h1>
+          <p class="page-lead">운영 중인 사장님은 무료 '1인 매장 운영 셀프 진단'으로 동선·배달앱·재고 문제를 먼저 확인할 수 있어요.</p>
+        </div>
+        <div class="card">
+          <ul class="diag-facts">
+            <li><b>10문항</b><span>예 / 아니오</span></li>
+            <li><b>무료</b><span>점수 바로 확인</span></li>
+          </ul>
+          <ul class="info-list">
+            <li>8~10점 상 (잘 운영 중)</li>
+            <li>5~7점 중 (일부 개선 필요)</li>
+            <li>0~4점 하 (구조 점검 필요)</li>
+          </ul>
+          <div class="btn-row">
+            <button class="btn btn--primary btn--block" type="button" id="start-btn">진단 시작하기</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ② 10문항 (한 화면에 1문항) -->
+      <section id="view-question" hidden aria-label="셀프 진단 문항">
+        <div class="quiz-top">
+          <button class="back-link" type="button" id="q-prev">← 이전 문항</button>
+          <span class="q-count num" id="q-count">1 / 10</span>
+        </div>
+        <div class="progress" id="q-progress" role="progressbar" aria-label="진행" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+          <div class="progress-bar" id="q-bar" style="width:10%"></div>
+        </div>
+        <div class="card quiz-card">
+          <span class="q-no" id="q-no">Q1</span>
+          <h1 class="q-text" id="q-text" tabindex="-1">주방 동선이 한 방향으로 흘러, 조리 중 같은 자리를 여러 번 오가지 않는다</h1>
+          <div class="answer-grid">
+            <button class="btn btn--answer" type="button" id="q-yes">예</button>
+            <button class="btn btn--answer" type="button" id="q-no-btn">아니오</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ③ 결과 미리보기 (점수·구간만) + 연락처 등록 -->
+      <section id="view-preview" hidden aria-labelledby="preview-title">
+        <div class="card score-card">
+          <h1 class="card-title" id="preview-title">셀프 진단 결과</h1>
+          <p class="score"><b class="num" id="p-score">6</b><span class="num">/ 10점</span></p>
+          <span class="band-chip band-chip--mid" id="p-band">중 · 일부 개선 필요</span>
+          <div class="gauge" aria-hidden="true"><div class="gauge-fill gauge-fill--mid" id="p-gauge" style="width:60%"></div></div>
+        </div>
+
+        <div class="locked" aria-hidden="true">
+          <div class="locked-lines"><span></span><span></span><span></span></div>
+          <div class="locked-mark">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+        </div>
+        <p class="locked-text" id="p-locked">'아니오'라고 답한 항목의 개선 팁은 연락처를 등록하면 바로 볼 수 있어요.</p>
+
+        <form class="card" id="diag-form" novalidate aria-labelledby="contact-title">
+          <h2 class="card-title" id="contact-title">연락처 등록</h2>
+          <div class="field" style="margin-top:14px">
+            <label class="field-label" for="d-name">이름</label>
+            <input class="input" id="d-name" name="name" type="text" autocomplete="name" required aria-describedby="de-name">
+            <p class="error-msg" id="de-name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="d-contact">카카오톡 아이디 또는 이메일</label>
+            <input class="input" id="d-contact" name="contact" type="text" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="de-contact">
+            <p class="error-msg" id="de-contact" aria-live="polite"></p>
+          </div>
+          <label class="check">
+            <input type="checkbox" name="marketing" value="yes">
+            <span>마케팅 수신 동의 <small>(선택)</small></span>
+          </label>
+          <p class="reassure">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            광고 폭탄 없음 · 언제든 수신 거부
+          </p>
+          <div class="btn-row">
+            <button class="btn btn--primary btn--block" type="submit">전체 결과 보기</button>
+          </div>
+          <p class="fine-print">입력하신 정보는 다음 화면 안내에만 쓰이고 저장되지 않아요 (데모)</p>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-info"><span class="footer-brand">박사장 클라쓰</span> · <span>대표 박미경</span> · <span data-channel="kakao">카카오톡 채널 '박사장 클라쓰'(예정)</span> · <span data-channel="instagram">인스타그램 @parksajang_class(예정)</span></p>
+      <p class="demo-notice">본 페이지의 결제는 프로젝트용 데모이며 실제 결제가 일어나지 않습니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

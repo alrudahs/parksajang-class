@@ -1,0 +1,19 @@
+{
+  "name": "parksajang-class",
+  "version": "1.0.0",
+  "description": "박사장 클라쓰 랜딩 · 캡처 도구용 (사이트는 빌드 없음)",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "capture": "node scripts/capture.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "playwright": "^1.64.1"
+  },
+  "private": true
+}

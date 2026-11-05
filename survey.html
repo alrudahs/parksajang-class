@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>만족도 설문 · 박사장 클라쓰</title>
+  <meta name="description" content="박사장 클라쓰 만족도 설문 2문항.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1F3A5A">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/tracking.js"></script>
+  <script src="js/survey.js" defer></script>
+</head>
+<body data-page="survey">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container container--wide">
+      <a class="brand" href="index.html" aria-label="박사장 클라쓰 홈"><span class="brand-mark" aria-hidden="true">박</span>박사장 클라쓰</a>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="container container--narrow">
+      <div id="survey-body">
+        <div class="page-head">
+          <span class="eyebrow" id="survey-about">오픈 D-7 체크리스트</span>
+          <h1 class="page-title">만족도 설문</h1>
+          <p class="page-lead">2문항이에요. 이름·연락처는 묻지 않아요.</p>
+        </div>
+
+        <form class="card" id="survey-form" novalidate>
+          <input type="hidden" name="survey_type" value="checklist">
+
+          <fieldset class="field survey-q" data-group="satisfaction">
+            <legend class="survey-legend"><span class="q-no">문항 1</span>이 자료에 얼마나 만족하셨나요?</legend>
+            <div class="scale scale--5" id="scale-satisfaction"></div>
+            <div class="scale-ends" aria-hidden="true"><span>1점</span><span>5점</span></div>
+            <p class="error-msg" aria-live="polite"></p>
+          </fieldset>
+
+          <div class="survey-sep" aria-hidden="true"></div>
+          <fieldset class="field survey-q" data-group="recommend">
+            <legend class="survey-legend"><span class="q-no">문항 2</span>주변 초보 사장님께 추천하시겠어요?</legend>
+            <div class="scale scale--11" id="scale-recommend"></div>
+            <div class="scale-ends" aria-hidden="true"><span>0점</span><span>10점</span></div>
+            <p class="error-msg" aria-live="polite"></p>
+          </fieldset>
+
+          <div class="btn-row">
+            <button class="btn btn--primary btn--block" type="submit">설문 제출하기</button>
+          </div>
+        </form>
+      </div>
+
+      <section class="card" id="survey-thanks" hidden aria-labelledby="thanks-title" style="text-align:center">
+        <div class="done-mark" style="margin:0 auto 16px" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h1 class="card-title" id="thanks-title">응답해 주셔서 고맙습니다</h1>
+        <p class="card-sub">남겨주신 점수는 자료를 다듬는 데 쓸게요.</p>
+        <div class="btn-row"><a class="btn btn--navy btn--block" href="index.html">처음으로</a></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-info"><span class="footer-brand">박사장 클라쓰</span> · <span>대표 박미경</span> · <span data-channel="kakao">카카오톡 채널 '박사장 클라쓰'(예정)</span> · <span data-channel="instagram">인스타그램 @parksajang_class(예정)</span></p>
+      <p class="demo-notice">본 페이지의 결제는 프로젝트용 데모이며 실제 결제가 일어나지 않습니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

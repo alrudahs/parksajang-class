@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>주문서 · 박사장 클라쓰</title>
+  <meta name="description" content="박사장 클라쓰 주문서. 상품명·금액·할인 적용 여부를 확인하고 결제하세요 (프로젝트용 데모 결제).">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1F3A5A">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/tracking.js"></script>
+  <script src="js/products.js" defer></script>
+  <script src="js/shop.js" defer></script>
+</head>
+<body data-page="checkout">
+  <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="container container--wide">
+      <a class="brand" href="index.html" aria-label="박사장 클라쓰 홈"><span class="brand-mark" aria-hidden="true">박</span>박사장 클라쓰</a>
+    </div>
+  </header>
+
+  <main id="main" class="page">
+    <div class="container container--narrow">
+      <a class="back-link" id="back-link" href="template.html">← 상품으로 돌아가기</a>
+      <div class="page-head">
+        <h1 class="page-title">주문서</h1>
+      </div>
+
+      <!-- 주문 상품: shop.js 가 ?item= 에 맞춰 채운다 (기본: 매장 운영 템플릿) -->
+      <section class="card" aria-labelledby="sum-title">
+        <h2 class="card-title" id="sum-title">주문 상품</h2>
+        <dl class="summary">
+          <div class="sum-row"><dt>상품명</dt><dd id="sum-name">매장 운영 템플릿</dd></div>
+          <div class="sum-row"><dt>금액</dt><dd class="num" id="sum-list">19,900원</dd></div>
+          <div class="sum-row sum-row--discount" id="sum-discount-row" hidden><dt>3일 한정 할인</dt><dd class="num" id="sum-discount"></dd></div>
+          <div class="sum-row sum-row--total"><dt>최종 결제 금액</dt><dd class="num" id="sum-final">19,900원</dd></div>
+        </dl>
+        <span class="status-chip" id="discount-chip">할인 미적용</span>
+        <p class="countdown" id="checkout-countdown" data-countdown hidden></p>
+      </section>
+
+      <form class="card" id="order-form" novalidate aria-labelledby="buyer-title">
+        <h2 class="card-title" id="buyer-title">주문자 정보</h2>
+        <div class="field" style="margin-top:14px">
+          <label class="field-label" for="o-name">이름</label>
+          <input class="input" id="o-name" name="name" type="text" autocomplete="name" required aria-describedby="oe-name">
+          <p class="error-msg" id="oe-name" aria-live="polite"></p>
+        </div>
+        <div class="field">
+          <label class="field-label" for="o-contact">연락처 <small style="color:var(--muted);font-weight:500">(카카오톡 아이디 또는 이메일)</small></label>
+          <input class="input" id="o-contact" name="contact" type="text" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="oe-contact">
+          <p class="error-msg" id="oe-contact" aria-live="polite"></p>
+        </div>
+
+        <p class="demo-box"><b>데모 결제</b> · 프로젝트용 데모라 실제 결제가 일어나지 않고, 카드 정보도 받지 않아요.</p>
+        <div class="btn-row">
+          <button class="btn btn--primary btn--block" type="submit">결제하기 (데모)</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-info"><span class="footer-brand">박사장 클라쓰</span> · <span>대표 박미경</span> · <span data-channel="kakao">카카오톡 채널 '박사장 클라쓰'(예정)</span> · <span data-channel="instagram">인스타그램 @parksajang_class(예정)</span></p>
+      <p class="demo-notice">본 페이지의 결제는 프로젝트용 데모이며 실제 결제가 일어나지 않습니다.</p>
+    </div>
+  </footer>
+</body>
+</html>

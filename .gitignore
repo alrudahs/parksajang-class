@@ -1,0 +1,18 @@
+# 진행 과정 캡처 (발표 자료용, GitHub에는 올리지 않음)
+captures/
+
+# npm 패키지 (npm install 로 다시 받을 수 있음)
+node_modules/
+
+# 개인 자료 (Public 저장소에 올리지 않음 — 2026-11-05 사용자 결정)
+4단계_프로젝트_가이드북_박사장클라쓰_최종.docx
+박사장클라쓰_제출전_체크리스트.pdf
+*.xlsx
+*.xls
+
+# OS · 에디터
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.vercel/

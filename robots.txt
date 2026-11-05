@@ -1,0 +1,29 @@
+# 박사장 클라쓰 — 검색·AI 크롤러 모두 허용
+# (완료·주문 페이지는 막지 않고 각 페이지의 <meta name="robots" content="noindex"> 로 검색 결과에서만 뺀다)
+
+User-agent: *
+Allow: /
+
+# AI 검색 크롤러 (명시적으로 허용)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+Sitemap: https://YOUR-DOMAIN/sitemap.xml
