@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const FILE = path.resolve(__dirname, '..', 'index.html');
-const SITE = 'https://YOUR-DOMAIN'; // set-domain.js 가 이 값도 함께 바꾼다
+const SITE = 'https://parksajang-class.vercel.app'; // set-domain.js 가 이 값도 함께 바꾼다
 
 const html = fs.readFileSync(FILE, 'utf8');
 

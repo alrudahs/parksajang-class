@@ -11,7 +11,8 @@
  *   node scripts/capture.js 04 "diagnosis-result.html?demo=low"  → 04-diagnosis-result-low-*.png
  *   node scripts/capture.js 03 checklist.html --desc "경로 A 신청 폼"
  *
- * - 서버 없이 로컬 파일(file://)을 바로 연다.
+ * - 서버 없이 로컬 파일(file://)을 바로 연다. https 주소를 주면 배포된 화면을 연다.
+ *     node scripts/capture.js 10 https://parksajang-class.vercel.app/   → 10-index-*.png
  * - 페이지마다 모바일(375×812)·데스크톱(1440×900) 전체 화면을 captures/ 에 저장한다.
  * - 파일 이름: <단계번호>-<페이지이름>[-쿼리값]-mobile.png / -desktop.png
  * - 캡처할 때마다 captures/README.md 에 날짜 · 파일 이름 · 한 줄 설명을 추가한다.
@@ -59,8 +60,16 @@ function usage(msg) {
   process.exit(1);
 }
 
-/** "diagnosis-result.html?demo=low&debug=1" → { file, query, name: "diagnosis-result-low" } */
+/** "diagnosis-result.html?demo=low&debug=1" → { file, query, name: "diagnosis-result-low" }
+ *  "https://주소/order-complete.html?x=1" → { url, query, name: "order-complete-1" } (배포 주소 캡처) */
 function resolvePage(input) {
+  if (/^https?:\/\//i.test(input)) {
+    const u = new URL(input);
+    const filePart = u.pathname.replace(/\/$/, '/index.html');
+    const query = u.search.replace(/^\?/, '');
+    const r = resolvePage(filePart.split('/').pop() + (query ? `?${query}` : ''));
+    return { input, url: input, file: null, query, name: r.name };
+  }
   const [filePart, query = ''] = input.split('?');
   const file = path.resolve(ROOT, filePart);
   const base = path.basename(filePart).replace(/\.html?$/i, '');
@@ -122,7 +131,7 @@ async function main() {
   if (pages.length === 0) usage('캡처할 페이지를 하나 이상 적어주세요.');
 
   const targets = pages.map(resolvePage);
-  const missing = targets.filter((t) => !fs.existsSync(t.file));
+  const missing = targets.filter((t) => t.file && !fs.existsSync(t.file));
   if (missing.length) usage(`파일을 찾을 수 없어요: ${missing.map((m) => m.input).join(', ')}`);
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -145,7 +154,7 @@ async function main() {
       page.on('pageerror', (e) => errors.push(e.message));
 
       for (const t of targets) {
-        const url = pathToFileURL(t.file).href + (t.query ? `?${t.query}` : '');
+        const url = t.url || pathToFileURL(t.file).href + (t.query ? `?${t.query}` : '');
         await page.goto(url, { waitUntil: 'load' });
         await prepare(page);
 

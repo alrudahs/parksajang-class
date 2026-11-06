@@ -15,8 +15,17 @@ const { pathToFileURL } = require('url');
 const { chromium } = require('playwright');
 const { ROOT, OUT_DIR, VIEWPORTS, prepare, appendReadme, today } = require('./capture');
 
-const step = process.argv[2] || '07';
-const url = (file) => pathToFileURL(path.join(ROOT, file)).href;
+// 선택: --base https://배포주소 (배포된 화면으로 시연) · --only order-complete,index (그 화면만 저장)
+//   node scripts/capture-path-a.js 10 --base https://parksajang-class.vercel.app --only order-complete
+const argv = process.argv.slice(2);
+const opt = (name) => {
+  const i = argv.indexOf(name);
+  return i === -1 ? null : argv.splice(i, 2)[1];
+};
+const base = (opt('--base') || '').replace(/\/+$/, '');
+const only = (opt('--only') || '').split(',').filter(Boolean);
+const step = argv[0] || '07';
+const url = (file) => (base ? `${base}/${file}` : pathToFileURL(path.join(ROOT, file)).href);
 
 // 화면마다: 이름, 설명, 이 화면에서 할 행동(캡처 뒤 다음 화면으로 넘어가는 동작)
 const SCREENS = [
@@ -96,6 +105,10 @@ const SCREENS = [
       for (const s of SCREENS) {
         await p.waitForSelector('#psc-debug');
         if (s.before) await s.before(p);
+        if (only.length && !only.includes(s.name)) {
+          if (s.next) await s.next(p);
+          continue;
+        }
         await prepare(p);
         // 전체 화면 캡처에서는 고정 상자가 첫 화면 높이에 찍혀 본문을 가리므로,
         // 캡처 순간만 로그를 전부 펼쳐 페이지 맨 아래(푸터 밑 여백)에 놓는다
@@ -111,7 +124,7 @@ const SCREENS = [
         const file = `${step}-${s.name}-${vp.label}.png`;
         await p.screenshot({ path: path.join(OUT_DIR, file), fullPage: true });
         saved.push(file);
-        rows.push(`| ${today()} | \`${file}\` | ${s.desc} (${vp.label} · ?debug=1) |`);
+        rows.push(`| ${today()} | \`${file}\` | ${s.desc} (${vp.label} · ${base ? base + ' · ' : ''}?debug=1) |`);
         if (s.next) await s.next(p);
       }
       if (errors.length) console.warn(`  ⚠ ${vp.label} 스크립트 오류: ${errors.join(' / ')}`);

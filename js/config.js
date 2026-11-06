@@ -6,7 +6,7 @@ window.PSC_CONFIG = {
   gtmId: 'GTM-XXXXXXX',
 
   // 배포 주소 (Vercel 배포 후 교체 — sitemap.xml · robots.txt · JSON-LD · og 태그도 같이)
-  siteUrl: 'https://YOUR-DOMAIN',
+  siteUrl: 'https://parksajang-class.vercel.app',
 
   // 공식 채널 — 실제 계정 개설 전이라 가상 주소.
   // virtual: true 이면 화면에서 링크를 걸지 않고 "(예정)" 텍스트로만 보여준다.
