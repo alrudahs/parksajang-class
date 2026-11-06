@@ -98,29 +98,34 @@ function appendReadme(step, rows) {
       'utf8'
     );
   }
-  // 같은 파일을 다시 찍으면 예전 기록 줄은 지우고 새 줄로 바꾼다
+  // 같은 파일을 다시 찍으면 예전 기록 줄(| 날짜 | `파일` | … 형식)만 지우고 새 줄로 바꾼다.
+  // 발표 추천 목록처럼 파일 이름이 다른 칸에 있는 표는 건드리지 않는다.
   const names = rows.map((r) => (r.match(/`([^`]+\.png)`/) || [])[1]).filter(Boolean);
-  const current = fs
+  const isRecordOf = (line, n) => new RegExp(`^\\| \\d{4}-\\d{2}-\\d{2} \\| \`${n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\` \\|`).test(line);
+  let lines = fs
     .readFileSync(README, 'utf8')
     .split('\n')
-    .filter((line) => !names.some((n) => line.startsWith('| ') && line.includes(`\`${n}\``)))
-    .join('\n');
-  fs.writeFileSync(README, current, 'utf8');
+    .filter((line) => !names.some((n) => isRecordOf(line, n)));
+  // "## 단계 10" 뒤에 " · 배포" 같은 제목이 붙어 있어도 같은 단계로 본다
   const heading = `## 단계 ${step}`;
-  let text = '';
-  if (!current.includes(`\n${heading}\n`)) {
-    text += `\n${heading}\n\n| 날짜 | 파일 | 설명 |\n|---|---|---|\n`;
-    text += rows.join('\n') + '\n';
+  const start = lines.findIndex((l) => l === heading || l.startsWith(`${heading} `));
+  if (start === -1) {
+    fs.writeFileSync(README, lines.join('\n'), 'utf8');
+    const text = `\n${heading}\n\n| 날짜 | 파일 | 설명 |\n|---|---|---|\n` + rows.join('\n') + '\n';
     fs.appendFileSync(README, text, 'utf8');
     return;
   }
-  // 같은 단계 표가 이미 있으면 그 표의 끝에 행을 끼워 넣는다
-  const lines = current.split('\n');
-  const start = lines.indexOf(heading);
+  // 같은 단계가 이미 있으면 그 단계의 기록 표(| 날짜 | … 로 시작하는 표) 끝에 행을 끼워 넣는다
   let end = start + 1;
-  while (end < lines.length && !lines[end].startsWith('## ')) end++;
-  let insertAt = end;
-  while (insertAt > start && lines[insertAt - 1].trim() === '') insertAt--;
+  while (end < lines.length && !lines[end].startsWith('## ') && lines[end] !== '---') end++;
+  let insertAt = -1;
+  for (let i = start + 1; i < end; i++) if (/^\| \d{4}-\d{2}-\d{2} \|/.test(lines[i])) insertAt = i + 1;
+  if (insertAt === -1) {
+    // 기록 표가 없는 단계면 단계 끝에 새 표를 만든다
+    insertAt = end;
+    while (insertAt > start && lines[insertAt - 1].trim() === '') insertAt--;
+    rows = ['', '| 날짜 | 파일 | 설명 |', '|---|---|---|', ...rows];
+  }
   lines.splice(insertAt, 0, ...rows);
   fs.writeFileSync(README, lines.join('\n'), 'utf8');
 }
