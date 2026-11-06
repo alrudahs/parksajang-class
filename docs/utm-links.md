@@ -12,7 +12,7 @@
 | 1 | 인스타그램 | A | 랜딩 | `https://parksajang-class.vercel.app/?utm_source=instagram&utm_medium=social&utm_campaign=open_checklist` |
 | 2 | 자영업 커뮤니티 | B | 셀프 진단 | `https://parksajang-class.vercel.app/diagnosis.html?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
 | 3 | 네이버 블로그 | 랜딩 FAQ | 랜딩 (FAQ 위치) | `https://parksajang-class.vercel.app/?utm_source=naver_blog&utm_medium=content&utm_campaign=faq_open_prep#faq-title` |
-| 4 | **박람회 QR** | A | 랜딩 | `https://parksajang-class.vercel.app/?utm_source=expo&utm_medium=offline&utm_campaign=startup_fair_2026` |
+| 4 | **박람회 QR** | A | 체크리스트 신청 | `https://parksajang-class.vercel.app/checklist.html?utm_source=expo&utm_medium=offline&utm_campaign=startup_fair_2026` |
 | 5 | CRM 카카오톡 | C | 무료 Zoom 라이브 신청 | `https://parksajang-class.vercel.app/live.html?utm_source=kakao&utm_medium=crm&utm_campaign=welcome_d3` |
 
 ## 값 확인표
@@ -27,8 +27,9 @@
 
 ## 박람회 QR 만들 때
 
+- 도착 페이지를 랜딩 대신 **체크리스트 신청 페이지**로 한 이유: 박람회 방문자는 이미 체크리스트를 받으려고 QR을 찍으므로 한 단계를 줄인다 (가설 H5와도 맞음 · 2026-11-06 사용자 결정).
 - QR에는 4번 링크를 **그대로** 넣습니다. 단축 URL 서비스를 거치면 UTM이 빠지지 않는지 먼저 확인하세요.
-- 인쇄 전에 휴대폰으로 QR을 찍어 랜딩이 열리는지, 주소창에 `utm_source=expo` 가 남아 있는지 확인합니다.
+- 인쇄 전에 휴대폰으로 QR을 찍어 체크리스트 신청 페이지가 열리는지, 주소창에 `utm_source=expo` 가 남아 있는지 확인합니다.
 
 ## 확인 방법 (qa-report 7장 9번)
 
