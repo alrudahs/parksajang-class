@@ -8,8 +8,12 @@
   --navy: #1f3a5a;
   --navy-deep: #172e48;
   --orange: #d9622b;
-  --orange-dark: #bd5322;
+  --orange-dark: #bd5322; /* 주황 버튼 배경 · 흰 바탕 위 작은 주황 글자 (흰 글자/흰 바탕 대비 4.75:1) */
+  --orange-deep: #a8481c; /* 버튼 hover · 연주황(--orange-tint) 위 글자 (대비 5.1:1) */
   --green: #2f7d6d;
+  --green-text: #2a7062; /* 연초록(--green-tint) 위 글자 (대비 5.1:1) */
+  /* 접근성 대비 4.5:1 기준 (2026-11-06): --orange 원색은 흰 글자와 3.66:1 이라
+     글자가 올라가는 곳은 같은 주황 계열의 진한 색을 쓰고, 원색은 그래프·테두리·큰 숫자에만 쓴다 */
   --bg: #f7f9fb;
 
   /* 파생 색 */
@@ -20,7 +24,7 @@
   --surface: #ffffff;
   --tint: #eef2f6;
   --ph: #e5eaf0;
-  --ph-text: #7d8a98;
+  --ph-text: #56636f; /* 자리표시 박스 안내 글자 (--ph 위 대비 5.1:1) */
   --orange-tint: #fcede5;
   --green-tint: #e6f2ef;
   --on-navy: #ffffff;
@@ -252,12 +256,12 @@ strong {
   transform: translateY(1px);
 }
 .btn--primary {
-  background: var(--orange);
+  background: var(--orange-dark);
   color: var(--on-accent);
   box-shadow: 0 8px 20px var(--cta-shadow);
 }
 .btn--primary:hover {
-  background: var(--orange-dark);
+  background: var(--orange-deep);
 }
 .text-link {
   display: inline-flex;
@@ -358,7 +362,7 @@ strong {
 }
 .pain-card--operate .pain-who {
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
 }
 .pain-text {
   color: var(--ink);
@@ -545,7 +549,7 @@ strong {
   padding: 1px 8px;
   border-radius: 999px;
   background: var(--orange-tint);
-  color: var(--orange-dark);
+  color: var(--orange-deep);
   font-size: 12px;
   font-weight: 700;
 }
@@ -619,7 +623,7 @@ strong {
 }
 .stat .arrow {
   margin: 0;
-  color: var(--orange);
+  color: var(--orange-dark);
   font-weight: 700;
 }
 .stat--peak b:last-of-type {
@@ -727,7 +731,7 @@ strong {
   padding: 4px 12px;
   border-radius: 999px;
   background: var(--orange-tint);
-  color: var(--orange-dark);
+  color: var(--orange-deep);
   font-size: 14px;
   font-weight: 800;
 }
@@ -1055,7 +1059,7 @@ strong {
   padding: 6px 12px;
   border-radius: 999px;
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
   font-size: 13px;
   font-weight: 700;
 }
@@ -1079,7 +1083,7 @@ strong {
   margin-bottom: 16px;
   border-radius: 50%;
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
 }
 .done-mark svg {
   width: 28px;
@@ -1147,7 +1151,7 @@ strong {
 }
 .countdown {
   margin-top: 6px;
-  color: var(--orange-dark);
+  color: var(--orange-deep);
   font-size: 14px;
   font-weight: 700;
 }
@@ -1257,7 +1261,7 @@ strong {
   text-align: right;
 }
 .sum-row--discount dd {
-  color: var(--orange);
+  color: var(--orange-dark);
 }
 .sum-row--total {
   margin-top: 6px;
@@ -1284,7 +1288,7 @@ strong {
 }
 .status-chip.is-on {
   background: var(--orange-tint);
-  color: var(--orange-dark);
+  color: var(--orange-deep);
 }
 .demo-box {
   margin-top: 16px;
@@ -1318,7 +1322,7 @@ strong {
 }
 .invite .badge {
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
 }
 .invite .card-title {
   margin-top: 10px;
@@ -1472,11 +1476,11 @@ strong {
 }
 .band-chip--high {
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
 }
 .band-chip--mid {
   background: var(--orange-tint);
-  color: var(--orange-dark);
+  color: var(--orange-deep);
 }
 .band-chip--low {
   background: var(--danger-tint);
@@ -1557,7 +1561,7 @@ strong {
 /* 전체 결과 · 개선 팁 */
 .count-chip {
   margin-left: 4px;
-  color: var(--orange);
+  color: var(--orange-dark);
 }
 .tips {
   margin-top: 8px;
@@ -1735,7 +1739,7 @@ strong {
   padding: 14px 16px;
   border-radius: var(--radius);
   background: var(--green-tint);
-  color: var(--green);
+  color: var(--green-text);
 }
 .booked svg {
   flex: none;

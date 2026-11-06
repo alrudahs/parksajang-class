@@ -146,8 +146,8 @@ index · index-b · checklist · checklist-done · template · checkout · order
 |---|---|---|---|
 | 1 | 배포 주소로 일괄 교체 | `node scripts/set-domain.js https://배포주소` (19곳) → 커밋·푸시 | 10단계 |
 | 2 | 경로 A·B·C를 휴대폰과 PC에서 끝까지 직접 따라가기 | 배포 주소에서 클릭 | 제출 체크리스트 3-7 |
-| 3 | 첫 화면 3초 이내 | PageSpeed Insights (모바일) | 3-5 |
-| 4 | FAQPage · Organization 감지 | Google 리치 결과 테스트 | 3-5 |
+| 3 | 첫 화면 3초 이내 | PageSpeed Insights (모바일) → ✅ **LCP 1.5초, 3초 이하 통과** (9장) | 3-5 |
+| 4 | FAQPage · Organization 문법 확인 | Schema Markup Validator(validator.schema.org)로 문법 확인 · 사유: Google이 2026년 5월 FAQ 리치 결과를 검색에서 없애고 6월에 리치 결과 테스트의 FAQ 지원도 끝내서, 리치 결과 테스트는 "감지된 항목 없음"으로 나옴 (코드 문제 아님 · JSON-LD는 그대로 유지) | 3-5 |
 | 5 | 공유 미리보기 (og.png) | 카카오톡 공유 디버거 · 링크를 카톡에 붙여 보기 | 6단계 |
 | 6 | robots.txt · sitemap.xml 열리는지 | `배포주소/robots.txt`, `배포주소/sitemap.xml` 직접 열기 → 서치 콘솔에 sitemap 제출 | 3-5 |
 | 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) | 3-6 |
@@ -166,3 +166,51 @@ index · index-b · checklist · checklist-done · template · checkout · order
 - **확인 방법**: 커밋이 없어 `git diff` 비교가 불가능해서, 사고 직전 캡처 시각을 기준으로 `find -newer` 로 이후 바뀐 파일을 모두 찾음 → `index.html` 의 JSON-LD를 6단계 사본(`captures/06-aeo-head.txt`)과 글자 단위 비교 · `YOUR-DOMAIN` 자리표시(sitemap 6 · robots 1 · og 2 · canonical 6페이지 · config 1 · Organization url) 확인.
 - **결과**: 사이트 파일은 **이상 없음**(`index.html` 내용 동일, 수정 시각만 바뀜 · 자리표시 그대로 · 낯선 파일 없음). 단 **07 캡처는 원본 손실** — 이벤트 흐름은 같으므로 기록용으로 그대로 두고, 최종 화면은 08 캡처를 씀. (처음 확인 때 수정 시각을 보지 않아 "이상 없음"으로 잘못 보고했다가 재확인에서 바로잡음)
 - **재발 방지**: `CLAUDE.md` 13장 — md·html 등 문서·코드는 파일 편집 기능으로만 쓰고, 셸(`echo`·`cat`·heredoc·`node -e` 문자열)로 내용을 쓰지 않는다. 셸로 일괄 변경한 뒤에는 수정 시각을 비교해 의도하지 않은 변경을 확인한다.
+
+---
+
+## 9. 배포 후 확인 결과 (2026-11-06)
+
+배포 주소: https://parksajang-class.vercel.app
+
+### 9-1. Google 리치 결과 테스트 → "감지된 항목 없음" (코드 문제 아님)
+
+- 원인: Google이 2026년 5월부터 FAQ 리치 결과를 검색에서 없앴고, 리치 결과 테스트의 FAQ 지원도 6월에 끝남.
+- 확인: 배포 주소 HTML을 `curl` 로 받아 보니 `application/ld+json` 2개(FAQPage 질문 5개 · Organization)가 있고 둘 다 JSON 문법 정상.
+- 결정: FAQPage · Organization JSON-LD는 **그대로 유지** (AI 검색·다른 크롤러가 읽을 수 있음). 앞으로 문법 확인은 Schema Markup Validator(validator.schema.org)로 한다 → 7장 4번 변경.
+- 캡처: `captures/10-rich-results.png`
+
+### 9-2. PageSpeed Insights (모바일, 2026-11-06 12:12)
+
+| 성능 | 접근성 | 권장사항 | SEO | FCP | LCP | TBT | CLS | Speed Index |
+|---|---|---|---|---|---|---|---|---|
+| 98 | 96 | 100 | 100 | 1.5초 | **1.5초** | 0ms | 0 | 4.1초 |
+
+- **LCP 3초 이하 통과** (제출 체크리스트 "첫 화면 3초 안에 표시").
+- 캡처: `captures/10-pagespeed-score.png` · `captures/10-pagespeed-metrics.png`
+- 남은 경고 2건 → 9-3 · 9-4에서 처리.
+
+### 9-3. 접근성: "배경색과 글자색 대비 부족" → 수정
+
+375px에서 22개 화면의 모든 글자를 자동 점검 (WCAG 기준: 보통 글자 4.5:1, 큰 글자 3:1). 수정 전 **16종** 미달 → 수정 후 **0종**.
+
+| 요소 | 어디 | 수정 전 | 대비 | 수정 후 | 대비 |
+|---|---|---|---|---|---|
+| 주황 CTA 버튼 (흰 글자) `.btn--primary` | 모든 주황 버튼 (랜딩 히어로·최종 CTA, 신청·구매·결제 버튼 등) | 배경 `--orange` #D9622B | 3.66 | 배경 `--orange-dark` #BD5322 (hover는 `--orange-deep` #A8481C) | 4.75 |
+| 작은 주황 글자 (흰 바탕) `.stat .arrow` · `.sum-row--discount dd` · `.count-chip` | 랜딩 숫자 카드 화살표, 주문서 "-5,000원", 진단 결과 팁 개수 | `--orange` | 3.66 | `--orange-dark` | 4.75 |
+| 연주황 칩 글자 `.badge` · `.chart-readout .tag` · `.countdown` · `.status-chip.is-on` · `.band-chip--mid` | "신청 후 3일 한정", "최고 달", 할인 남은 시간, "3일 한정 할인 적용", "중 · 일부 개선 필요" | `--orange-dark` | 4.16 | `--orange-deep` #A8481C (새 변수) | 5.1 |
+| 연초록 칩 글자 `.pain-card--operate .pain-who` · `.reassure` · `.invite .badge` · `.band-chip--high` (+ 같은 배경의 `.done-mark` · `.booked`) | "운영 단계", "광고 폭탄 없음 · 언제든 수신 거부", "무료 Zoom 라이브 우선 초대", "상 · 잘 운영 중" | `--green` #2F7D6D | 4.28 | `--green-text` #2A7062 (새 변수) | 5.1 |
+| 자리표시 박스 안내 글자 `.placeholder` | "대표 사진 / 매장 사진", "실제 쓰던 양식 미리보기" | `--ph-text` #7D8A98 | 2.91 | `--ph-text` #56636F | 5.1 |
+
+- 브랜드 원색 `--orange` #D9622B · `--green` #2F7D6D 값은 그대로. 원색은 그래프(최고 달 막대)·테두리·큰 숫자(할인가 14,900원, 최고 4,246만 원 — 큰 글자 기준 3:1 통과)에 계속 쓰고, **글자가 올라가거나 작은 글자일 때만 같은 계열의 진한 색**을 씀.
+- 바뀐 파일: `css/style.css` (변수 2개 추가 · `--ph-text` 값 변경 · 규칙 16곳), `CLAUDE.md` 4장 컬러 표 설명.
+
+### 9-4. 렌더링 차단 요청 (예상 절감 약 650ms) → 폰트만 개선
+
+| 차단 요소 | 처리 | 이유 |
+|---|---|---|
+| Pretendard 웹폰트 CSS (외부 CDN) | ✅ **차단하지 않게 변경** — `rel="preload" as="style"` + 불러온 뒤 `stylesheet` 로 전환, JS가 꺼진 경우를 위해 `<noscript>` 안에 원래 링크 유지 (13개 페이지) | 폰트는 이미 `font-display: swap` 이라 기본 글꼴로 먼저 그려도 됨. 로컬에서 Pretendard 적용 확인 |
+| `css/style.css` | 유지 | 화면을 그리는 데 꼭 필요한 CSS. 늦게 불러오면 스타일 없는 화면이 잠깐 보임 |
+| `js/config.js` · `common.js` · `tracking.js` (head) | 유지 | 랜딩 본문의 인라인 스크립트가 화면을 그리기 전에 이 파일들의 `PSC` 로 H3 헤드라인 A/B를 바꾼다 (깜빡임 방지). `defer` 로 바꾸려면 A/B 처리 구조를 바꿔야 해서 하지 않음. 세 파일은 같은 서버의 작은 파일(압축 후 수 KB) |
+
+- 배포 후 PageSpeed Insights를 다시 실행해 접근성 점수와 렌더링 차단 항목이 바뀌었는지 확인 필요.
