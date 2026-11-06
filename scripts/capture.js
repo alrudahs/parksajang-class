@@ -121,6 +121,12 @@ function appendReadme(step, rows) {
   let insertAt = -1;
   for (let i = start + 1; i < end; i++) if (/^\| \d{4}-\d{2}-\d{2} \|/.test(lines[i])) insertAt = i + 1;
   if (insertAt === -1) {
+    // 기록 줄을 모두 다시 찍어 표 머리만 남은 경우: 그 머리 바로 아래에 넣는다
+    for (let i = start + 1; i < end - 1; i++) {
+      if (lines[i] === '| 날짜 | 파일 | 설명 |' && lines[i + 1] === '|---|---|---|') insertAt = i + 2;
+    }
+  }
+  if (insertAt === -1) {
     // 기록 표가 없는 단계면 단계 끝에 새 표를 만든다
     insertAt = end;
     while (insertAt > start && lines[insertAt - 1].trim() === '') insertAt--;
