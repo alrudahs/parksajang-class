@@ -37,7 +37,7 @@
 ## 3. 규칙
 
 - **금액**: `price`·`value` 는 원 단위 숫자(콤마 없음). 금액 이벤트에는 `currency: "KRW"` 를 함께 보낸다 (GA4 금액 집계 요구사항).
-- **중복 방지**: `purchase` 는 같은 `transaction_id` 로 한 번만. `view_item`·`begin_checkout` 은 새로고침이면 다시 보내지 않는다.
+- **중복 방지**: `purchase` 는 같은 `transaction_id` 로 한 번만. `view_item`·`begin_checkout` 은 새로고침이면 다시 보내지 않는다. `click_cta` 는 같은 버튼을 다음 화면으로 넘어가기 전에 다시 눌러도 다시 보내지 않는다 (Ctrl 클릭 새 탭은 클릭마다 전송).
 - **이동 직전 이벤트**: `click_cta`·`generate_lead`·`register_live` 는 GTM 전송을 최대 0.8초 기다렸다가 다음 화면으로 넘어간다.
 - **UTM**: 첫 방문 주소의 `utm_source/medium/campaign` 을 소문자로 이 탭 동안 저장 (`start_diagnosis` 의 `source` 에 사용).
 - **목록 밖 이벤트 금지**: `tracking.js` 에 없는 이름을 보내면 콘솔 경고만 남기고 보내지 않는다.

@@ -130,6 +130,8 @@
   // 히어로·최종 CTA 클릭 → click_cta (전송을 기다렸다가 이동)
   function bindCta() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-cta]'), function (a) {
+      var sent = false; // 이 버튼의 click_cta 를 이미 보냈는지
+      var moving = false; // 전송 대기가 끝나 이동을 시작했는지
       a.addEventListener('click', function (e) {
         var pos = a.getAttribute('data-cta');
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
@@ -138,9 +140,23 @@
         }
         e.preventDefault();
         var href = a.href;
+        // 다시 누르면 보내지 않는다. 대기 중이면 첫 클릭이 이동시키고, 이동이 끊겼으면 다시 이동한다
+        if (sent) {
+          if (moving) window.location.href = href;
+          return;
+        }
+        sent = true;
         PSC.events.ctaClick(pos, function () {
+          moving = true;
           window.location.href = href;
         });
+      });
+      // 뒤로 가기로 돌아온 화면에서 누르면 새 클릭으로 센다
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          sent = false;
+          moving = false;
+        }
       });
     });
   }
