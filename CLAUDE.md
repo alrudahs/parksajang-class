@@ -228,6 +228,8 @@ PARKSAJANG-CLASS/
 - 캡처 후 이미지를 직접 열어 글자·버튼 잘림, 가로 스크롤, 빈 섹션이 없는지 확인하고, 문제가 있으면 고친 뒤 다시 캡처한다.
 - 화면이 바뀌지 않은 단계(예: 6단계 AEO)는 이미지 대신 근거 텍스트 파일(`captures/06-aeo-head.txt`)을 남기고 README에 기록한다.
 - `captures/`와 `node_modules/`는 `.gitignore`에 들어 있다. GitHub에 올리지 않는다.
+- **Playwright 등 자동 시험은 항상 GA4 수집 요청(google-analytics.com, region1.google-analytics.com의 /g/collect)을 route로 차단한다. 실제 전송이 꼭 필요하면 먼저 사용자에게 묻는다.** (2026-11-09 사고 후 추가)
+  - route만으로는 페이지를 떠날 때 나가는 요청 등이 샐 수 있으므로, 브라우저도 `scripts/block-analytics.js` 의 `launchOptions()` 로 켜고 context에 `blockAnalytics()` 를 건다. 새 시험 스크립트도 이 파일을 쓴다.
 
 ## 13. 파일 쓰기 규칙 (2026-11-05 사고 후 추가)
 

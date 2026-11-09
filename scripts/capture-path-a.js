@@ -14,6 +14,7 @@ const fs = require('fs');
 const { pathToFileURL } = require('url');
 const { chromium } = require('playwright');
 const { ROOT, OUT_DIR, VIEWPORTS, prepare, pinExperimentGroups, appendReadme, today } = require('./capture');
+const { launchOptions, blockAnalytics } = require('./block-analytics');
 
 // 선택: --base https://배포주소 (배포된 화면으로 시연) · --only order-complete,index (그 화면만 저장)
 //   node scripts/capture-path-a.js 10 --base https://parksajang-class.vercel.app --only order-complete
@@ -83,7 +84,7 @@ const SCREENS = [
 
 (async () => {
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(launchOptions());
   const saved = [];
   const rows = [];
   try {
@@ -97,6 +98,7 @@ const SCREENS = [
         reducedMotion: 'reduce',
         acceptDownloads: true,
       });
+      await blockAnalytics(ctx);
       await pinExperimentGroups(ctx);
       const p = await ctx.newPage();
       const errors = [];

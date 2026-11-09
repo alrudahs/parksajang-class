@@ -23,6 +23,7 @@
 const fs = require('fs');
 const path = require('path');
 const { pathToFileURL } = require('url');
+const { launchOptions, blockAnalytics } = require('./block-analytics');
 
 let chromium;
 try {
@@ -146,7 +147,7 @@ async function main() {
   if (missing.length) usage(`파일을 찾을 수 없어요: ${missing.map((m) => m.input).join(', ')}`);
 
   fs.mkdirSync(OUT_DIR, { recursive: true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(launchOptions());
   const saved = [];
   const readmeRows = [];
 
@@ -160,6 +161,7 @@ async function main() {
         locale: 'ko-KR',
         reducedMotion: 'reduce',
       });
+      await blockAnalytics(context);
       await pinExperimentGroups(context);
       const page = await context.newPage();
       const errors = [];

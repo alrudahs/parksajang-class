@@ -315,3 +315,11 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 
 - 1번 제출과 3연타의 GA4 전송 요청 수도 `dataLayer` 와 같았다. 빈칸 제출 뒤 정상 제출은 1번으로 세고, 실제 이동 3연타에서 다음 화면은 1번 열렸다.
 - 만족도 설문은 첫 제출과 함께 폼이 사라져 3연타해도 `submit_survey` 1번이다. 주문서는 제출 때 보내는 이벤트가 없다. 둘 다 고치지 않았다.
+
+### 9-11. 자동 시험이 GA4로 전송됨 (2026-11-09)
+
+- **2026-11-09 16시 전후 자동 시험 약 65명분이 GA4로 전송됨 → 11/9 데이터는 테스트로 제외.**
+- GA4 실시간 (지난 30분, 사용자 확인): 활성 사용자 66, `first_visit` 65, `generate_lead` 36, `register_live` 7.
+- 원인: 시험에서 GA 요청을 Playwright `route` 로만 막았는데, 실제로 페이지를 이동하는 시험의 이벤트 등이 차단을 지나 GA4에 기록되었다. 실제 이동 시험의 이벤트 수(`generate_lead` 37건 · `register_live` 6건)가 실시간 수치와 거의 같다. 모든 경로를 특정하지는 못했다.
+- 9-8·9-10의 "GA 전송 차단"은 시험 조건을 적은 것이며, 그 시험의 데이터가 GA4에 전혀 들어가지 않았다는 뜻이 아니다.
+- 재발 방지: `CLAUDE.md` 12장 규칙 추가. `scripts/block-analytics.js` 로 브라우저 수준에서 GA 주소를 차단 (`region1`·`www`.google-analytics.com, analytics.google.com, stats.g.doubleclick.net 접속 실패 확인). `scripts/capture.js` · `scripts/capture-path-a.js` 에 기본 적용.
