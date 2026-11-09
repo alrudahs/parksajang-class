@@ -247,4 +247,6 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - GA4 향상된 측정의 "파일 다운로드"는 끔 (`file_download` 중복 방지, 사용자 처리).
 - 실험 그룹 값은 `tracking.js` 가 GTM보다 먼저 dataLayer에 넣고, `sessionStorage` 에 저장해 이후 모든 이벤트에 함께 보냄. `abTest.enabled = true` 로 H3·H1 모두 방문자별 50:50 (2026-11-09 사용자 결정).
 - `page_view` 에 `exp_headline` 을 붙이려면 GTM의 기존 Google 태그를 직접 고쳐야 함 (`docs/gtm/README.md` 7장).
+- H1도 50:50 유지 (가이드북 4-5 검증 계획 1순위). H1·H3는 각각 따로 무작위 배정되므로 **결과는 실험별로 따로 분석**함 (`docs/gtm/README.md` 8장). H1 노출 수를 보려면 Google 태그에 `exp_done_offer` 도 추가해야 함.
+- 발표 시연 전 그룹 고정 방법: `docs/demo-checklist.md`
 - 상태: 파일을 GTM에 가져오고 미리보기·DebugView로 확인하는 일은 남아 있음 (7장 7·8번).
