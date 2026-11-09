@@ -150,8 +150,8 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 4 | FAQPage · Organization 문법 확인 | Schema Markup Validator(validator.schema.org)로 문법 확인 · 사유: Google이 2026년 5월 FAQ 리치 결과를 검색에서 없애고 6월에 리치 결과 테스트의 FAQ 지원도 끝내서, 리치 결과 테스트는 "감지된 항목 없음"으로 나옴 (코드 문제 아님 · JSON-LD는 그대로 유지) | 3-5 |
 | 5 | 공유 미리보기 (og.png) | 카카오톡 공유 디버거 · 링크를 카톡에 붙여 보기 → ✅ **완료** (카카오톡 공유 미리보기에 og 이미지·제목·배포 주소 표시 확인 · 근거 `captures/10-kakao-preview.png`) | 6단계 |
 | 6 | robots.txt · sitemap.xml 열리는지 | `배포주소/robots.txt`, `배포주소/sitemap.xml` 직접 열기 → 서치 콘솔에 sitemap 제출 | 3-5 |
-| 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) | 3-6 |
-| 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 | 3-7 |
+| 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) → ✅ **GTM 게시 완료** (버전 3 · 2026-11-09 · 근거 `captures/11-gtm-version3.png`, 9-8) | 3-6 |
+| 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 → ✅ **GTM 미리보기 이벤트 확인 완료 · GA4 DebugView 수신 확인 완료** (2026-11-09 경로 A 기준, 확인 범위는 9-8) | 3-7 |
 | 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 | 3-7 |
 | 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 | 2-1 · 4-2 |
 | 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 | 제출 전 체크리스트 2장 |
@@ -249,4 +249,18 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - `page_view` 에 `exp_headline` 을 붙이려면 GTM의 기존 Google 태그를 직접 고쳐야 함 (`docs/gtm/README.md` 7장).
 - H1도 50:50 유지 (가이드북 4-5 검증 계획 1순위). H1·H3는 각각 따로 무작위 배정되므로 **결과는 실험별로 따로 분석**함 (`docs/gtm/README.md` 8장). H1 노출 수를 보려면 Google 태그에 `exp_done_offer` 도 추가해야 함.
 - 발표 시연 전 그룹 고정 방법: `docs/demo-checklist.md`
-- 상태: 파일을 GTM에 가져오고 미리보기·DebugView로 확인하는 일은 남아 있음 (7장 7·8번).
+- 상태: GTM 가져오기·미리보기·DebugView 확인·게시 완료 → 9-8.
+
+### 9-8. GTM 미리보기 · GA4 DebugView · 게시 검증 (2026-11-09)
+
+| 항목 | 결과 | 캡처 |
+|---|---|---|
+| GTM 미리보기 이벤트 확인 | ✅ Tag Assistant 확장 프로그램 사용. `purchase` 이벤트에서 `GA4 이벤트` 태그 실행 성공. Google 태그는 초기화 때 실행되는 태그라 이 이벤트에서는 미실행이 정상 | `captures/11-preview-purchase.png` |
+| `GA4 이벤트` 태그 설정 | ✅ 매개변수 18개(`exp_headline`, `exp_done_offer` 포함) 연결, 트리거 `CE - 박사장 이벤트 10개` 충족 | `captures/11-preview-ga4-tag.png` |
+| GA4 DebugView 수신 확인 | ✅ 경로 A 순서대로 수신: `click_cta` → `generate_lead` → `view_item` → `begin_checkout` | `captures/11-debugview-1.png` · `captures/11-debugview-2.png` |
+| `purchase` 수신 | ✅ 주요 이벤트로 표시. 매개변수 `value` · `currency` · `item_name` · `transaction_id` · `exp_headline` · `exp_done_offer` 확인 | `captures/11-debugview-purchase-1.png` · `captures/11-debugview-purchase-2.png` |
+| GTM 게시 | ✅ 버전 3 "박사장 이벤트 10개 + A/B 그룹 연결" (변경 21건), 2026-11-09 오후 12:56 게시 | `captures/11-gtm-version3.png` |
+
+- **확인 범위:** DebugView 캡처는 게시 전 미리보기 세션(오후 12:35)의 경로 A 기록이다. `file_download`, `start_diagnosis`, `complete_diagnosis`, `register_live`, `submit_survey` 는 이번 캡처에 없다.
+- **`click_cta` 2번 표시:** `captures/11-debugview-1.png` 에 `click_cta` 가 연달아 2번 찍혀 있다. 같은 세션의 다른 이벤트는 1번씩이고, 버튼마다 클릭 처리는 1개다. 다만 다음 화면으로 넘어가기를 기다리는 최대 0.8초 동안 다시 누르면 다시 전송되는 구조라(`js/landing.js`), 원인은 캡처만으로 확정하지 않았다.
+- **Google 태그:** 버전 3 설명에는 `exp_headline` 추가만 적혀 있다. H1 노출 수에 필요한 `exp_done_offer` 추가 여부는 이번 캡처로 확인되지 않는다 (`docs/gtm/README.md` 8장).
