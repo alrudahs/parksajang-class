@@ -165,12 +165,12 @@ PARKSAJANG-CLASS/
 
 ### A/B 테스트 (가이드북 H1 · H3)
 
-- 이벤트를 새로 만들지 않는다. 대신 페이지 로드 시 **이벤트가 아닌 변수**로 실험 그룹을 dataLayer에 넣는다. GTM에서 사용자 속성으로 연결한다.
+- 이벤트를 새로 만들지 않는다. `js/tracking.js` 가 GTM을 켜기 전에 **이벤트가 아닌 변수**로 실험 그룹을 dataLayer에 넣고, `sessionStorage` 에 저장해 이후 모든 이벤트에 함께 보낸다. GTM에서 GA4 이벤트 매개변수로 연결한다 (`docs/gtm/README.md` 6·7장).
   - `{ exp_headline: "a" | "b" }` — H3 히어로 헤드라인 (`index.html`)
   - `{ exp_done_offer: "on" | "off" }` — H1 신청 완료 화면의 템플릿 샘플 + 3일 할인 배너 (`checklist-done.html`)
-- 기본값은 **고정**: 헤드라인 A안, 완료 화면 배너 `on` (md 기준 화면). 캡처·시연 결과가 매번 같게 하기 위함.
+- `abTest.enabled = false` 일 때의 기본값은 헤드라인 A안, 완료 화면 배너 `on` (md 기준 화면). 캡처 도구는 무작위와 상관없이 이 그룹으로 고정해 찍는다.
 - 주소로 강제 지정: `?v=a` / `?v=b` (헤드라인), `?offer=on` / `?offer=off` (H1).
-- 실제 테스트를 시작할 때만 `js/config.js`의 `abTest.enabled = true` → 방문자마다 무작위 50/50 배정, `localStorage`에 기억. 주소 지정이 항상 우선.
+- 현재 `js/config.js`의 `abTest.enabled = true` (2026-11-09 사용자 결정) → 방문자마다 무작위 50/50 배정, `localStorage`에 기억. 주소 지정이 항상 우선이고 저장된 그룹은 바꾸지 않는다.
 - H1 블록(샘플 + 할인 배너)은 독립된 덩어리로 만들어 켜고 끌 수 있게 한다.
 
 ### 만족도 설문 → 구글폼

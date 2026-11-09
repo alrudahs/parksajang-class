@@ -28,6 +28,22 @@
     submit_survey: 1,
   };
 
+  // ---------------- A/B 그룹 (GTM 을 켜기 전에 정해서 dataLayer 에 먼저 넣는다) ----------------
+  // 배정은 PSC.variant (localStorage 로 같은 그룹 유지), 페이지를 옮겨도 모든 이벤트에 붙도록 sessionStorage 에 저장
+  var EXP_KEY = 'psc_exp_groups';
+  var expPage = (location.pathname.split('/').pop() || 'index.html').replace(/\.html?$/i, '');
+  PSC.exp = {};
+  try {
+    PSC.exp = JSON.parse(PSC.store.get(EXP_KEY, 'session')) || {};
+  } catch (e) {}
+  if (expPage === 'index') PSC.exp.exp_headline = PSC.variant('headline', 'v', ['a', 'b'], 'a');
+  if (expPage === 'checklist-done') PSC.exp.exp_done_offer = PSC.variant('done_offer', 'offer', ['on', 'off'], 'on');
+  var hasExp = Object.keys(PSC.exp).length > 0;
+  if (hasExp) {
+    PSC.store.set(EXP_KEY, JSON.stringify(PSC.exp), 'session');
+    PSC.dl(PSC.exp);
+  }
+
   // ---------------- GTM ----------------
   var gtmId = String(C.gtmId || '');
   var gtmOn = /^GTM-[A-Z0-9]+$/.test(gtmId) && gtmId !== 'GTM-XXXXXXX';
@@ -115,8 +131,13 @@
       return;
     }
     var payload = { event: name };
-    Object.keys(params || {}).forEach(function (k) {
-      payload[k] = params[k];
+    var sent = {};
+    // 이벤트 정보 + A/B 그룹 값을 모든 이벤트에 함께 보낸다
+    [params || {}, PSC.exp].forEach(function (src) {
+      Object.keys(src).forEach(function (k) {
+        sent[k] = src[k];
+        payload[k] = src[k];
+      });
     });
     if (done && gtmOn) {
       payload.eventCallback = fin;
@@ -124,7 +145,7 @@
       setTimeout(fin, 800);
     }
     window.dataLayer.push(payload);
-    log({ t: 'event', name: name, params: params || {} });
+    log({ t: 'event', name: name, params: sent });
     if (done && !gtmOn) setTimeout(fin, 0);
   };
 
@@ -289,6 +310,7 @@
     });
     arr.push({ t: 'page', page: pageName, current: true, time: new Date().toTimeString().slice(0, 8) });
     PSC.store.set(LOG_KEY, JSON.stringify(arr.slice(-40)), 'session');
+    if (hasExp) log({ t: 'var', data: PSC.exp });
     console.log('%c[tracking] 디버그 모드 · ' + pageName + (gtmOn ? '' : ' · GTM 미설치(자리표시 ID)'), 'color:#1F3A5A;font-weight:bold');
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
     else render();

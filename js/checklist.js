@@ -46,11 +46,10 @@
       greet.hidden = false;
     }
 
-    // H1 가설: 템플릿 샘플 + 3일 할인 배너 (기본 on, ?offer=off 이면 숨김)
-    var offer = PSC.variant('done_offer', 'offer', ['on', 'off'], 'on');
+    // H1 가설: 템플릿 샘플 + 3일 할인 배너 (tracking.js 가 정한 그룹대로, ?offer=off 이면 숨김)
+    var offer = PSC.exp.exp_done_offer;
     var block = document.getElementById('done-offer');
     if (block) block.hidden = offer === 'off';
-    PSC.dl({ exp_done_offer: offer });
 
     // D-7 체크리스트 다운로드 → file_download
     var dl = document.querySelector('a[download][href$=".pdf"]');

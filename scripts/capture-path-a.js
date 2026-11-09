@@ -13,7 +13,7 @@ const path = require('path');
 const fs = require('fs');
 const { pathToFileURL } = require('url');
 const { chromium } = require('playwright');
-const { ROOT, OUT_DIR, VIEWPORTS, prepare, appendReadme, today } = require('./capture');
+const { ROOT, OUT_DIR, VIEWPORTS, prepare, pinExperimentGroups, appendReadme, today } = require('./capture');
 
 // 선택: --base https://배포주소 (배포된 화면으로 시연) · --only order-complete,index (그 화면만 저장)
 //   node scripts/capture-path-a.js 10 --base https://parksajang-class.vercel.app --only order-complete
@@ -97,6 +97,7 @@ const SCREENS = [
         reducedMotion: 'reduce',
         acceptDownloads: true,
       });
+      await pinExperimentGroups(ctx);
       const p = await ctx.newPage();
       const errors = [];
       p.on('pageerror', (e) => errors.push(e.message));

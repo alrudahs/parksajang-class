@@ -123,14 +123,13 @@
           <h1 class="hero-title" id="hero-title">AI가 모르는 오픈 현장,<br>두 번 열어본 박사장이 알려드려요</h1>
           <template id="hero-title-b">알바에서 사장까지 8년,<br>먼저 겪은 박사장이 미리 막아드려요</template>
           <script>
-            // H3 헤드라인 A/B — 기본 A안, ?v=b 이면 B안 (화면이 그려지기 전에 바꿔서 깜빡임 없음)
+            // H3 헤드라인 A/B — tracking.js 가 정한 그룹대로 표시, ?v=b 이면 B안 (화면이 그려지기 전에 바꿔서 깜빡임 없음)
             (function () {
-              var v = PSC.variant('headline', 'v', ['a', 'b'], 'a');
+              var v = PSC.exp.exp_headline;
               if (v === 'b') {
                 document.getElementById('hero-title').innerHTML = document.getElementById('hero-title-b').innerHTML;
               }
               document.documentElement.setAttribute('data-exp-headline', v);
-              PSC.dl({ exp_headline: v });
             })();
           </script>
           <p class="hero-sub">혼자 시작해 월 매출 <b class="num">1,567만</b> → <b class="num">4,246만 원</b></p>

@@ -26,7 +26,7 @@
 - 이벤트에 함께 보내는 정보 이름은 중복을 빼면 16개이고, 아래 실험 그룹 값 2개를 더해 GA4로 보내는 매개변수는 18개입니다.
 - `page_view` 는 이미 있는 Google 태그가 보내므로 코드에서 push 하지 않고, 트리거에서도 뺐습니다.
 - `eventCallback`, `eventTimeout` 은 페이지 이동을 기다리는 GTM 제어값이라 GA4로 보내지 않습니다.
-- `exp_headline`(H3), `exp_done_offer`(H1)는 이벤트 없이 push 되는 실험 그룹 값이지만, 같은 페이지에서 나가는 이벤트에 매개변수로 붙도록 태그에 연결했습니다 (6장).
+- `exp_headline`(H3), `exp_done_offer`(H1)는 실험 그룹 값입니다. GTM이 켜지기 전에 dataLayer에 먼저 들어가고, 위 10개 이벤트 모두에 함께 붙어 나갑니다 (6장).
 
 ## 2. 파일에 들어 있는 것
 
@@ -75,13 +75,44 @@ GA4 **관리 → 데이터 표시 → 맞춤 정의 → 맞춤 측정기준 만�
 
 - 등록한 뒤 들어오는 데이터부터 보이고, 이전 데이터에는 소급되지 않습니다. 보고서에 나타나기까지 최대 24~48시간 걸릴 수 있습니다.
 
-### 지금 구조에서 값이 붙는 범위
+### 그룹 값이 붙는 범위
 
-| 값 | push 되는 페이지 | 값이 붙는 이벤트 | 붙지 않는 이벤트 |
-|---|---|---|---|
-| `exp_headline` | `index.html` | `click_cta` | `page_view`, 다음 페이지의 `generate_lead` · `purchase` 등 |
-| `exp_done_offer` | `checklist-done.html` | `file_download` | `page_view`, 다음 페이지의 `view_item` · `purchase` 등 |
+| 값 | 정해지는 페이지 | 그 뒤 값이 붙는 이벤트 |
+|---|---|---|
+| `exp_headline` | `index.html` | 같은 탭에서 나가는 10개 이벤트 전부 (`generate_lead`, `purchase` 포함) |
+| `exp_done_offer` | `checklist-done.html` | 그 페이지 이후 같은 탭에서 나가는 이벤트 |
 
-- 데이터 영역 값은 페이지를 옮기면 사라지고, `page_view` 는 값이 push 되기 전 Initialization 단계에서 나갑니다.
-- 따라서 지금은 그룹별 클릭 수(`click_cta`)는 볼 수 있지만, 그룹별 노출 수와 신청·구매 전환은 GA4에서 나눠 볼 수 없습니다.
-- 방문자를 무작위로 나누려면 `js/config.js` 의 `abTest.enabled` 를 `true` 로 바꿔야 합니다. 지금은 `false` 라 `?v=b` 로 들어온 경우 말고는 모두 A안입니다.
+- 그룹 배정은 `localStorage` 에 남아 같은 사람은 같은 그룹을 계속 봅니다. 이벤트에 붙일 값은 `sessionStorage` 에 저장합니다.
+- `js/config.js` 의 `abTest.enabled` 가 `true` 라 H3와 H1이 **둘 다** 방문자별로 50:50 나뉩니다.
+- `?v=a|b`, `?offer=on|off` 는 그 화면만 강제로 바꾸고 저장된 그룹은 바꾸지 않습니다.
+- 랜딩을 거치지 않고 다른 페이지로 바로 들어온 방문자의 이벤트에는 `exp_headline` 이 붙지 않습니다.
+
+## 7. 노출 수를 위해 기존 Google 태그 고치기 (직접 작업)
+
+`page_view` 에 `exp_headline` 을 붙이는 일은 **가져오기 파일로 할 수 없고, GTM에서 직접 고쳐야 합니다.** 기존 태그를 파일에 넣으면, "병합 · 이름 변경" 가져오기에서 같은 태그가 하나 더 생겨 `page_view` 가 2번 나갈 수 있기 때문입니다.
+
+3장 가져오기로 `DLV - exp_headline` 변수를 만든 뒤 진행합니다.
+
+1. GTM **작업공간 → 태그**에서 `Google Analytics G-8FTGPCLPTM` 을 엽니다.
+2. **태그 구성** 영역을 눌러 편집합니다.
+3. **구성 설정**(Configuration settings)을 펼치고 **매개변수 추가**(Add parameter)를 누릅니다.
+4. **구성 매개변수**에 `exp_headline` 을 입력합니다.
+5. **값** 오른쪽 블록 아이콘을 눌러 `DLV - exp_headline` 을 고릅니다.
+6. 트리거 `Initialization - All Pages` 는 그대로 두고 **저장**을 누릅니다.
+7. **미리보기**로 `https://parksajang-class.vercel.app/?v=b` 를 연결합니다.
+8. 왼쪽 **Initialization** 단계를 눌러 Google 태그가 실행됐는지, **변수** 탭의 `DLV - exp_headline` 이 `b` 인지 봅니다.
+9. GA4 **DebugView**의 `page_view` 매개변수에 `exp_headline` 이 있는지 봅니다. 없으면 게시하지 말고 멈춥니다.
+10. 이상 없으면 **제출 → 게시**를 누릅니다.
+
+### GA4에서 H3 비교하기
+
+GA4 **탐색 분석**에서 측정기준 `실험 헤드라인` 으로 나눠 봅니다.
+
+| 비교 값 | 설정 |
+|---|---|
+| 노출 | 이벤트 `page_view` + 페이지 경로 `/` 또는 `/index.html` 만 필터 |
+| 클릭 | 이벤트 `click_cta` |
+| 신청 | 이벤트 `generate_lead` |
+| 구매 | 이벤트 `purchase` |
+
+`exp_headline` 은 다음 페이지의 `page_view` 에도 붙으므로, 노출을 셀 때는 페이지 경로 필터가 필요합니다.

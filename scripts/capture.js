@@ -160,6 +160,7 @@ async function main() {
         locale: 'ko-KR',
         reducedMotion: 'reduce',
       });
+      await pinExperimentGroups(context);
       const page = await context.newPage();
       const errors = [];
       page.on('pageerror', (e) => errors.push(e.message));
@@ -194,6 +195,16 @@ async function main() {
   console.log('  - captures/README.md 기록 추가\n');
 }
 
+/** 무작위 A/B 가 켜져 있어도 캡처 결과가 같도록 그룹을 A안 · 배너 on 으로 고정 (주소의 ?v= · ?offer= 가 우선) */
+async function pinExperimentGroups(context) {
+  await context.addInitScript(() => {
+    try {
+      localStorage.setItem('psc_exp_headline', 'a');
+      localStorage.setItem('psc_exp_done_offer', 'on');
+    } catch (e) {}
+  });
+}
+
 /** 캡처 직전 준비: 폰트·지연 로딩 이미지 기다리기, sticky 헤더 고정 풀기 */
 async function prepare(page) {
   await page.waitForLoadState('networkidle', { timeout: 5000 }).catch(() => {});
@@ -214,7 +225,7 @@ async function prepare(page) {
 }
 
 // 다른 캡처 스크립트(capture-path-a.js 등)에서 같이 쓰는 도구
-module.exports = { ROOT, OUT_DIR, VIEWPORTS, prepare, appendReadme, today };
+module.exports = { ROOT, OUT_DIR, VIEWPORTS, prepare, pinExperimentGroups, appendReadme, today };
 
 if (require.main === module) {
   main().catch((err) => {

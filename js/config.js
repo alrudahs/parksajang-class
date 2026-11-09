@@ -27,5 +27,5 @@ window.PSC_CONFIG = {
 
   // A/B 테스트 — false: 고정(헤드라인 A안, 완료 화면 배너 on) / true: 방문자별 무작위 50:50
   // 주소의 ?v=a|b, ?offer=on|off 가 항상 우선한다.
-  abTest: { enabled: false },
+  abTest: { enabled: true },
 };

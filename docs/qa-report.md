@@ -245,5 +245,6 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 측정 ID는 `js/config.js` 와 `docs/event-map.md` 에 기록. 사이트 코드에는 GA4를 심지 않고 GTM으로만 보냄.
 - 이벤트 10개를 GA4로 보내는 설정 파일: `docs/gtm/gtm-import.json` (태그 1 · 트리거 1 · 변수 18 — 실험 그룹 값 `exp_headline` · `exp_done_offer` 포함), 가져오는 방법과 맞춤 측정기준은 `docs/gtm/README.md`.
 - GA4 향상된 측정의 "파일 다운로드"는 끔 (`file_download` 중복 방지, 사용자 처리).
-- 실험 그룹 값은 같은 페이지의 이벤트에만 붙음 (`exp_headline` → `click_cta`, `exp_done_offer` → `file_download`). 그룹별 노출 수와 신청·구매 전환은 현재 구조로 GA4에서 나눠 볼 수 없음.
+- 실험 그룹 값은 `tracking.js` 가 GTM보다 먼저 dataLayer에 넣고, `sessionStorage` 에 저장해 이후 모든 이벤트에 함께 보냄. `abTest.enabled = true` 로 H3·H1 모두 방문자별 50:50 (2026-11-09 사용자 결정).
+- `page_view` 에 `exp_headline` 을 붙이려면 GTM의 기존 Google 태그를 직접 고쳐야 함 (`docs/gtm/README.md` 7장).
 - 상태: 파일을 GTM에 가져오고 미리보기·DebugView로 확인하는 일은 남아 있음 (7장 7·8번).

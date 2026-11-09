@@ -32,7 +32,7 @@
 | `index.html` | `exp_headline: "a" / "b"` | H3 히어로 헤드라인 A/B (`?v=b`) |
 | `checklist-done.html` | `exp_done_offer: "on" / "off"` | H1 템플릿 샘플 + 3일 할인 배너 (`?offer=off`) |
 
-GTM "데이터 영역 변수"로 만들어 `GA4 이벤트` 태그의 이벤트 매개변수에 연결했다. 같은 페이지에서 나가는 이벤트에만 붙는다 (`exp_headline` → `click_cta`, `exp_done_offer` → `file_download`). 자세한 범위와 맞춤 측정기준은 `docs/gtm/README.md` 6장.
+`js/tracking.js` 가 GTM을 켜기 전에 그룹을 정해 dataLayer에 먼저 넣고, `sessionStorage` 에 저장해 이후 모든 페이지의 모든 이벤트에 함께 보낸다. 배정은 `localStorage` 에 남아 같은 사람은 같은 그룹을 본다. GA4 연결과 맞춤 측정기준은 `docs/gtm/README.md` 6·7장.
 
 ## 3. 규칙
 
