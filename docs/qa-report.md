@@ -215,7 +215,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 
 - 배포 후 다시 측정한 결과는 9-5.
 
-### 9-5. PageSpeed Insights 재측정 — 수정 전·후 비교 (모바일, 2026-11-09 기록)
+### 9-5. PageSpeed Insights 재측정 — 수정 전·후 비교 (모바일, 2026-11-06 측정 · 수정 전 12:12, 수정 후 같은 날 오후)
 
 | 항목 | 수정 전 (9-2) | 수정 후 | 변화 |
 |---|---|---|---|
