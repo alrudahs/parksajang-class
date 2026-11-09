@@ -1367,6 +1367,39 @@ strong {
   font-size: 13px;
 }
 
+/* 시작 화면 문항 미리보기 */
+.preview {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.preview-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.preview-list li {
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+}
+.preview-list strong {
+  display: block;
+  color: var(--green-text);
+  font-size: 14px;
+  font-weight: 800;
+}
+.preview-list p {
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 15px;
+}
+.preview-more {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 /* 문항 */
 .quiz-top {
   display: flex;
