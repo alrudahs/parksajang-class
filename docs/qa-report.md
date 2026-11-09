@@ -148,7 +148,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 2 | 경로 A·B·C를 휴대폰과 PC에서 끝까지 직접 따라가기 | 배포 주소에서 클릭 | 제출 체크리스트 3-7 |
 | 3 | 첫 화면 3초 이내 | PageSpeed Insights (모바일) → ✅ **LCP 0.9초, 3초 이하 통과** (재측정 · 수정 전 1.5초, 9-5) | 3-5 |
 | 4 | FAQPage · Organization 문법 확인 | Schema Markup Validator(validator.schema.org)로 문법 확인 · 사유: Google이 2026년 5월 FAQ 리치 결과를 검색에서 없애고 6월에 리치 결과 테스트의 FAQ 지원도 끝내서, 리치 결과 테스트는 "감지된 항목 없음"으로 나옴 (코드 문제 아님 · JSON-LD는 그대로 유지) | 3-5 |
-| 5 | 공유 미리보기 (og.png) | 카카오톡 공유 디버거 · 링크를 카톡에 붙여 보기 | 6단계 |
+| 5 | 공유 미리보기 (og.png) | 카카오톡 공유 디버거 · 링크를 카톡에 붙여 보기 → ✅ **완료** (카카오톡 공유 미리보기에 og 이미지·제목·배포 주소 표시 확인 · 근거 `captures/10-kakao-preview.png`) | 6단계 |
 | 6 | robots.txt · sitemap.xml 열리는지 | `배포주소/robots.txt`, `배포주소/sitemap.xml` 직접 열기 → 서치 콘솔에 sitemap 제출 | 3-5 |
 | 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) | 3-6 |
 | 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 | 3-7 |
@@ -180,7 +180,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 - 결정: FAQPage · Organization JSON-LD는 **그대로 유지** (AI 검색·다른 크롤러가 읽을 수 있음). 앞으로 문법 확인은 Schema Markup Validator(validator.schema.org)로 한다 → 7장 4번 변경.
 - 캡처: `captures/10-rich-results.png`
 
-### 9-2. PageSpeed Insights (모바일, 2026-11-06 12:12)
+### 9-2. PageSpeed Insights (모바일, 2026-11-06 12:13)
 
 | 성능 | 접근성 | 권장사항 | SEO | FCP | LCP | TBT | CLS | Speed Index |
 |---|---|---|---|---|---|---|---|---|
@@ -215,7 +215,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 
 - 배포 후 다시 측정한 결과는 9-5.
 
-### 9-5. PageSpeed Insights 재측정 — 수정 전·후 비교 (모바일, 2026-11-06 측정 · 수정 전 12:12, 수정 후 같은 날 오후)
+### 9-5. PageSpeed Insights 재측정 — 수정 전·후 비교 (모바일, 2026-11-06 측정 · 수정 전 12:13, 수정 후 같은 날 오후)
 
 | 항목 | 수정 전 (9-2) | 수정 후 | 변화 |
 |---|---|---|---|
