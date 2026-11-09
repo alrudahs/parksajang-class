@@ -243,5 +243,7 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 
 - GA4가 GTM을 감지해 Google 태그 `Google Analytics G-8FTGPCLPTM` (트리거 Initialization - All Pages)을 만들고 버전 2로 게시함. 캡처: `captures/11-gtm-google-tag.png` · `captures/11-gtm-version2.png`
 - 측정 ID는 `js/config.js` 와 `docs/event-map.md` 에 기록. 사이트 코드에는 GA4를 심지 않고 GTM으로만 보냄.
-- 이벤트 10개를 GA4로 보내는 설정 파일: `docs/gtm/gtm-import.json` (태그 1 · 트리거 1 · 변수 16), 가져오는 방법은 `docs/gtm/README.md`.
+- 이벤트 10개를 GA4로 보내는 설정 파일: `docs/gtm/gtm-import.json` (태그 1 · 트리거 1 · 변수 18 — 실험 그룹 값 `exp_headline` · `exp_done_offer` 포함), 가져오는 방법과 맞춤 측정기준은 `docs/gtm/README.md`.
+- GA4 향상된 측정의 "파일 다운로드"는 끔 (`file_download` 중복 방지, 사용자 처리).
+- 실험 그룹 값은 같은 페이지의 이벤트에만 붙음 (`exp_headline` → `click_cta`, `exp_done_offer` → `file_download`). 그룹별 노출 수와 신청·구매 전환은 현재 구조로 GA4에서 나눠 볼 수 없음.
 - 상태: 파일을 GTM에 가져오고 미리보기·DebugView로 확인하는 일은 남아 있음 (7장 7·8번).

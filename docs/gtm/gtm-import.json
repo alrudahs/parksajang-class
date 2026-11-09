@@ -46,7 +46,9 @@
               { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "live_round" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - live_round}}" } ] },
               { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "survey_type" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - survey_type}}" } ] },
               { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "satisfaction" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - satisfaction}}" } ] },
-              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "recommend" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - recommend}}" } ] }
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "recommend" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - recommend}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "exp_headline" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - exp_headline}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "exp_done_offer" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - exp_done_offer}}" } ] }
             ]
           }
         ],
@@ -92,7 +94,9 @@
       { "accountId": "0", "containerId": "0", "variableId": "2013", "name": "DLV - live_round", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "live_round" } ], "fingerprint": "0", "formatValue": {} },
       { "accountId": "0", "containerId": "0", "variableId": "2014", "name": "DLV - survey_type", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "survey_type" } ], "fingerprint": "0", "formatValue": {} },
       { "accountId": "0", "containerId": "0", "variableId": "2015", "name": "DLV - satisfaction", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "satisfaction" } ], "fingerprint": "0", "formatValue": {} },
-      { "accountId": "0", "containerId": "0", "variableId": "2016", "name": "DLV - recommend", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "recommend" } ], "fingerprint": "0", "formatValue": {} }
+      { "accountId": "0", "containerId": "0", "variableId": "2016", "name": "DLV - recommend", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "recommend" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2017", "name": "DLV - exp_headline", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "exp_headline" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2018", "name": "DLV - exp_done_offer", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "exp_done_offer" } ], "fingerprint": "0", "formatValue": {} }
     ],
     "builtInVariable": [
       { "accountId": "0", "containerId": "0", "type": "EVENT", "name": "Event" }

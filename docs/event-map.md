@@ -32,7 +32,7 @@
 | `index.html` | `exp_headline: "a" / "b"` | H3 히어로 헤드라인 A/B (`?v=b`) |
 | `checklist-done.html` | `exp_done_offer: "on" / "off"` | H1 템플릿 샘플 + 3일 할인 배너 (`?offer=off`) |
 
-GTM에서 "데이터 영역 변수"로 만들어 GA4 사용자 속성에 연결하면 그룹별 전환율을 나눠 볼 수 있다.
+GTM "데이터 영역 변수"로 만들어 `GA4 이벤트` 태그의 이벤트 매개변수에 연결했다. 같은 페이지에서 나가는 이벤트에만 붙는다 (`exp_headline` → `click_cta`, `exp_done_offer` → `file_download`). 자세한 범위와 맞춤 측정기준은 `docs/gtm/README.md` 6장.
 
 ## 3. 규칙
 
@@ -55,6 +55,6 @@ GTM에서 "데이터 영역 변수"로 만들어 GA4 사용자 속성에 연결�
 
 - 태그: `Google Analytics G-8FTGPCLPTM` (Initialization - All Pages) — page_view 자동, GTM 버전 2로 게시됨
 - 태그: `GA4 이벤트` 1개 (이벤트 이름 `{{Event}}`), 트리거는 맞춤 이벤트 정규식으로 `click_cta` ~ `submit_survey` 10개를 묶음
-- 데이터 영역 변수 16개: `button_position`, `lead_type`, `marketing_consent`, `file_name`, `item_name`, `price`, `value`, `currency`, `discount_applied`, `transaction_id`, `source`, `score_band`, `live_round`, `survey_type`, `satisfaction`, `recommend`
+- 데이터 영역 변수 18개: `button_position`, `lead_type`, `marketing_consent`, `file_name`, `item_name`, `price`, `value`, `currency`, `discount_applied`, `transaction_id`, `source`, `score_band`, `live_round`, `survey_type`, `satisfaction`, `recommend`, `exp_headline`, `exp_done_offer`
 - 가져오기 파일과 방법: `docs/gtm/gtm-import.json`, `docs/gtm/README.md`
-- `exp_headline`, `exp_done_offer` 는 이벤트 없이 push 되는 값이라 가져오기 파일에 없다. GA4에서 실험 그룹별로 보려면 사용자 속성 연결을 따로 만든다 (2장).
+- GA4 향상된 측정의 "파일 다운로드"는 끈다 (`file_download` 중복 방지 · 2026-11-09 처리).
