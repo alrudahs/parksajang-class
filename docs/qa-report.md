@@ -231,3 +231,10 @@ index · index-b · checklist · checklist-done · template · checkout · order
 - 접근성 100: 9-3의 글자 대비 수정이 반영된 결과.
 - PageSpeed 점수는 측정할 때마다 조금씩 달라질 수 있음.
 - 캡처: 수정 전 `captures/10-pagespeed-score.png` · `captures/10-pagespeed-metrics.png` / 수정 후 `captures/10-pagespeed-after-score.png` · `captures/10-pagespeed-after-a11y.png`
+
+### 9-6. GTM 연결 확인 (GTM-N4L8G2LB, 2026-11-09)
+
+GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문에는 ID가 없지만 13개 페이지 모두 gtm.js 200 응답 확인. noscript 는 이벤트·GA4가 모두 JS 기반이라 생략.
+
+- 캡처: `captures/11-gtm-loaded.png` (배포 사이트 랜딩의 네트워크 요청 목록 · `gtm.js?id=GTM-N4L8G2LB` 200 응답)
+- GA4 연결은 측정 ID를 받은 뒤 진행 (7장 7·8번).
