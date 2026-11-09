@@ -146,7 +146,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 |---|---|---|---|
 | 1 | 배포 주소로 일괄 교체 | `node scripts/set-domain.js https://배포주소` (19곳) → 커밋·푸시 | 10단계 |
 | 2 | 경로 A·B·C를 휴대폰과 PC에서 끝까지 직접 따라가기 | 배포 주소에서 클릭 | 제출 체크리스트 3-7 |
-| 3 | 첫 화면 3초 이내 | PageSpeed Insights (모바일) → ✅ **LCP 1.5초, 3초 이하 통과** (9장) | 3-5 |
+| 3 | 첫 화면 3초 이내 | PageSpeed Insights (모바일) → ✅ **LCP 0.9초, 3초 이하 통과** (재측정 · 수정 전 1.5초, 9-5) | 3-5 |
 | 4 | FAQPage · Organization 문법 확인 | Schema Markup Validator(validator.schema.org)로 문법 확인 · 사유: Google이 2026년 5월 FAQ 리치 결과를 검색에서 없애고 6월에 리치 결과 테스트의 FAQ 지원도 끝내서, 리치 결과 테스트는 "감지된 항목 없음"으로 나옴 (코드 문제 아님 · JSON-LD는 그대로 유지) | 3-5 |
 | 5 | 공유 미리보기 (og.png) | 카카오톡 공유 디버거 · 링크를 카톡에 붙여 보기 | 6단계 |
 | 6 | robots.txt · sitemap.xml 열리는지 | `배포주소/robots.txt`, `배포주소/sitemap.xml` 직접 열기 → 서치 콘솔에 sitemap 제출 | 3-5 |
@@ -213,4 +213,21 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | `css/style.css` | 유지 | 화면을 그리는 데 꼭 필요한 CSS. 늦게 불러오면 스타일 없는 화면이 잠깐 보임 |
 | `js/config.js` · `common.js` · `tracking.js` (head) | 유지 | 랜딩 본문의 인라인 스크립트가 화면을 그리기 전에 이 파일들의 `PSC` 로 H3 헤드라인 A/B를 바꾼다 (깜빡임 방지). `defer` 로 바꾸려면 A/B 처리 구조를 바꿔야 해서 하지 않음. 세 파일은 같은 서버의 작은 파일(압축 후 수 KB) |
 
-- 배포 후 PageSpeed Insights를 다시 실행해 접근성 점수와 렌더링 차단 항목이 바뀌었는지 확인 필요.
+- 배포 후 다시 측정한 결과는 9-5.
+
+### 9-5. PageSpeed Insights 재측정 — 수정 전·후 비교 (모바일, 2026-11-09 기록)
+
+| 항목 | 수정 전 (9-2) | 수정 후 | 변화 |
+|---|---|---|---|
+| 성능 | 98 | **99** | +1 |
+| 접근성 | 96 | **100** | +4 |
+| 권장사항 | 100 | 100 | 그대로 |
+| SEO | 100 | 100 | 그대로 |
+| LCP | 1.5초 | **0.9초** | 0.6초 단축 |
+| Speed Index | 4.1초 | **3.5초** | 0.6초 단축 |
+| 렌더링 차단 항목 | 경고 있음 | A/B 헤드라인 JS 때문에 유지 | 처리 내역은 9-4 |
+
+- **LCP 3초 이하 통과 유지** (제출 체크리스트 "첫 화면 3초 안에 표시").
+- 접근성 100: 9-3의 글자 대비 수정이 반영된 결과.
+- PageSpeed 점수는 측정할 때마다 조금씩 달라질 수 있음.
+- 캡처: 수정 전 `captures/10-pagespeed-score.png` · `captures/10-pagespeed-metrics.png` / 수정 후 `captures/10-pagespeed-after-score.png` · `captures/10-pagespeed-after-a11y.png`
