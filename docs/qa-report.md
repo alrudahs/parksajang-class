@@ -153,7 +153,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) → ✅ **GTM 게시 완료** (버전 3 · 2026-11-09 · 근거 `captures/11-gtm-version3.png`, 9-8) | 3-6 |
 | 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 → ✅ **GTM 미리보기 이벤트 확인 완료 · GA4 DebugView 수신 확인 완료** (2026-11-09 경로 A 기준, 확인 범위는 9-8) | 3-7 |
 | 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 → 페이지 조회 수신·UTM 전달 확인 (9-9). 첫 사용자 소스는 14번에서 재확인 | 3-7 |
-| 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 | 2-1 · 4-2 |
+| 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 → ✅ **연결 완료** (시험 1건 응답 200, 시트 행 확인은 사용자 확인 필요 · 9-12) | 2-1 · 4-2 |
 | 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 | 제출 전 체크리스트 2장 |
 | 12 | 채널 계정 개설 후 | `js/config.js` 채널 주소 수정 + `virtual: false` → `scripts/build-jsonld.js` 주소 수정 후 실행 | 1-5 |
 | 13 | 실제 운영 전 | 개인정보 수집·이용 동의(필수) 체크박스 추가 · 프리미엄 컨설팅은 견적 상담 흐름 검토 | 3단계·5단계 메모 |
@@ -323,3 +323,31 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 원인: 시험에서 GA 요청을 Playwright `route` 로만 막았는데, 실제로 페이지를 이동하는 시험의 이벤트 등이 차단을 지나 GA4에 기록되었다. 실제 이동 시험의 이벤트 수(`generate_lead` 37건 · `register_live` 6건)가 실시간 수치와 거의 같다. 모든 경로를 특정하지는 못했다.
 - 9-8·9-10의 "GA 전송 차단"은 시험 조건을 적은 것이며, 그 시험의 데이터가 GA4에 전혀 들어가지 않았다는 뜻이 아니다.
 - 재발 방지: `CLAUDE.md` 12장 규칙 추가. `scripts/block-analytics.js` 로 브라우저 수준에서 GA 주소를 차단 (`region1`·`www`.google-analytics.com, analytics.google.com, stats.g.doubleclick.net 접속 실패 확인). `scripts/capture.js` · `scripts/capture-path-a.js` 에 기본 적용.
+
+### 9-12. 만족도 설문 구글폼 연결 (2026-11-09)
+
+`survey.html` 제출 시 `submit_survey` 는 GA4로 그대로 보내고, 같은 응답을 구글폼으로 전송한다 (`js/config.js` 의 `surveyForm`, `js/survey.js`).
+
+| 폼 문항 | 보내는 값 |
+|---|---|
+| 설문종류 (`entry.1255429821`) | `survey_type` |
+| 만족도 (1~5) (`entry.1629520359`) | `satisfaction` |
+| 추천 의향 (0~10) (`entry.370164772`) | `recommend` |
+| 헤드라인 그룹 (`entry.710186266`) | `exp_headline` (값 없으면 빈칸) |
+| 완료화면 그룹 (`entry.641282472`) | `exp_done_offer` (값 없으면 빈칸) |
+
+시험 결과 (GA 전송 차단, `scripts/block-analytics.js`):
+
+| 시험 | 구글폼 전송 | 결과 |
+|---|---|---|
+| 실험 그룹 없음 | 차단 후 내용 기록 | 5개 값 전송, 그룹 2개는 빈칸, 감사 화면 표시 |
+| 실험 그룹 있음 | 차단 후 내용 기록 | `b` / `off` 전송, 감사 화면 표시 |
+| 추천 0점 | 차단 후 내용 기록 | `recommend` = `0` 전송, 감사 화면 표시 |
+| 세션에 이름·연락처가 있는 상태 | 차단 후 내용 기록 | 폼 값은 위 5개뿐, 개인정보 없음 |
+| 네트워크 실패 · 서버 500 | 실패 재현 | 감사 화면 표시, `submit_survey` 1번, 스크립트 오류 없음 |
+| **실제 전송 1건** | `survey_type` = `test`, 만족도 5, 추천 9, `a` / `on` | 구글폼 응답 200, 감사 화면 표시 |
+
+- 실제 전송 1건은 나중에 지울 시험 데이터다 (시트의 설문종류 `test` 행).
+- 구글폼은 공개 문항 구조로 `entry` 번호와 단답형 · 선택 입력을 확인했다.
+
+**지표 정의 (가이드북 4-2 기준): 추천 의향 고객 = `recommend` 9~10점 응답 수.** 설문에 이름·연락처를 묻지 않아 사람 단위로 묶지 않으므로, 같은 사람이 여러 번 응답하면 응답 수대로 센다.

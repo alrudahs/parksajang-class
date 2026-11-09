@@ -21,8 +21,14 @@ window.PSC_CONFIG = {
 
   // 만족도 설문 → 구글폼 전송 (비어 있으면 이벤트만 보내고 폼 전송은 건너뜀)
   surveyForm: {
-    action: '', // 예: https://docs.google.com/forms/d/e/폼ID/formResponse
-    entries: { surveyType: '', satisfaction: '', recommend: '' }, // 예: 'entry.123456'
+    action: 'https://docs.google.com/forms/d/e/1FAIpQLSeDFayTZf4dHNITZ-0pfk_n6znlu0Zp9u2bBs0z-j-kh4QO3A/formResponse',
+    entries: {
+      surveyType: 'entry.1255429821',
+      satisfaction: 'entry.1629520359',
+      recommend: 'entry.370164772',
+      expHeadline: 'entry.710186266', // 값 없으면 빈칸
+      expDoneOffer: 'entry.641282472', // 값 없으면 빈칸
+    },
   },
 
   // A/B 테스트 — false: 고정(헤드라인 A안, 완료 화면 배너 on) / true: 방문자별 무작위 50:50

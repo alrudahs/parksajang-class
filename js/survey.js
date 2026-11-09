@@ -56,8 +56,12 @@
     body.append(en.surveyType, data.survey_type);
     body.append(en.satisfaction, String(data.satisfaction));
     body.append(en.recommend, String(data.recommend));
+    var exp = PSC.exp || {};
+    if (en.expHeadline) body.append(en.expHeadline, exp.exp_headline || '');
+    if (en.expDoneOffer) body.append(en.expDoneOffer, exp.exp_done_offer || '');
+    // 전송에 실패해도 감사 화면은 그대로 보여준다
     try {
-      fetch(sf.action, { method: 'POST', mode: 'no-cors', body: body });
+      fetch(sf.action, { method: 'POST', mode: 'no-cors', body: body }).catch(function () {});
     } catch (e) {}
   }
 
