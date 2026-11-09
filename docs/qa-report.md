@@ -280,4 +280,6 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
   | 실제 이동 1번 클릭 / 더블클릭 | 각 1회 | — | — | `checklist.html` 도착 |
 - **Google 태그:** GTM 버전 4 "Google 태그에 exp_done_offer 추가"로 구성 매개변수에 `exp_headline`, `exp_done_offer` 두 개가 모두 들어갔다. H1 노출 수를 나누는 데 필요한 설정이다 (`docs/gtm/README.md` 8장). 태그 설정 근거는 `captures/11-gtm-google-tag-v2.png`, 게시 근거는 `captures/11-gtm-version4.png` (2026-11-09 오후 1:17 게시, Google 태그 수정 1건)다.
 - **`page_view` 의 `exp_done_offer` 수신:** ✅ GTM 미리보기로 `checklist-done.html?offer=on` 접속 → GA4 DebugView `page_view` 에서 `exp_done_offer` = `on` 확인. 근거 `captures/11-debugview-pageview-offer.png`
+- **`page_view` 의 `exp_headline` 수신:** ✅ GTM 미리보기로 `/?v=b` 접속 → GA4 DebugView `page_view` 에서 `exp_headline` = `b` (소문자) 확인. 근거 `captures/11-debugview-pageview-headline.png`
+- **GA4에 들어가는 값:** `exp_headline` 은 `a` / `b`, `exp_done_offer` 는 `on` / `off`. Looker Studio 필터는 소문자로 건다.
 - **GA4 맞춤 측정기준:** ✅ 2개 등록 (범위 이벤트) — `실험 헤드라인` = `exp_headline`, `실험 완료화면 제안` = `exp_done_offer`. 근거 `captures/11-ga4-custom-dimensions.png`

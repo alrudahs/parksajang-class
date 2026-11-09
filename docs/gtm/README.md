@@ -103,7 +103,7 @@ GA4 **관리 → 데이터 표시 → 맞춤 정의 → 맞춤 측정기준 만�
 6. 트리거 `Initialization - All Pages` 는 그대로 두고 **저장**을 누릅니다.
 7. **미리보기**로 `https://parksajang-class.vercel.app/?v=b` 를 연결합니다.
 8. 왼쪽 **Initialization** 단계를 눌러 Google 태그가 실행됐는지, **변수** 탭의 `DLV - exp_headline` 이 `b` 인지 봅니다.
-9. GA4 **DebugView**의 `page_view` 매개변수에 `exp_headline` 이 있는지 봅니다. 없으면 게시하지 말고 멈춥니다. ✅ `exp_done_offer` 완료 — `checklist-done.html?offer=on` 에서 `exp_done_offer` = `on` 수신 확인 (근거 `captures/11-debugview-pageview-offer.png`)
+9. GA4 **DebugView**의 `page_view` 매개변수에 `exp_headline` 이 있는지 봅니다. 없으면 게시하지 말고 멈춥니다. ✅ 완료 — `/?v=b` 에서 `exp_headline` = `b` 수신 확인 (근거 `captures/11-debugview-pageview-headline.png`), `checklist-done.html?offer=on` 에서 `exp_done_offer` = `on` 수신 확인 (근거 `captures/11-debugview-pageview-offer.png`)
 10. 이상 없으면 **제출 → 게시**를 누릅니다.
 
 ### GA4에서 H3 비교하기
