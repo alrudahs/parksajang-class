@@ -299,7 +299,7 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 
 - **GA4 실시간:** UTM 링크 페이지 조회 수신. 같은 창에서 열어 캠페인은 합쳐졌다. 근거 `captures/11-realtime-overview.png`
 - **휴대폰 Chrome:** expo 링크 → 경로 A 완료, `click_cta` · `generate_lead` · `file_download` 수신. 근거 `captures/11-realtime-phone-pathA.png`
-- **카카오톡 인앱 브라우저:** 기록되지 않음. 박람회 QR은 기본 브라우저로 열리므로 운영 영향 없음 (사용자 확인).
+- **카카오톡 인앱 브라우저:** 실시간 30분 범위를 벗어났던 것으로 확인, 인앱에서도 정상 기록. 2026-11-09 17시, 휴대폰 카카오톡 인앱 브라우저로 kakao CRM 링크 접속 → 무료 라이브 신청(`register_live` 1) → 경로 C 코칭·상담·주문서·구매 완료(`purchase` 1, 주요 이벤트) 실시간 수신. 활성 사용자 1명(자동 시험 차단 확인). 근거 `captures/11-realtime-kakao-inapp.png`
 - **첫 사용자 소스·캠페인이 실시간에서 비어 있는 이유:** Google 도움말 기준으로 이 카드는 이미 처리된 사용자만 보여 주며, 새 사용자는 처리 전이라 값이 없다. 다음 날 획득 보고서에서 재확인한다 (7장 14번).
 
 ### 9-10. 폼 연타 재전송 막기 적용 (2026-11-09)
