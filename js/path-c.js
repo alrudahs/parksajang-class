@@ -138,6 +138,9 @@
     var consultOnce = PSC.submitOnce();
     cform.addEventListener('submit', function (e) {
       e.preventDefault();
+      // 뒤로 가기로 돌아오면 브라우저가 라디오를 복원해도 change 가 나지 않으므로 화면 값을 다시 읽는다
+      var checkedTarget = cform.querySelector('input[name=target]:checked');
+      pick.target = checkedTarget ? checkedTarget.value : '';
       var ok = groupError('field-date', pick.date ? '' : '날짜를 골라주세요');
       ok = groupError('field-time', pick.time ? '' : '시간을 골라주세요') && ok;
       ok = groupError('field-target', pick.target ? '' : '오픈 단계 / 운영 단계 중 하나를 골라주세요') && ok;
