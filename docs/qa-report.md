@@ -247,7 +247,7 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - GA4 향상된 측정의 "파일 다운로드"는 끔 (`file_download` 중복 방지, 사용자 처리).
 - 실험 그룹 값은 `tracking.js` 가 GTM보다 먼저 dataLayer에 넣고, `sessionStorage` 에 저장해 이후 모든 이벤트에 함께 보냄. `abTest.enabled = true` 로 H3·H1 모두 방문자별 50:50 (2026-11-09 사용자 결정).
 - `page_view` 에 `exp_headline` 을 붙이려면 GTM의 기존 Google 태그를 직접 고쳐야 함 (`docs/gtm/README.md` 7장).
-- H1도 50:50 유지 (가이드북 4-5 검증 계획 1순위). H1·H3는 각각 따로 무작위 배정되므로 **결과는 실험별로 따로 분석**함 (`docs/gtm/README.md` 8장). H1 노출 수를 보려면 Google 태그에 `exp_done_offer` 도 추가해야 함.
+- H1도 50:50 유지 (가이드북 4-5 검증 계획 1순위). H1·H3는 각각 따로 무작위 배정되므로 **결과는 실험별로 따로 분석**함 (`docs/gtm/README.md` 8장). H1 노출 수에 필요한 Google 태그의 `exp_done_offer` 는 GTM 버전 4에서 추가함 (9-8).
 - 발표 시연 전 그룹 고정 방법: `docs/demo-checklist.md`
 - 상태: GTM 가져오기·미리보기·DebugView 확인·게시 완료 → 9-8.
 
@@ -278,4 +278,4 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
   | Ctrl 클릭 뒤 일반 클릭 | 1회 | 2번 (Ctrl 클릭이 일반 클릭에 영향 없음) | 2번 | 새 탭 1개 + 이동 |
   | 클릭 → 뒤로 가기(`pageshow` 재현) → 클릭 | 1회 | 2번 (새 클릭으로 셈) | 2번 | 2번 시도됨 |
   | 실제 이동 1번 클릭 / 더블클릭 | 각 1회 | — | — | `checklist.html` 도착 |
-- **Google 태그:** 버전 3 설명에는 `exp_headline` 추가만 적혀 있다. H1 노출 수에 필요한 `exp_done_offer` 추가 여부는 이번 캡처로 확인되지 않는다 (`docs/gtm/README.md` 8장).
+- **Google 태그:** GTM 버전 4 "Google 태그에 exp_done_offer 추가"로 구성 매개변수에 `exp_headline`, `exp_done_offer` 두 개가 모두 들어갔다. H1 노출 수를 나누는 데 필요한 설정이다 (`docs/gtm/README.md` 8장). 근거 `captures/11-gtm-google-tag-v2.png` 는 게시 전 태그 설정 화면이고, 버전 4 게시는 사용자 확인 기준이다.

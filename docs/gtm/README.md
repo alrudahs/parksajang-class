@@ -95,9 +95,9 @@ GA4 **관리 → 데이터 표시 → 맞춤 정의 → 맞춤 측정기준 만�
 
 1. GTM **작업공간 → 태그**에서 `Google Analytics G-8FTGPCLPTM` 을 엽니다.
 2. **태그 구성** 영역을 눌러 편집합니다.
-3. **구성 설정**(Configuration settings)을 펼치고 **매개변수 추가**(Add parameter)를 누릅니다.
-4. **구성 매개변수**에 `exp_headline` 을 입력합니다.
-5. **값** 오른쪽 블록 아이콘을 눌러 `DLV - exp_headline` 을 고릅니다.
+3. ✅ 완료 — **구성 설정**(Configuration settings)을 펼치고 **매개변수 추가**(Add parameter)를 누릅니다.
+4. ✅ 완료 — **구성 매개변수**에 `exp_headline` 을 입력합니다.
+5. ✅ 완료 — **값** 오른쪽 블록 아이콘을 눌러 `DLV - exp_headline` 을 고릅니다. (`exp_done_offer` · `DLV - exp_done_offer` 도 추가, GTM 버전 4 · 근거 `captures/11-gtm-google-tag-v2.png`)
 6. 트리거 `Initialization - All Pages` 는 그대로 두고 **저장**을 누릅니다.
 7. **미리보기**로 `https://parksajang-class.vercel.app/?v=b` 를 연결합니다.
 8. 왼쪽 **Initialization** 단계를 눌러 Google 태그가 실행됐는지, **변수** 탭의 `DLV - exp_headline` 이 `b` 인지 봅니다.
@@ -126,6 +126,6 @@ H1과 H3는 **각각 따로 무작위 배정**되므로(2026-11-09 사용자 결
 | H1 완료 화면 배너 | `실험 완료화면 제안` (`on` / `off`) | 신청 완료 화면을 본 방문자 | `page_view` + 페이지 경로 `/checklist-done.html` | `view_item`, `begin_checkout`, `purchase` |
 | H3 헤드라인 | `실험 헤드라인` (`a` / `b`) | 랜딩을 본 방문자 | `page_view` + 페이지 경로 `/` 또는 `/index.html` | `click_cta`, `generate_lead`, `purchase` |
 
-- **H1 노출 수를 보려면 7장 3~5번을 `exp_done_offer` · `DLV - exp_done_offer` 로 한 번 더 추가**합니다. 추가하지 않으면 `page_view` 에 H1 그룹이 없어 노출 수를 나눌 수 없습니다.
+- **H1 노출 수에 필요한 `exp_done_offer` · `DLV - exp_done_offer` 는 Google 태그에 추가했습니다** (GTM 버전 4, 7장 3~5번). 이 설정이 없으면 `page_view` 에 H1 그룹이 없어 노출 수를 나눌 수 없습니다.
 - `generate_lead` (체크리스트 신청)는 완료 화면보다 먼저 나가므로 H1 그룹이 붙지 않습니다. H1의 결과 지표로 쓰지 않습니다.
 - 발표 시연처럼 그룹을 일부러 고정한 방문은 실험 데이터에 섞일 수 있습니다 (`docs/demo-checklist.md`).
