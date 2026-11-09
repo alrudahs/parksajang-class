@@ -51,14 +51,14 @@
     $('live-round').textContent = round.label;
     var form = $('live-form');
     prefill(form);
+    var liveOnce = PSC.submitOnce();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!PSC.validate(form, { name: PSC.nameRule, contact: PSC.contactRule })) return;
+      if (liveOnce.repeated()) return;
       saveLead(form);
       writeJSON(LIVE_KEY, { round: round.id, label: round.label });
-      PSC.events.registerLive(round.id, function () {
-        window.location.href = 'live-done.html';
-      });
+      PSC.events.registerLive(round.id, liveOnce.go('live-done.html'));
     });
   }
 
@@ -135,6 +135,7 @@
       return !msg;
     }
 
+    var consultOnce = PSC.submitOnce();
     cform.addEventListener('submit', function (e) {
       e.preventDefault();
       var ok = groupError('field-date', pick.date ? '' : '날짜를 골라주세요');
@@ -147,12 +148,11 @@
         return;
       }
       if (!fieldsOk) return;
+      if (consultOnce.repeated()) return;
       saveLead(cform);
       writeJSON(BOOK_KEY, { date: pick.date, time: pick.time, target: pick.target });
       // 상담 예약 화면에는 수신 동의 칸이 없어서, 앞 화면에서 받은 동의 여부를 그대로 쓴다 (없으면 false)
-      PSC.events.lead('consult', PSC.lead.get().marketingConsent, function () {
-        window.location.href = 'coaching.html?type=' + pick.target + '&booked=1';
-      });
+      PSC.events.lead('consult', PSC.lead.get().marketingConsent, consultOnce.go('coaching.html?type=' + pick.target + '&booked=1'));
     });
   }
 

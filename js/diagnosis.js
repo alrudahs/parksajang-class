@@ -161,9 +161,11 @@
     });
 
     var form = $('diag-form');
+    var once = PSC.submitOnce();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!PSC.validate(form, { name: PSC.nameRule, contact: PSC.contactRule })) return;
+      if (once.repeated()) return;
       PSC.lead.set({
         name: form.elements.name.value.trim(),
         contact: form.elements.contact.value.trim(),
@@ -175,9 +177,7 @@
         d.registered = true;
         save(d);
       }
-      PSC.events.lead('diagnosis', form.elements.marketing.checked, function () {
-        window.location.href = 'diagnosis-result.html';
-      });
+      PSC.events.lead('diagnosis', form.elements.marketing.checked, once.go('diagnosis-result.html'));
     });
 
     // 주소로 화면 바로 열기 (테스트·캡처용)

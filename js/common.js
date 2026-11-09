@@ -153,6 +153,39 @@
     return !firstBad;
   };
 
+  /*
+   * 제출 연타 막기 — 다음 화면으로 넘어가기 전에 다시 눌러도 이벤트를 다시 보내지 않는다.
+   * repeated(): 첫 제출이면 false, 다시 누른 제출이면 true (이동이 끊겼으면 다시 이동시킨다)
+   * go(주소): 이벤트 전송이 끝난 뒤 이동할 함수를 돌려준다
+   */
+  PSC.submitOnce = function () {
+    var sent = false;
+    var target = '';
+    // 뒤로 가기로 돌아온 화면에서 제출하면 새 신청으로 센다
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) {
+        sent = false;
+        target = '';
+      }
+    });
+    return {
+      repeated: function () {
+        if (!sent) {
+          sent = true;
+          return false;
+        }
+        if (target) window.location.href = target;
+        return true;
+      },
+      go: function (href) {
+        return function () {
+          target = href;
+          window.location.href = href;
+        };
+      },
+    };
+  };
+
   PSC.isEmail = function (v) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   };

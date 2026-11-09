@@ -152,11 +152,12 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 6 | robots.txt · sitemap.xml 열리는지 | `배포주소/robots.txt`, `배포주소/sitemap.xml` 직접 열기 → 서치 콘솔에 sitemap 제출 | 3-5 |
 | 7 | GTM 연결 | GTM 컨테이너 생성 → `js/config.js` 의 `gtmId` 교체 → GA4 태그·이벤트 태그 10개·변수 만들기 (`docs/event-map.md` 5장) → ✅ **GTM 게시 완료** (버전 3 · 2026-11-09 · 근거 `captures/11-gtm-version3.png`, 9-8) | 3-6 |
 | 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 → ✅ **GTM 미리보기 이벤트 확인 완료 · GA4 DebugView 수신 확인 완료** (2026-11-09 경로 A 기준, 확인 범위는 9-8) | 3-7 |
-| 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 | 3-7 |
+| 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 → 페이지 조회 수신·UTM 전달 확인 (9-9). 첫 사용자 소스는 14번에서 재확인 | 3-7 |
 | 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 | 2-1 · 4-2 |
 | 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 | 제출 전 체크리스트 2장 |
 | 12 | 채널 계정 개설 후 | `js/config.js` 채널 주소 수정 + `virtual: false` → `scripts/build-jsonld.js` 주소 수정 후 실행 | 1-5 |
 | 13 | 실제 운영 전 | 개인정보 수집·이용 동의(필수) 체크박스 추가 · 프리미엄 컨설팅은 견적 상담 흐름 검토 | 3단계·5단계 메모 |
+| 14 | 첫 사용자 소스 재확인 | 다음 날 GA4 획득 보고서에서 첫 사용자 소스·캠페인 확인 (실시간 보고서에서는 새 사용자의 값이 비어 있음, 9-9) | 3-7 |
 
 ---
 
@@ -248,6 +249,7 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 실험 그룹 값은 `tracking.js` 가 GTM보다 먼저 dataLayer에 넣고, `sessionStorage` 에 저장해 이후 모든 이벤트에 함께 보냄. `abTest.enabled = true` 로 H3·H1 모두 방문자별 50:50 (2026-11-09 사용자 결정).
 - `page_view` 에 `exp_headline` 을 붙이려면 GTM의 기존 Google 태그를 직접 고쳐야 함 (`docs/gtm/README.md` 7장).
 - H1도 50:50 유지 (가이드북 4-5 검증 계획 1순위). H1·H3는 각각 따로 무작위 배정되므로 **결과는 실험별로 따로 분석**함 (`docs/gtm/README.md` 8장). H1 노출 수에 필요한 Google 태그의 `exp_done_offer` 는 GTM 버전 4에서 추가함 (9-8).
+- **A/B 실험 집계 시작일: 2026-11-10.** 11/9까지는 설정·테스트 기간으로 제외한다.
 - 발표 시연 전 그룹 고정 방법: `docs/demo-checklist.md`
 - 상태: GTM 가져오기·미리보기·DebugView 확인·게시 완료 → 9-8.
 
@@ -283,3 +285,33 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - **`page_view` 의 `exp_headline` 수신:** ✅ GTM 미리보기로 `/?v=b` 접속 → GA4 DebugView `page_view` 에서 `exp_headline` = `b` (소문자) 확인. 근거 `captures/11-debugview-pageview-headline.png`
 - **GA4에 들어가는 값:** `exp_headline` 은 `a` / `b`, `exp_done_offer` 는 `on` / `off`. Looker Studio 필터는 소문자로 건다.
 - **GA4 맞춤 측정기준:** ✅ 2개 등록 (범위 이벤트) — `실험 헤드라인` = `exp_headline`, `실험 완료화면 제안` = `exp_done_offer`. 근거 `captures/11-ga4-custom-dimensions.png`
+
+### 9-9. UTM · GA4 실시간 검증 (2026-11-09)
+
+새 브라우저에서 instagram · expo UTM 링크를 열어 GA4로 나가는 요청을 기록했다 (배포 사이트, GA 전송 허용).
+
+| 확인 항목 | instagram | expo |
+|---|---|---|
+| 주소의 `utm_` 값 유지 (`replaceState` 호출 0회, 코드에도 없음) | ✅ 유지 | ✅ 유지 |
+| `page_view` 의 `dl` 에 UTM 3개 포함 | ✅ `instagram` / `social` / `open_checklist` | ✅ `expo` / `offline` / `startup_fair_2026` |
+| 동의가 `analytics_storage` 를 막는지 (동의 명령 0개, 거부값 없음, `gcs` 없음) | ✅ 막지 않음 | ✅ 막지 않음 |
+| GA 쿠키 (`_ga`, `_ga_8FTGPCLPTM`) | ✅ 생성 | ✅ 생성 |
+
+- **GA4 실시간:** UTM 링크 페이지 조회 수신. 같은 창에서 열어 캠페인은 합쳐졌다. 근거 `captures/11-realtime-overview.png`
+- **휴대폰 Chrome:** expo 링크 → 경로 A 완료, `click_cta` · `generate_lead` · `file_download` 수신. 근거 `captures/11-realtime-phone-pathA.png`
+- **카카오톡 인앱 브라우저:** 기록되지 않음. 박람회 QR은 기본 브라우저로 열리므로 운영 영향 없음 (사용자 확인).
+- **첫 사용자 소스·캠페인이 실시간에서 비어 있는 이유:** Google 도움말 기준으로 이 카드는 이미 처리된 사용자만 보여 주며, 새 사용자는 처리 전이라 값이 없다. 다음 날 획득 보고서에서 재확인한다 (7장 14번).
+
+### 9-10. 폼 연타 재전송 막기 적용 (2026-11-09)
+
+이동을 기다리는 폼 4곳에 `PSC.submitOnce` (`js/common.js`)를 적용했다. 다음 화면으로 넘어가기 전에 다시 제출해도 이벤트를 다시 보내지 않고, 이동은 그대로다. 뒤로 가기로 돌아와 다시 제출하면 새 신청으로 센다. 배포 페이지에 수정한 JS를 끼워 넣어 휴대폰 환경으로 시험했다 (GA 전송 차단).
+
+| 폼 | 이벤트 | 1번 제출 | 3연타 (이동이 안 끝난 상태) | 뒤로 가기 후 재신청 |
+|---|---|---|---|---|
+| 체크리스트 | `generate_lead` | 1번 (3회 시험) | 1번 (3회 시험, 수정 전 3번) | 2번 · 완료 화면 2번 |
+| 셀프 진단 연락처 | `generate_lead` | 1번 | 1번 | 2번 · 결과 화면 2번 |
+| 무료 라이브 신청 | `register_live` | 1번 | 1번 | 2번 · 완료 화면 2번 |
+| 15분 상담 예약 | `generate_lead` | 1번 | 1번 | 2번 · 코칭 화면 2번 |
+
+- 1번 제출과 3연타의 GA4 전송 요청 수도 `dataLayer` 와 같았다. 빈칸 제출 뒤 정상 제출은 1번으로 세고, 실제 이동 3연타에서 다음 화면은 1번 열렸다.
+- 만족도 설문은 첫 제출과 함께 폼이 사라져 3연타해도 `submit_survey` 1번이다. 주문서는 제출 때 보내는 이벤트가 없다. 둘 다 고치지 않았다.

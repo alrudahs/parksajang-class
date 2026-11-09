@@ -7,10 +7,12 @@
   // ---------- 신청 폼 ----------
   if (page === 'checklist') {
     var form = document.getElementById('lead-form');
+    var once = PSC.submitOnce();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var ok = PSC.validate(form, { name: PSC.nameRule, contact: PSC.contactRule });
       if (!ok) return;
+      if (once.repeated()) return;
 
       // 다음 화면에 이름을 보여주는 데만 사용 (이 탭에서만, 저장·전송 없음)
       PSC.lead.set({
@@ -19,9 +21,7 @@
         marketingConsent: form.elements.marketing.checked,
       });
       PSC.offer.start(); // 3일 한정 할인 시작
-      PSC.events.lead('checklist', form.elements.marketing.checked, function () {
-        window.location.href = 'checklist-done.html';
-      });
+      PSC.events.lead('checklist', form.elements.marketing.checked, once.go('checklist-done.html'));
     });
 
     // 고치는 중에는 오류 표시를 바로 지운다
