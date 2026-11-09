@@ -49,8 +49,12 @@ GTM에서 "데이터 영역 변수"로 만들어 GA4 사용자 속성에 연결�
 3. GTM 미리보기 모드 → GA4 DebugView 에서 위 표의 이벤트가 순서대로 들어오는지 확인.
 4. 경로 A 자동 확인: `node scripts/capture-path-a.js 07` (각 화면을 이벤트 로그와 함께 캡처).
 
-## 5. GTM 에서 만들 것 (컨테이너 생성 후)
+## 5. GTM 설정 (컨테이너 `GTM-N4L8G2LB` · GA4 측정 ID `G-8FTGPCLPTM`)
 
-- 태그: GA4 구성(측정 ID) — page_view 자동
-- 태그: GA4 이벤트 × 10 (`click_cta` ~ `submit_survey`), 트리거는 "맞춤 이벤트 = 이벤트 이름"
-- 데이터 영역 변수: `button_position`, `lead_type`, `marketing_consent`, `file_name`, `item_name`, `price`, `value`, `currency`, `discount_applied`, `transaction_id`, `source`, `score_band`, `live_round`, `survey_type`, `satisfaction`, `recommend`, `exp_headline`, `exp_done_offer`
+사이트 코드에는 GA4를 따로 심지 않고 GTM으로만 보낸다.
+
+- 태그: `Google Analytics G-8FTGPCLPTM` (Initialization - All Pages) — page_view 자동, GTM 버전 2로 게시됨
+- 태그: `GA4 이벤트` 1개 (이벤트 이름 `{{Event}}`), 트리거는 맞춤 이벤트 정규식으로 `click_cta` ~ `submit_survey` 10개를 묶음
+- 데이터 영역 변수 16개: `button_position`, `lead_type`, `marketing_consent`, `file_name`, `item_name`, `price`, `value`, `currency`, `discount_applied`, `transaction_id`, `source`, `score_band`, `live_round`, `survey_type`, `satisfaction`, `recommend`
+- 가져오기 파일과 방법: `docs/gtm/gtm-import.json`, `docs/gtm/README.md`
+- `exp_headline`, `exp_done_offer` 는 이벤트 없이 push 되는 값이라 가져오기 파일에 없다. GA4에서 실험 그룹별로 보려면 사용자 속성 연결을 따로 만든다 (2장).

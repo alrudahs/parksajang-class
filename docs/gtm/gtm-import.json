@@ -1,0 +1,103 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-11-09 10:00:00",
+  "containerVersion": {
+    "path": "accounts/0/containers/0/versions/0",
+    "accountId": "0",
+    "containerId": "0",
+    "containerVersionId": "0",
+    "container": {
+      "path": "accounts/0/containers/0",
+      "accountId": "0",
+      "containerId": "0",
+      "name": "parksajang-class.vercel.app",
+      "publicId": "GTM-N4L8G2LB",
+      "usageContext": ["WEB"],
+      "fingerprint": "0",
+      "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/0/containers/0/workspaces?apiLink=container"
+    },
+    "tag": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "tagId": "1001",
+        "name": "GA4 이벤트",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "{{Event}}" },
+          { "type": "TEMPLATE", "key": "measurementIdOverride", "value": "G-8FTGPCLPTM" },
+          {
+            "type": "LIST",
+            "key": "eventSettingsTable",
+            "list": [
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "button_position" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - button_position}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "lead_type" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - lead_type}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "marketing_consent" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - marketing_consent}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "file_name" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - file_name}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "item_name" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - item_name}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "price" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - price}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "currency" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - currency}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "value" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - value}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "discount_applied" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - discount_applied}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "transaction_id" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - transaction_id}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "source" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - source}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "score_band" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - score_band}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "live_round" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - live_round}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "survey_type" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - survey_type}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "satisfaction" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - satisfaction}}" } ] },
+              { "type": "MAP", "map": [ { "type": "TEMPLATE", "key": "parameter", "value": "recommend" }, { "type": "TEMPLATE", "key": "parameterValue", "value": "{{DLV - recommend}}" } ] }
+            ]
+          }
+        ],
+        "fingerprint": "0",
+        "firingTriggerId": ["1002"],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": { "type": "MAP" },
+        "consentSettings": { "consentStatus": "NOT_SET" }
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "0",
+        "containerId": "0",
+        "triggerId": "1002",
+        "name": "CE - 박사장 이벤트 10개",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+              { "type": "TEMPLATE", "key": "arg1", "value": "^(click_cta|generate_lead|file_download|view_item|begin_checkout|purchase|start_diagnosis|complete_diagnosis|register_live|submit_survey)$" }
+            ]
+          }
+        ],
+        "fingerprint": "0"
+      }
+    ],
+    "variable": [
+      { "accountId": "0", "containerId": "0", "variableId": "2001", "name": "DLV - button_position", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "button_position" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2002", "name": "DLV - lead_type", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "lead_type" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2003", "name": "DLV - marketing_consent", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "marketing_consent" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2004", "name": "DLV - file_name", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "file_name" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2005", "name": "DLV - item_name", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "item_name" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2006", "name": "DLV - price", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "price" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2007", "name": "DLV - currency", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "currency" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2008", "name": "DLV - value", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "value" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2009", "name": "DLV - discount_applied", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "discount_applied" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2010", "name": "DLV - transaction_id", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "transaction_id" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2011", "name": "DLV - source", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "source" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2012", "name": "DLV - score_band", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "score_band" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2013", "name": "DLV - live_round", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "live_round" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2014", "name": "DLV - survey_type", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "survey_type" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2015", "name": "DLV - satisfaction", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "satisfaction" } ], "fingerprint": "0", "formatValue": {} },
+      { "accountId": "0", "containerId": "0", "variableId": "2016", "name": "DLV - recommend", "type": "v", "parameter": [ { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" }, { "type": "BOOLEAN", "key": "setDefaultValue", "value": "false" }, { "type": "TEMPLATE", "key": "name", "value": "recommend" } ], "fingerprint": "0", "formatValue": {} }
+    ],
+    "builtInVariable": [
+      { "accountId": "0", "containerId": "0", "type": "EVENT", "name": "Event" }
+    ],
+    "fingerprint": "0",
+    "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/0/containers/0/versions/0?apiLink=version"
+  }
+}

@@ -5,6 +5,9 @@ window.PSC_CONFIG = {
   // Google Tag Manager 컨테이너 ID (GTM 만든 뒤 교체)
   gtmId: 'GTM-N4L8G2LB',
 
+  // GA4 측정 ID (기록용 — 사이트 코드에서 쓰지 않고 GTM 안에서만 사용)
+  ga4MeasurementId: 'G-8FTGPCLPTM',
+
   // 배포 주소 (Vercel 배포 후 교체 — sitemap.xml · robots.txt · JSON-LD · og 태그도 같이)
   siteUrl: 'https://parksajang-class.vercel.app',
 
