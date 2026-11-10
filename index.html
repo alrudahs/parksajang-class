@@ -142,6 +142,7 @@
 
         <div class="hero-cta">
           <a class="btn btn--primary" href="checklist.html" data-cta="hero">무료 D-7 체크리스트 받기</a>
+          <a class="text-link hero-diag-link" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">이미 장사 중이세요? 무료 셀프 진단(10문항) 먼저 해보기 →</a>
         </div>
       </div>
     </section>
@@ -153,6 +154,23 @@
         <p class="loss-sub">혼자 부딪히기 전에, 박사장이 놓치기 쉬운 것부터 짚어드려요</p>
       </div>
     </aside>
+
+    <!-- 갈림길: 오픈 준비 → 체크리스트(경로 A) / 운영 중 → 셀프 진단(경로 B). A·B안 공통 -->
+    <section class="section split" aria-labelledby="split-title">
+      <div class="container">
+        <h2 class="section-title" id="split-title">어느 쪽이세요?</h2>
+        <div class="split-grid">
+          <article class="split-card">
+            <h3 class="split-name">오픈 준비 중이에요</h3>
+            <a class="btn btn--navy btn--block" href="checklist.html" data-cta="split_open">무료 D-7 체크리스트 받기</a>
+          </article>
+          <article class="split-card split-card--running">
+            <h3 class="split-name">이미 운영 중이에요</h3>
+            <a class="btn btn--green btn--block" href="diagnosis.html" data-cta="split_running">무료 셀프 진단 해보기</a>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <!-- ② 문제 공감 -->
     <section class="section" aria-labelledby="pain-title">
@@ -292,11 +310,71 @@
           <li class="stat">최고 월 주문 <b class="num">1,729건</b></li>
         </ul>
 
-        <div class="proof-extra">
-          <!-- 이미지 교체: 아래 .placeholder 를 <img src="images/form-preview.png" alt="실제 쓰던 양식 미리보기"> 로 바꾸기 -->
-          <figure class="media media--doc">
-            <div class="placeholder" role="img" aria-label="실제 쓰던 양식 미리보기 자리">실제 쓰던 양식 미리보기</div>
+        <!-- 현장 사진 (images/site/, webp + jpg 대체) -->
+        <div class="photo-grid photo-grid--pair">
+          <figure class="photo">
+            <picture>
+              <source srcset="images/site/store-front.webp" type="image/webp">
+              <img src="images/site/store-front.jpg" width="960" height="917" loading="lazy" decoding="async" alt="2023년 2월 직접 오픈해 3년 넘게 운영한 매장 외관 (간판은 가림)">
+            </picture>
+            <figcaption>2023년 2월 직접 오픈해 3년 넘게 운영한 매장 (간판은 가렸어요)</figcaption>
           </figure>
+          <figure class="photo">
+            <picture>
+              <source srcset="images/site/kitchen-line.webp" type="image/webp">
+              <img src="images/site/kitchen-line.jpg" width="747" height="934" loading="lazy" decoding="async" alt="하루 최고 80건 주문을 소화한 조리 라인">
+            </picture>
+            <figcaption>하루 최고 80건 주문을 소화한 조리 라인</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="photo-title">실제 쓰던 양식 미리보기</h3>
+        <div class="photo-grid photo-grid--docs">
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/tpl-sales.webp" type="image/webp">
+              <img src="images/site/tpl-sales.png" width="1080" height="471" loading="lazy" decoding="async" alt="배달앱별 하루 매출을 입력하는 시트">
+            </picture>
+            <figcaption>배달앱별 하루 매출 입력 시트</figcaption>
+          </figure>
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/tpl-stock.webp" type="image/webp">
+              <img src="images/site/tpl-stock.png" width="1080" height="426" loading="lazy" decoding="async" alt="주재료 재고와 발주를 관리하는 시트">
+            </picture>
+            <figcaption>주재료 재고·발주 시트</figcaption>
+          </figure>
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/tpl-cleaning.webp" type="image/webp">
+              <img src="images/site/tpl-cleaning.png" width="1080" height="438" loading="lazy" decoding="async" alt="요일별 청소 스케줄 표">
+            </picture>
+            <figcaption>요일별 청소 스케줄</figcaption>
+          </figure>
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/tpl-hiring.webp" type="image/webp">
+              <img src="images/site/tpl-hiring.png" width="1080" height="615" loading="lazy" decoding="async" alt="알바 면접 질문지">
+            </picture>
+            <figcaption>알바 면접 질문지</figcaption>
+          </figure>
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/floor-plan.webp" type="image/webp">
+              <img src="images/site/floor-plan.png" width="483" height="556" loading="lazy" decoding="async" alt="실제 매장 평면도로 짠 동선">
+            </picture>
+            <figcaption>실제 매장 평면도로 짠 동선</figcaption>
+          </figure>
+          <figure class="photo photo--doc">
+            <picture>
+              <source srcset="images/site/container-shelf.webp" type="image/webp">
+              <img src="images/site/container-shelf.jpg" width="1100" height="632" loading="lazy" decoding="async" alt="라벨을 붙여 정리한 포장 용기 선반">
+            </picture>
+            <figcaption>라벨로 정리한 포장 용기 선반</figcaption>
+          </figure>
+        </div>
+
+        <div class="proof-extra">
           <div class="review-slot">
             <span>Zoom 라이브 후기</span>
             <span class="tag">런칭 후 추가</span>

@@ -127,7 +127,7 @@
     host.addEventListener('blur', reset);
   }
 
-  // 히어로·최종 CTA 클릭 → click_cta (전송을 기다렸다가 이동)
+  // data-cta 버튼(히어로·최종 CTA·히어로 셀프 진단 링크·갈림길 카드) 클릭 → click_cta (전송을 기다렸다가 이동)
   function bindCta() {
     Array.prototype.forEach.call(document.querySelectorAll('[data-cta]'), function (a) {
       var sent = false; // 이 버튼의 click_cta 를 이미 보냈는지

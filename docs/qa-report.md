@@ -154,7 +154,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 → ✅ **GTM 미리보기 이벤트 확인 완료 · GA4 DebugView 수신 확인 완료** (2026-11-09 경로 A 기준, 확인 범위는 9-8) | 3-7 |
 | 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 → 페이지 조회 수신·UTM 전달 확인 (9-9). 첫 사용자 소스는 14번에서 재확인 | 3-7 |
 | 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 → ✅ **연결 완료** (응답 시트 수신 확인 · 근거 `captures/11-survey-sheet-test.png`, 9-12) | 2-1 · 4-2 |
-| 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 | 제출 전 체크리스트 2장 |
+| 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 → 🔶 **현장 사진 2장 · 양식 미리보기 6장 반영 완료** (2026-11-10, 9-13). 히어로 사진 자리는 LCP 유지를 위해 자리표시 그대로, PDF는 남음 | 제출 전 체크리스트 2장 |
 | 12 | 채널 계정 개설 후 | `js/config.js` 채널 주소 수정 + `virtual: false` → `scripts/build-jsonld.js` 주소 수정 후 실행 | 1-5 |
 | 13 | 실제 운영 전 | 개인정보 수집·이용 동의(필수) 체크박스 추가 · 프리미엄 컨설팅은 견적 상담 흐름 검토 | 3단계·5단계 메모 |
 | 14 | 첫 사용자 소스 재확인 | 다음 날 GA4 획득 보고서에서 첫 사용자 소스·캠페인 확인 (실시간 보고서에서는 새 사용자의 값이 비어 있음, 9-9) | 3-7 |
@@ -371,3 +371,37 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 구글폼은 공개 문항 구조로 `entry` 번호와 단답형 · 선택 입력을 확인했다.
 
 **지표 정의 (가이드북 4-2 기준): 추천 의향 고객 = `recommend` 9~10점 응답 수.** 설문에 이름·연락처를 묻지 않아 사람 단위로 묶지 않으므로, 같은 사람이 여러 번 응답하면 응답 수대로 센다.
+
+### 9-13. 셀프 진단 상단 배치 · 현장 사진 · 양식 미리보기 (2026-11-10)
+
+사용자 요청: 먼저 점검해 보고 구매로 이어지게 셀프 진단을 위로 올린다. 히어로 헤드라인(H3)과 완료 화면 제안(H1)은 A/B 실험 중이라 바꾸지 않았고, 새 요소는 A·B안에 똑같이 보인다.
+
+| 위치 | 추가한 것 | 이동 | `button_position` |
+|---|---|---|---|
+| 히어로 메인 CTA 바로 아래 | 보조 링크 "이미 장사 중이세요? 무료 셀프 진단(10문항) 먼저 해보기 →" | `diagnosis.html?from=hero` | `hero_diagnosis` |
+| 히어로 · 배너 ① 다음 "어느 쪽이세요?" | 오픈 준비 중이에요 → "무료 D-7 체크리스트 받기" (남색 버튼) | `checklist.html` | `split_open` |
+| 〃 | 이미 운영 중이에요 → "무료 셀프 진단 해보기" (초록 버튼) | `diagnosis.html` | `split_running` |
+
+- 배너 ①은 "히어로 바로 아래" 규칙(`docs/banner-copy.md`)대로 그대로 두고, 카드 섹션은 그 다음에 넣었다.
+- 한 화면 주황 버튼 1개 원칙에 따라 카드 버튼은 남색·초록(`--green-text`, 흰 글자 대비 4.5:1 이상)으로 했다.
+- 기존 `hero` · `bottom` 은 그대로. 새 값 3개는 `docs/event-map.md` 와 `CLAUDE.md` 7장 표에 추가했다. GTM은 `click_cta` 와 `button_position` 변수를 그대로 쓰므로 바꿀 것이 없다.
+
+**새 버튼 클릭 시험** (GA4·구글폼 차단 `scripts/block-analytics.js`, 이동은 막고 dataLayer 기록 확인, 헤드라인 A안 · B안에도 같은 버튼 5개가 있는지 확인):
+
+| 버튼 | 1번 클릭 | 빠르게 3번 연타 | 이동 주소 |
+|---|---|---|---|
+| `hero_diagnosis` | `click_cta` 1번 | `click_cta` 1번 | `diagnosis.html?from=hero` |
+| `split_open` | `click_cta` 1번 | `click_cta` 1번 | `checklist.html` |
+| `split_running` | `click_cta` 1번 | `click_cta` 1번 | `diagnosis.html` |
+
+**사진** (`images/site/`, 사용자가 크기 줄이고 간판·민감 정보 가림): `<picture>` 로 webp + jpg/png 대체, `width`·`height` 지정, 모두 첫 화면 아래라 `loading="lazy"`. 히어로에는 이미지를 넣지 않았다 (LCP 유지, 대표 사진 자리는 자리표시 그대로).
+
+| 자리 | 파일 | 캡션 (alt는 같은 뜻) |
+|---|---|---|
+| ④ 숫자 섹션 (나란히) | `store-front` | 2023년 2월 직접 오픈해 3년 넘게 운영한 매장 (간판은 가렸어요) |
+| 〃 | `kitchen-line` | 하루 최고 80건 주문을 소화한 조리 라인 |
+| 실제 쓰던 양식 미리보기 (기존 자리표시 자리) | `tpl-sales` · `tpl-stock` · `tpl-cleaning` · `tpl-hiring` · `floor-plan` · `container-shelf` | 배달앱별 하루 매출 입력 시트 / 주재료 재고·발주 시트 / 요일별 청소 스케줄 / 알바 면접 질문지 / 실제 매장 평면도로 짠 동선 / 라벨로 정리한 포장 용기 선반 |
+
+- 배치: 모바일 1열 · 640px 이상 2열 · 1024px 이상 양식 3열. 양식은 자르지 않고(`contain`) 모바일은 원래 비율, 여러 열일 때는 16:10 칸에 맞춘다.
+- 캡처: `captures/14-site-photos-pc.png` · `captures/14-site-photos-mobile.png` · `captures/14-hero-diagnosis.png` — 8장 모두 webp로 로드, 가로 스크롤 없음, 스크립트 오류 없음.
+- 새 문구(사용자 지정): 보조 링크·카드 제목·카드 버튼·사진 캡션. "어느 쪽이세요?", "실제 쓰던 양식 미리보기"는 소제목으로 사용.

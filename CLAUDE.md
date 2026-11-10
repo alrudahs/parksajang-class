@@ -143,7 +143,7 @@ PARKSAJANG-CLASS/
 | 이벤트명 | 언제 | 파라미터 |
 |---|---|---|
 | `page_view` | 모든 페이지 열람 | (GTM 자동 — 수동 push 하지 않음) |
-| `click_cta` | 히어로·최종 CTA 클릭 | `button_position`: `hero` / `bottom` |
+| `click_cta` | 히어로·최종 CTA·히어로 셀프 진단 링크·"어느 쪽이세요?" 카드 클릭 | `button_position`: `hero` / `bottom` / `hero_diagnosis` / `split_open` / `split_running` (뒤 3개는 2026-11-10 사용자 결정) |
 | `generate_lead` | 무료 자료 신청·상담 예약 완료 | `lead_type`: `checklist` / `diagnosis` / `consult`, `marketing_consent`: `true`/`false` |
 | `file_download` | D-7 체크리스트 다운로드 | `file_name` |
 | `view_item` | 템플릿·키트·코칭 상세 열람 | `item_name`, `price` |

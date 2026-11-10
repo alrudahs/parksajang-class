@@ -337,6 +337,89 @@ strong {
 .hero-cta {
   margin-top: 4px;
 }
+.hero-diag-link {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+/* ---------- 갈림길: 오픈 준비 / 운영 중 ---------- */
+.section.split {
+  padding-bottom: 0;
+}
+.split-grid {
+  display: grid;
+  gap: 12px;
+}
+.split-card {
+  display: grid;
+  gap: 14px;
+  padding: 20px 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--navy);
+  border-radius: var(--radius);
+}
+.split-card--running {
+  border-top-color: var(--green);
+}
+.split-name {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+}
+.btn--green {
+  background: var(--green-text);
+  color: var(--on-accent);
+}
+.btn--green:hover {
+  background: var(--navy);
+}
+
+/* ---------- 현장 사진 · 양식 미리보기 (images/site/) ---------- */
+.photo-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+.photo picture {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  background: var(--ph);
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* 양식은 자르지 않는다: 모바일은 원래 비율, 여러 열일 때는 같은 칸(16:10) 안에 맞춤 */
+.photo--doc picture {
+  aspect-ratio: auto;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.photo--doc img {
+  height: auto;
+  object-fit: contain;
+}
+.photo figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.photo-title {
+  margin-top: 36px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 800;
+}
+.photo-title + .photo-grid {
+  margin-top: 14px;
+}
 
 /* ---------- ② 문제 공감 ---------- */
 .pain-grid {
@@ -832,14 +915,17 @@ strong {
   .stats {
     grid-template-columns: 1.4fr 1fr 1fr;
   }
-  .proof-extra {
-    grid-template-columns: 1.4fr 1fr;
-    align-items: stretch;
+  .split-grid {
+    grid-template-columns: 1fr 1fr;
   }
-  .review-slot {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  .photo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .photo--doc picture {
+    aspect-ratio: 16 / 10;
+  }
+  .photo--doc img {
+    height: 100%;
   }
   .chart svg {
     height: 220px;
@@ -888,6 +974,9 @@ strong {
   }
   .hero-title {
     font-size: 42px;
+  }
+  .photo-grid--docs {
+    grid-template-columns: repeat(3, 1fr);
   }
   .hero-sub {
     font-size: 18px;
