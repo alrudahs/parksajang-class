@@ -301,6 +301,19 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - **휴대폰 Chrome:** expo 링크 → 경로 A 완료, `click_cta` · `generate_lead` · `file_download` 수신. 근거 `captures/11-realtime-phone-pathA.png`
 - **카카오톡 인앱 브라우저:** 실시간 30분 범위를 벗어났던 것으로 확인, 인앱에서도 정상 기록. 2026-11-09 17시, 휴대폰 카카오톡 인앱 브라우저로 kakao CRM 링크 접속 → 무료 라이브 신청(`register_live` 1) → 경로 C 코칭·상담·주문서·구매 완료(`purchase` 1, 주요 이벤트) 실시간 수신. 활성 사용자 1명(자동 시험 차단 확인). 근거 `captures/11-realtime-kakao-inapp.png`
 - **첫 사용자 소스·캠페인이 실시간에서 비어 있는 이유:** Google 도움말 기준으로 이 카드는 이미 처리된 사용자만 보여 주며, 새 사용자는 처리 전이라 값이 없다. 다음 날 획득 보고서에서 재확인한다 (7장 14번).
+- **GA4 트래픽 획득 (세션 소스/매체, 2026-11-08 ~ 11-10):** 근거 `captures/11-ga4-traffic-source.png`
+
+  | 세션 소스/매체 | 세션 |
+  |---|---|
+  | (direct) / (none) | 78 |
+  | expo / offline | 30 |
+  | (not set) | 4 |
+  | kakao / crm | 3 |
+  | tagassistant.google.com / referral | 3 |
+
+  - expo / offline 30은 휴대폰 테스트와 11/9 새어 나간 자동 시험을 포함한다 (9-11).
+  - instagram · naver_cafe · naver_blog는 같은 창에서 연속으로 열어 첫 출처로 합쳐져 보고서에 없다. `dl` 에 UTM이 포함되는 것은 위 표(instagram · expo)로 확인했으므로 재시험하지 않는다. 11/10부터 실제 집계한다.
+  - 기본 채널 그룹에서는 매체 community · content · offline · crm이 GA4 기본 분류에 없어 "Unassigned"로 나온다 → 대시보드는 채널 그룹 대신 "세션 소스/매체" · "세션 캠페인" 기준으로 보여준다.
 
 ### 9-10. 폼 연타 재전송 막기 적용 (2026-11-09)
 
