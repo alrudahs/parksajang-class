@@ -42,7 +42,8 @@ PARKSAJANG-CLASS/
 │  └─ (페이지별).js         landing.js, diagnosis.js, checkout.js 등
 ├─ images/                 사진·양식 미리보기·og.png (지금은 자리표시)
 ├─ files/                  다운로드 PDF (D-7 체크리스트 최종본 · 템플릿은 아직 임시)
-├─ robots.txt · sitemap.xml   (vercel.json 은 없음 — 정적 파일 그대로 배포, 필요해지면 10단계에서 추가)
+├─ robots.txt · sitemap.xml
+├─ vercel.json             D-7 PDF 한 경로에만 Content-Disposition 헤더 (한글 저장 이름 · 2026-11-11). 그 밖에는 정적 파일 그대로 배포
 ├─ scripts/capture.js      Playwright 캡처 도구 (배포와 무관)
 ├─ captures/               캡처 결과 (.gitignore, GitHub에 올리지 않음)
 ├─ package.json            캡처 도구용 (사이트는 빌드 없음)
