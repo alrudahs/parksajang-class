@@ -336,6 +336,10 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 원인: 시험에서 GA 요청을 Playwright `route` 로만 막았는데, 실제로 페이지를 이동하는 시험의 이벤트 등이 차단을 지나 GA4에 기록되었다. 실제 이동 시험의 이벤트 수(`generate_lead` 37건 · `register_live` 6건)가 실시간 수치와 거의 같다. 모든 경로를 특정하지는 못했다.
 - 9-8·9-10의 "GA 전송 차단"은 시험 조건을 적은 것이며, 그 시험의 데이터가 GA4에 전혀 들어가지 않았다는 뜻이 아니다.
 - 재발 방지: `CLAUDE.md` 12장 규칙 추가. `scripts/block-analytics.js` 로 브라우저 수준에서 GA 주소를 차단 (`region1`·`www`.google-analytics.com, analytics.google.com, stats.g.doubleclick.net 접속 실패 확인). `scripts/capture.js` · `scripts/capture-path-a.js` 에 기본 적용.
+- **2026-11-11 추가 발견 — 차단에 빠진 대체 주소:** google-analytics.com 이 막히면 gtag 가 **`www.google.com/g/collect`** 로 같은 수집 요청을 다시 보낸다. 이 주소가 `block-analytics.js` 에 없어서, **11/9 차단 적용 이후의 자동 시험(11/9 ~ 11/11 오전)도 이 경로로 GA4에 기록됐을 수 있다.** Lighthouse 1회(11/11, 수정 전 배포본)에서 이 주소가 응답 204로 나간 것을 확인했고, Playwright 시험도 같은 주소로 요청하는 것을 확인했다. 위 11/9 사고에서 특정하지 못한 경로도 이것일 가능성이 크다.
+  - 해당 시험: 11/10 14단계 캡처·클릭 시험 (랜딩 약 20회 열람, `click_cta` 6건 · `hero_diagnosis`/`split_open`/`split_running` 각 2건), 11/11 15단계 캡처·시험 (랜딩 약 10회, 일부는 주소 `127.0.0.1`), Lighthouse 1회. 그 밖에 11/9 차단 적용 이후의 시험.
+  - **A/B 실험 집계(11/10 시작)에 섞였을 수 있다.** GA4에서 호스트 이름 `127.0.0.1` 과 위 시각대의 랜딩 조회·`click_cta` 를 확인해 제외할지 판단 필요.
+  - 수정: `block-analytics.js` 에 `www.google.com` (브라우저 수준) 과 `google.*/g/collect` · `/ccm/collect` (route) 추가 → 두 주소 모두 `net::ERR_FAILED` 로 막히고 GTM은 그대로 불러오는 것 확인. Lighthouse 측정에도 같은 주소를 막는다. `CLAUDE.md` 12장에 추가.
 
 ### 9-12. 만족도 설문 구글폼 연결 (2026-11-09)
 
@@ -434,3 +438,35 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 헤드라인 A안 · B안 모두 히어로 사진 · 4단계 사진 · 시장 사진이 똑같이 보이고 헤드라인만 다르다.
 - **LCP가 글자에서 히어로 사진(webp 110KB)으로 바뀐다.** 배포 후 PageSpeed 모바일로 다시 재야 한다 (9-5 기준 LCP 0.9초).
 - 캡처: `captures/15-hero-owner-pc.png` · `captures/15-hero-owner-mobile.png` (첫 화면) · `captures/15-build-steps-mobile.png`
+
+#### PageSpeed 모바일 하락 → 개선 (2026-11-11)
+
+사용자 측정 (PageSpeed 모바일 3회): **70 / 78 / 78점**, LCP 5.7·5.7·5.8초 (히어로 `owner-hero`), FCP 2.8·0.9·0.9초, TBT 70~170ms, CLS 0·0.033·0.033. 히어로 사진 추가 전은 88점 (LCP 2.8초, CLS 0). 목표: 90점 이상 · LCP 2.5초 이하 · CLS 0.
+
+**원인**
+
+| 증상 | 원인 (확인 방법) |
+|---|---|
+| LCP 5.7초 | 사진 다운로드 자체는 짧고(로드 지연 0 · 로드 0.06초) **렌더 지연이 88%**. 느린 4G 시뮬레이션에서 히어로 사진(110KB)이 Pretendard 글꼴 16개(약 400KB, 최우선)·`gtm.js`(180KB)와 대역폭을 나눠 쓴다 (Lighthouse LCP 단계 · 네트워크 요청 표) |
+| CLS 0.033 | **헤드라인 B안만** 생김. 웹폰트 도착 전 대체 글꼴에서 B안 둘째 줄이 3줄로 접혔다가, 도착 후 2줄로 줄며 사진·CTA·보조 링크가 위로 37px 이동 (0.0319). A안은 두 글꼴 모두 3줄이라 0 → PageSpeed 3회 중 0 · 0.033 · 0.033 으로 갈린 이유 (412×823·DPR 1.75·느린 4G·CPU 4배 조건에서 `layout-shift` 출처 기록) |
+
+**수정** (헤드라인 문구·구조(H3)와 완료 화면(H1)은 그대로)
+
+| 수정 | 내용 |
+|---|---|
+| 히어로 사진 반응형 | 가린 `owner-hero.webp` 를 원본으로 `owner-hero-480` (webp 32KB · jpg 55KB) · `owner-hero-720` (webp 56KB · jpg 105KB) 생성 (webp 품질 70 · jpg 80). 원본과 픽셀 비교로 가림 상태 같음을 확인하고 720 jpg는 눈으로도 확인 |
+| `srcset` + `sizes` | 480w · 720w · 960w, `sizes="(min-width: 480px) 440px, calc(100vw - 40px)"` (사진 폭 = 화면 폭 − 좌우 여백 40px, 최대 440px로 모든 화면에서 고정). 모바일(412px · DPR 1.75)은 720w webp 56KB 1개만 받음 (이전 110KB) |
+| preload | `<head>` 에 `<link rel="preload" as="image" type="image/webp" imagesrcset imagesizes fetchpriority="high">` (picture 와 같은 값 · 중복 다운로드 없음 확인) |
+| CLS | `.hero-title { min-height: calc(1.38em * 3) }` — 3줄 높이를 미리 잡음. B안 CLS 0.0325 → 0.0007, A안 0.0006 (같은 조건 재측정). B안은 글꼴 도착 후 헤드라인 아래에 한 줄 정도 빈 칸이 남는다 |
+
+- 히어로 사진은 HTML `<img>` 라 CSS 배경·JS로 늦게 그려지지 않는다 (지연 로딩 없음 확인).
+- 렌더 차단: `css/style.css` 와 헤드라인 A/B에 필요한 `config.js`·`common.js`·`tracking.js` (합계 약 64KB). A/B 깜빡임 방지 때문에 그대로 둔다. Pretendard는 이미 비동기(preload → stylesheet) + `font-display: swap` + `preconnect`.
+- **시도 후 되돌림:** Pretendard를 `load` 뒤에 붙여 보니 FCP는 3.9 → 1.5초로 줄었지만, 글꼴 16개 교체에 따른 다시 그리기가 TBT 구간으로 넘어가 TBT 248 → 1,955ms, 점수 71 → 57 (로컬 · CPU 2배)로 더 나빠져 되돌렸다.
+- **더 줄일 수 있는 것 (사용자 결정 필요):** `gtm.js` 180KB를 `load` 뒤로 미루기. 첫 화면 대역폭·TBT에는 도움이 되지만 `page_view` 가 늦게 나가 바로 나가는 방문이 덜 잡힐 수 있고 A/B 실험 도중 측정 조건이 바뀐다.
+
+**로컬 Lighthouse 사전 측정** (Lighthouse 12.6.1, 모바일 기본 설정 · 시뮬레이션 스로틀링, GA4 차단): 이 PC의 CPU 지표(benchmarkIndex 790)가 PageSpeed 서버보다 낮아 기본 CPU 4배에서는 TBT가 2초 이상으로 크게 나온다. 점수는 PageSpeed와 직접 비교할 수 없고 **수정 전후 비교용**으로만 본다.
+
+| 조건 (CPU 2배, 1회) | 점수 | FCP | LCP | TBT | CLS |
+|---|---|---|---|---|---|
+| 수정 전 (배포본) | 58 | 3.62초 | 6.25초 | 464ms | 0.035 |
+| 수정 후 (로컬 서버) | 71 | 3.93초 | 4.27초 | 248ms | 0.001 |

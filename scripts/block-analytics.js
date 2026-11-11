@@ -5,16 +5,21 @@
  * 그래서 두 겹으로 막는다.
  *   1) 브라우저를 켤 때 GA 수집 주소와 docs.google.com 을 찾을 수 없게 한다 (launchOptions)
  *   2) context.route 로 GA 수집 요청과 구글폼 formResponse 요청을 중단한다 (blockAnalytics)
+ *
+ * 2026-11-11 추가: google-analytics.com 을 막으면 gtag 가 www.google.com/g/collect 로 다시 보낸다(대체 주소).
+ * 이 주소가 빠져 있어 11/9 이후 자동 시험의 page_view 등이 GA4로 나갔을 수 있다 → www.google.com 도 막는다.
  */
 const COLLECT_HOSTS = [
   '*.google-analytics.com',
   'google-analytics.com',
   'analytics.google.com',
+  '*.analytics.google.com',
   'stats.g.doubleclick.net',
   'docs.google.com',
+  'www.google.com', // gtag 대체 수집 주소 (/g/collect, /ccm/collect)
 ];
 
-const COLLECT_URL = /^https?:\/\/([a-z0-9-]+\.)*(google-analytics\.com|analytics\.google\.com|stats\.g\.doubleclick\.net)\//i;
+const COLLECT_URL = /^https?:\/\/(([a-z0-9-]+\.)*(google-analytics\.com|analytics\.google\.com|stats\.g\.doubleclick\.net)\/|(www\.)?google\.[a-z.]+\/(g|ccm)\/collect)/i;
 const FORM_URL = /^https?:\/\/docs\.google\.com\/forms\/.*formResponse/i;
 
 function launchOptions(options = {}) {

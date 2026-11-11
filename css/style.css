@@ -325,6 +325,9 @@ strong {
   line-height: 1.38;
   font-weight: 800;
   letter-spacing: -0.03em;
+  /* CLS 방지 (2026-11-11): 헤드라인 B안은 웹폰트가 오기 전 대체 글꼴에서 3줄 → 도착 후 2줄로 줄어
+     사진·CTA가 위로 37px 밀렸다(CLS 0.032). 3줄 높이를 미리 잡아 둔다. 문구·구조는 그대로 */
+  min-height: calc(1.38em * 3);
 }
 .hero-sub {
   margin-top: 14px;
@@ -443,7 +446,11 @@ strong {
 }
 
 /* 히어로 대표 사진 (4:5) */
+/* 폭: 화면 폭 - 좌우 여백 40px, 최대 440px (index.html 의 sizes·preload 와 같은 기준) */
 .hero-media {
+  width: 100%;
+  max-width: 440px;
+  justify-self: center;
   aspect-ratio: 4 / 5;
 }
 .hero-media picture {
@@ -1010,11 +1017,6 @@ strong {
   }
   .photo-grid--steps {
     grid-template-columns: repeat(4, 1fr);
-  }
-  .hero-media {
-    width: 100%;
-    max-width: 440px;
-    justify-self: center;
   }
   .hero-sub {
     font-size: 18px;

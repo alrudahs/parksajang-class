@@ -93,6 +93,10 @@
   </script>
   <!--JSONLD:END-->
 
+  <!-- 히어로 사진(LCP)을 가장 먼저 받기: index.html 히어로 <picture> 의 webp srcset·sizes 와 같은 값 -->
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high"
+        imagesrcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
+        imagesizes="(min-width: 480px) 440px, calc(100vw - 40px)">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <link rel="stylesheet" href="css/style.css">
@@ -137,9 +141,15 @@
 
         <!-- 히어로 대표 사진: 첫 화면(LCP)이라 지연 로딩 없이 우선 불러온다 -->
         <figure class="media hero-media">
+          <!-- srcset·sizes 는 <head> 의 preload 와 같은 값으로 유지 (사진 폭: 화면 폭 - 좌우 여백 40px, 최대 440px) -->
           <picture>
-            <source srcset="images/site/owner-hero.webp" type="image/webp">
-            <img src="images/site/owner-hero.jpg" width="960" height="1200" fetchpriority="high" decoding="async" alt="직접 오픈해 3년 넘게 운영한 박사장">
+            <source type="image/webp"
+                    srcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
+                    sizes="(min-width: 480px) 440px, calc(100vw - 40px)">
+            <img src="images/site/owner-hero-720.jpg"
+                 srcset="images/site/owner-hero-480.jpg 480w, images/site/owner-hero-720.jpg 720w, images/site/owner-hero.jpg 960w"
+                 sizes="(min-width: 480px) 440px, calc(100vw - 40px)"
+                 width="960" height="1200" fetchpriority="high" decoding="async" alt="직접 오픈해 3년 넘게 운영한 박사장">
           </picture>
         </figure>
 
