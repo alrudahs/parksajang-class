@@ -41,7 +41,7 @@ PARKSAJANG-CLASS/
 │  ├─ common.js            저장소·A/B·3일 할인 타이머·폼 검사·채널 링크 (푸터는 각 HTML에 직접 작성)
 │  └─ (페이지별).js         landing.js, diagnosis.js, checkout.js 등
 ├─ images/                 사진·양식 미리보기·og.png (지금은 자리표시)
-├─ files/                  다운로드용 임시 PDF
+├─ files/                  다운로드 PDF (D-7 체크리스트 최종본 · 템플릿은 아직 임시)
 ├─ robots.txt · sitemap.xml   (vercel.json 은 없음 — 정적 파일 그대로 배포, 필요해지면 10단계에서 추가)
 ├─ scripts/capture.js      Playwright 캡처 도구 (배포와 무관)
 ├─ captures/               캡처 결과 (.gitignore, GitHub에 올리지 않음)
@@ -125,7 +125,7 @@ PARKSAJANG-CLASS/
 - 결제 버튼을 누르면 바로 완료 페이지로 이동. 주문번호는 임의 생성 (`DEMO-YYYYMMDD-XXXX`).
 - **모든 페이지 푸터**에 고지: "본 페이지의 결제는 프로젝트용 데모이며 실제 결제가 일어나지 않습니다."
 - 입력받은 이름·연락처는 **저장하지 않고 다음 화면으로 넘기는 데만** 쓴다 (`sessionStorage`, 표시 용도). 서버 전송 없음. dataLayer에도 개인정보를 넣지 않는다.
-- 다운로드 버튼은 `files/` 의 임시 PDF로 연결한다 (실제 D-7 체크리스트가 생기면 교체).
+- 다운로드 버튼은 `files/` 의 PDF로 연결한다. D-7 체크리스트는 2026-11-11 최종본으로 교체(파일 이름 `d7-checklist-sample.pdf` 그대로), 템플릿 PDF는 아직 임시.
 - 할인 규칙:
   - 운영 템플릿 19,900원 → **14,900원**: 체크리스트 신청 후 3일 한정. 신청 시각만 `localStorage`에 저장하고 남은 시간을 표시, 지나면 정가.
   - 오픈 올인원 키트: 템플릿 구매자는 60일 안에 49,100원으로 업그레이드 (안내 문구로만).
