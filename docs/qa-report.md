@@ -154,7 +154,7 @@ index · index-b · checklist · checklist-done · template · checkout · order
 | 8 | 이벤트 수신 확인 | GTM 미리보기 → GA4 DebugView에서 11개 이벤트 확인 → ✅ **GTM 미리보기 이벤트 확인 완료 · GA4 DebugView 수신 확인 완료** (2026-11-09 경로 A 기준, 확인 범위는 9-8) | 3-7 |
 | 9 | UTM 채널 확인 | 박람회 QR 포함 UTM 링크 5개로 들어가 GA4 실시간에서 채널 확인 → 페이지 조회 수신·UTM 전달 확인 (9-9). 첫 사용자 소스는 14번에서 재확인 | 3-7 |
 | 10 | 구글폼 설문 연결 | 구글폼 만들기 → `js/config.js` 의 `surveyForm` 에 주소·entry 번호 → 제출 후 시트 확인 → ✅ **연결 완료** (응답 시트 수신 확인 · 근거 `captures/11-survey-sheet-test.png`, 9-12) | 2-1 · 4-2 |
-| 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 → 🔶 **현장 사진 2장 · 양식 미리보기 6장 반영 완료** (2026-11-10, 9-13) · **히어로 대표 사진 · 매장 만든 과정 4장 · 시장 사진 반영 완료** (2026-11-11, 9-14) · **D-7 체크리스트 PDF 최종본 교체** (2026-11-11, 9-15). 템플릿 PDF는 남음 | 제출 전 체크리스트 2장 |
+| 11 | 실물 교체 (D3·D4) | 사진 3장 → `images/`, D-7 체크리스트·템플릿 PDF → `files/` 같은 이름으로 → 🔶 **현장 사진 2장 · 양식 미리보기 6장 반영 완료** (2026-11-10, 9-13) · **히어로 대표 사진 · 매장 만든 과정 4장 · 시장 사진 반영 완료** (2026-11-11, 9-14) · **D-7 체크리스트 PDF 최종본 교체** (2026-11-11, 9-15) · **템플릿 샘플 1장 · 템플릿 데모 PDF 7쪽 반영** (2026-11-11, 9-16) → ✅ 자리표시 없음 | 제출 전 체크리스트 2장 |
 | 12 | 채널 계정 개설 후 | `js/config.js` 채널 주소 수정 + `virtual: false` → `scripts/build-jsonld.js` 주소 수정 후 실행 | 1-5 |
 | 13 | 실제 운영 전 | 개인정보 수집·이용 동의(필수) 체크박스 추가 · 프리미엄 컨설팅은 견적 상담 흐름 검토 | 3단계·5단계 메모 |
 | 14 | 첫 사용자 소스 재확인 | 다음 날 GA4 획득 보고서에서 첫 사용자 소스·캠페인 확인 (실시간 보고서에서는 새 사용자의 값이 비어 있음, 9-9) | 3-7 |
@@ -501,3 +501,33 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 - 헤드리스 브라우저에는 PDF 뷰어가 없어, 받은 파일을 pdf.js로 열어 2쪽이 그려지는지 확인 (근거 `captures/15-d7-download.png`).
 - 배포 주소(`6f474c5` 배포본)에서도 PC·모바일 같은 결과. 단, **저장되는 파일 이름은 `d7-checklist-sample.pdf`** — Vercel이 `Content-Disposition: inline; filename="d7-checklist-sample.pdf"` 를 보내 HTML의 `download="박사장클라쓰_오픈D-7체크리스트.pdf"` 보다 우선한다 (로컬 서버에서는 한글 이름으로 저장). 이번 교체 전부터 같던 동작이며, 한글 이름으로 받게 하려면 `vercel.json` 헤더 설정이 필요하다 (사용자 결정).
 - **→ 해결 (2026-11-11, `291bd1c`):** `vercel.json` 에서 이 PDF 경로에만 `Content-Disposition: attachment; filename="parksajang-class_open-D-7-checklist.pdf"; filename*=UTF-8''(한글 이름 인코딩)` 을 붙임. 배포 후 PC·모바일 모두 `박사장클라쓰_오픈D-7체크리스트.pdf` 로 저장 · 파일 같음 · 2쪽 · `file_name` 은 `d7-checklist-sample.pdf` 그대로 · GA 요청 0건. 다른 응답 헤더(`/`, `checklist-done.html`, `style.css`, `template-sample.pdf`, 사진, `robots.txt`)는 적용 전과 비교해 차이 없음.
+
+### 9-16. 네이버 유입 진단 버튼 · 템플릿 샘플 미리보기 · 템플릿 데모 PDF (2026-11-11)
+
+| 수정 | 내용 |
+|---|---|
+| UTM 2번 링크 | `docs/utm-links.md` 자영업 커뮤니티 → 랜딩 `/?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
+| 히어로 버튼 | 저장된 UTM의 `utm_campaign=diagnosis` 일 때만 주황 버튼 2개(같은 크기): 위 "무료 셀프 진단(10문항) 받기" → `diagnosis.html?from=hero` (`hero_diagnosis`) · 아래 "무료 D-7 체크리스트 받기" (`hero` 그대로). 이때 진단 글자 링크는 숨김. 히어로 CTA 직전 인라인 스크립트가 `<html data-entry="diagnosis">` 를 붙이고 CSS로만 전환 → 레이아웃 이동 없음 |
+| 모바일 첫 화면 | 버튼 2개면 375px에서 두 번째 버튼 아래 끝이 840px(> 812), 412px에서 886px(> 823)로 넘쳐서, **이 유입에서만** 1023px 이하 사진 최대 폭을 300px로 줄임 (사진 비율·내용 그대로) |
+| 템플릿 샘플 1장 | `checklist-done.html`(H1 블록 안) · `template.html` 의 회색 빈칸 → `images/site/tpl-sales.webp`(+png) `<picture>`, 1080×471, `loading="lazy"`, alt "매출 입력 시트 샘플 미리보기". 시트 비율 그대로(자르지 않음). H1 블록의 문구·구조는 그대로 |
+| 템플릿 PDF | 원본자료 `박사장클라쓰_매장운영템플릿_데모.pdf` **한 개만** → `files/template-sample.pdf` 덮어씀 (바이트 같음, 437,456 bytes, 7쪽, 실명·연락처 없음). 링크 주소 그대로. `vercel.json` 에 이 경로만 저장 이름 "박사장클라쓰_매장운영템플릿_데모.pdf" (영문 대체 `parksajang-class_store-template_demo.pdf`) |
+| 구매 완료 문구 | "지금은 임시 파일이에요." → "데모 버전(7쪽)이에요." |
+
+- 템플릿 다운로드 버튼에는 원래 `file_download` 이벤트가 없다 (이벤트 표의 `file_download` 는 D-7 체크리스트 전용). 이번에도 새로 만들지 않음 → 바뀐 값 없음.
+
+**시험 (로컬 서버, `block-analytics.js` · GA4·구글폼 요청 0건)**
+
+| 항목 | PC 1440×900 | 모바일 375×812 | 모바일 412×823 |
+|---|---|---|---|
+| 네이버 유입 버튼 2개 (A·B안) | ✅ 진단 위 · 360×56 같은 크기 · 같은 주황 | ✅ 335×56 | ✅ 372×56 |
+| 두 버튼 첫 화면 안 (아래 끝) | 591px | 796px | 796px |
+| CLS (A·B안) | 0.0008 ~ 0.001 (기존 화면도 0.0009 · 버튼과 무관) | 0 | 0 |
+| UTM 없이 다시 랜딩 (같은 탭) | 버튼 2개 유지 (저장된 UTM 기준) | 〃 | 〃 |
+| 진단 버튼 클릭 | `click_cta` `hero_diagnosis` 1건 → `diagnosis.html?from=hero` | 〃 | 〃 |
+| 체크리스트 버튼 클릭 | `click_cta` `hero` | | |
+| 직접 방문 · 인스타 UTM | 기존 화면 그대로 (버튼 1개 + 진단 글자 링크) | 〃 | 〃 |
+| 옛 링크 `diagnosis.html?utm…` | | 시작 화면 정상 · `start_diagnosis` `source: naver_cafe` | |
+| 샘플 미리보기 (완료·상세) | `tpl-sales.webp` · 518×225 · 빈칸 0 | 333×144 | |
+| 템플릿 PDF | 받은 파일 = 원본 · 문구 "데모 버전(7쪽)이에요." | 〃 | |
+
+- 캡처: `captures/16-naver-hero.png`, `16-done-sample.png`, `16-template-pdf.png` (PC·모바일).

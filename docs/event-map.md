@@ -12,6 +12,7 @@
 | A | `index.html` | 히어로 "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "hero"` | `js/landing.js` |
 | A | `index.html` | 최종 CTA "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "bottom"` | `js/landing.js` |
 | B | `index.html` | 히어로 보조 링크 "이미 장사 중이세요? 무료 셀프 진단(10문항) 먼저 해보기 →" 클릭 (→ `diagnosis.html?from=hero`) | `click_cta` | `button_position: "hero_diagnosis"` | `js/landing.js` |
+| B | `index.html` (네이버 카페 유입 · 저장된 `utm_campaign=diagnosis` 일 때만) | 히어로 위 주황 버튼 "무료 셀프 진단(10문항) 받기" 클릭 (→ `diagnosis.html?from=hero`, 2026-11-11) | `click_cta` | `button_position: "hero_diagnosis"` (글자 링크와 같은 값 재사용 · 이 유입에선 글자 링크 숨김) | `js/landing.js` |
 | A | `index.html` | "어느 쪽이세요?" 카드 · 오픈 준비 중이에요 "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "split_open"` | `js/landing.js` |
 | B | `index.html` | "어느 쪽이세요?" 카드 · 이미 운영 중이에요 "무료 셀프 진단 해보기" 클릭 | `click_cta` | `button_position: "split_running"` | `js/landing.js` |
 | A | `checklist.html` | 이름·연락처 입력 후 신청 (빈칸이면 안 나감) | `generate_lead` | `lead_type: "checklist"`, `marketing_consent: true/false` | `js/checklist.js` |

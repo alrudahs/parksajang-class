@@ -293,6 +293,19 @@ strong {
 .media--doc {
   aspect-ratio: 16 / 10;
 }
+/* 템플릿 샘플 1장 (신청 완료·템플릿 상세): 시트 원래 비율 그대로, 자르지 않음 */
+.media--sample {
+  aspect-ratio: 1080 / 471;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.media--sample picture {
+  display: block;
+  height: 100%;
+}
+.media--sample img {
+  object-fit: contain;
+}
 .placeholder {
   display: flex;
   flex-direction: column;
@@ -344,6 +357,32 @@ strong {
   margin-top: 8px;
   font-size: 15px;
   line-height: 1.45;
+}
+/* 네이버 카페 유입(utm_campaign=diagnosis)만: 주황 버튼 2개, 같은 크기 (2026-11-11 사용자 결정 · 주황 1개 원칙의 예외) */
+.hero-diag-btn {
+  display: none;
+}
+[data-entry='diagnosis'] .hero-cta {
+  display: grid;
+  gap: 12px;
+}
+[data-entry='diagnosis'] .hero-cta .btn {
+  display: flex;
+  width: 100%;
+}
+[data-entry='diagnosis'] .hero-diag-link {
+  display: none;
+}
+@media (min-width: 640px) {
+  [data-entry='diagnosis'] .hero-cta {
+    max-width: 360px;
+  }
+}
+/* 모바일·태블릿: 버튼 2개가 첫 화면에 들어오도록 이 유입에서만 사진 폭을 줄임 (375·412px 기준 확인) */
+@media (max-width: 1023px) {
+  [data-entry='diagnosis'] .hero-media {
+    max-width: 300px;
+  }
 }
 
 /* ---------- 갈림길: 오픈 준비 / 운영 중 ---------- */

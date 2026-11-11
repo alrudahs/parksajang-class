@@ -10,7 +10,7 @@
 | # | 채널 | 경로 | 도착 페이지 | 완성 링크 |
 |---|---|---|---|---|
 | 1 | 인스타그램 | A | 랜딩 | `https://parksajang-class.vercel.app/?utm_source=instagram&utm_medium=social&utm_campaign=open_checklist` |
-| 2 | 자영업 커뮤니티 | B | 셀프 진단 | `https://parksajang-class.vercel.app/diagnosis.html?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
+| 2 | 자영업 커뮤니티 | B | 랜딩 (히어로에 진단 버튼 우선) | `https://parksajang-class.vercel.app/?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
 | 3 | 네이버 블로그 | 랜딩 FAQ | 랜딩 (FAQ 위치) | `https://parksajang-class.vercel.app/?utm_source=naver_blog&utm_medium=content&utm_campaign=faq_open_prep#faq-title` |
 | 4 | **박람회 QR** | A | 체크리스트 신청 | `https://parksajang-class.vercel.app/checklist.html?utm_source=expo&utm_medium=offline&utm_campaign=startup_fair_2026` |
 | 5 | CRM 카카오톡 | C | 무료 Zoom 라이브 신청 | `https://parksajang-class.vercel.app/live.html?utm_source=kakao&utm_medium=crm&utm_campaign=welcome_d3` |
@@ -24,6 +24,11 @@
 | 네이버 블로그 | naver_blog | content | faq_open_prep |
 | 박람회 QR | expo | offline | startup_fair_2026 |
 | CRM 카카오톡 | kakao | crm | welcome_d3 |
+
+## 네이버 카페(2번) 도착 페이지 변경 (2026-11-11 사용자 결정)
+
+- 셀프 진단 페이지 대신 **랜딩 첫 화면**으로 보낸다. 저장된 UTM의 `utm_campaign` 이 `diagnosis` 인 방문만 히어로 버튼이 두 개(주황, 같은 크기)로 바뀐다: 위 **무료 셀프 진단(10문항) 받기** (`click_cta` · `hero_diagnosis`) / 아래 **무료 D-7 체크리스트 받기** (`hero`). 이때 히어로의 진단 글자 링크는 숨긴다. 그 외 유입은 그대로.
+- 옛 링크 `diagnosis.html?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` 도 계속 그대로 동작한다 (진단 시작 화면 + UTM 저장).
 
 ## 박람회 QR 만들 때
 

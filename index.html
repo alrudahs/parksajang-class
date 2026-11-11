@@ -153,7 +153,15 @@
           </picture>
         </figure>
 
+        <script>
+          // 네이버 카페 유입(저장된 UTM utm_campaign=diagnosis)이면 히어로 버튼 2개(진단 위·체크리스트 아래).
+          // 버튼이 그려지기 전에 html 속성만 붙이고 CSS로 보이기/숨기기 → 레이아웃 이동 없음. 헤드라인 A/B와 무관.
+          (function () {
+            if ((PSC.utm().utm_campaign || '') === 'diagnosis') document.documentElement.setAttribute('data-entry', 'diagnosis');
+          })();
+        </script>
         <div class="hero-cta">
+          <a class="btn btn--primary hero-diag-btn" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">무료 셀프 진단(10문항) 받기</a>
           <a class="btn btn--primary" href="checklist.html" data-cta="hero">무료 D-7 체크리스트 받기</a>
           <a class="text-link hero-diag-link" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">이미 장사 중이세요? 무료 셀프 진단(10문항) 먼저 해보기 →</a>
         </div>
