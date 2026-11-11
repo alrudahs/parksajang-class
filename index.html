@@ -96,7 +96,7 @@
   <!-- 히어로 사진(LCP)을 가장 먼저 받기: index.html 히어로 <picture> 의 webp srcset·sizes 와 같은 값 -->
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
-        imagesizes="(min-width: 480px) 440px, calc(100vw - 40px)">
+        imagesizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <link rel="stylesheet" href="css/style.css">
@@ -141,29 +141,22 @@
 
         <!-- 히어로 대표 사진: 첫 화면(LCP)이라 지연 로딩 없이 우선 불러온다 -->
         <figure class="media hero-media">
-          <!-- srcset·sizes 는 <head> 의 preload 와 같은 값으로 유지 (사진 폭: 화면 폭 - 좌우 여백 40px, 최대 440px) -->
+          <!-- srcset·sizes 는 <head> 의 preload 와 같은 값으로 유지 (사진 폭: PC 440px, 모바일·태블릿 300px — 340px 미만 화면은 화면 폭 - 좌우 여백 40px) -->
           <picture>
             <source type="image/webp"
                     srcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
-                    sizes="(min-width: 480px) 440px, calc(100vw - 40px)">
+                    sizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)">
             <img src="images/site/owner-hero-720.jpg"
                  srcset="images/site/owner-hero-480.jpg 480w, images/site/owner-hero-720.jpg 720w, images/site/owner-hero.jpg 960w"
-                 sizes="(min-width: 480px) 440px, calc(100vw - 40px)"
+                 sizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)"
                  width="960" height="1200" fetchpriority="high" decoding="async" alt="직접 오픈해 3년 넘게 운영한 박사장">
           </picture>
         </figure>
 
-        <script>
-          // 네이버 카페 유입(저장된 UTM utm_campaign=diagnosis)이면 히어로 버튼 2개(진단 위·체크리스트 아래).
-          // 버튼이 그려지기 전에 html 속성만 붙이고 CSS로 보이기/숨기기 → 레이아웃 이동 없음. 헤드라인 A/B와 무관.
-          (function () {
-            if ((PSC.utm().utm_campaign || '') === 'diagnosis') document.documentElement.setAttribute('data-entry', 'diagnosis');
-          })();
-        </script>
+        <!-- 히어로 버튼 2개 (모든 방문자 · 2026-11-11): 위 셀프 진단 · 아래 D-7 체크리스트. 헤드라인 A/B와 무관 -->
         <div class="hero-cta">
-          <a class="btn btn--primary hero-diag-btn" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">무료 셀프 진단(10문항) 받기</a>
+          <a class="btn btn--primary" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">무료 셀프 진단(10문항) 받기</a>
           <a class="btn btn--primary" href="checklist.html" data-cta="hero">무료 D-7 체크리스트 받기</a>
-          <a class="text-link hero-diag-link" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">이미 장사 중이세요? 무료 셀프 진단(10문항) 먼저 해보기 →</a>
         </div>
       </div>
     </section>

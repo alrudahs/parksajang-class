@@ -5,12 +5,19 @@
 - 첫 방문 때 주소의 UTM이 저장되고(`sessionStorage`), 이후 페이지 이벤트에서 다시 쓰입니다. 예를 들어 `start_diagnosis` 의 `source` 값이 이 링크의 `utm_source` 가 됩니다.
 - 도착 페이지는 `landing-content.md` 5장의 서비스 경로(A·B·C)에 맞춰 골랐습니다.
 
-## 완성 링크 5개
+## 지인 베타 테스트용 (2026-11-12~) — 지금 쓰는 링크
+
+`https://parksajang-class.vercel.app/?utm_source=friends&utm_medium=referral&utm_campaign=beta_test`
+
+- 과제용 지인 테스트라 채널을 하나로 통일함. 카톡·인스타·네이버 카페 어디에 올리든 **이 링크 하나만** 사용.
+- 채널 비교는 아래 5개 채널 링크를 이용한 가상 시나리오로 대체.
+
+## 실제 운영 시 사용할 링크 (5개 채널)
 
 | # | 채널 | 경로 | 도착 페이지 | 완성 링크 |
 |---|---|---|---|---|
 | 1 | 인스타그램 | A | 랜딩 | `https://parksajang-class.vercel.app/?utm_source=instagram&utm_medium=social&utm_campaign=open_checklist` |
-| 2 | 자영업 커뮤니티 | B | 랜딩 (히어로에 진단 버튼 우선) | `https://parksajang-class.vercel.app/?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
+| 2 | 자영업 커뮤니티 | B | 랜딩 | `https://parksajang-class.vercel.app/?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` |
 | 3 | 네이버 블로그 | 랜딩 FAQ | 랜딩 (FAQ 위치) | `https://parksajang-class.vercel.app/?utm_source=naver_blog&utm_medium=content&utm_campaign=faq_open_prep#faq-title` |
 | 4 | **박람회 QR** | A | 체크리스트 신청 | `https://parksajang-class.vercel.app/checklist.html?utm_source=expo&utm_medium=offline&utm_campaign=startup_fair_2026` |
 | 5 | CRM 카카오톡 | C | 무료 Zoom 라이브 신청 | `https://parksajang-class.vercel.app/live.html?utm_source=kakao&utm_medium=crm&utm_campaign=welcome_d3` |
@@ -24,10 +31,11 @@
 | 네이버 블로그 | naver_blog | content | faq_open_prep |
 | 박람회 QR | expo | offline | startup_fair_2026 |
 | CRM 카카오톡 | kakao | crm | welcome_d3 |
+| 지인 베타 테스트 (2026-11-12~) | friends | referral | beta_test |
 
 ## 네이버 카페(2번) 도착 페이지 변경 (2026-11-11 사용자 결정)
 
-- 셀프 진단 페이지 대신 **랜딩 첫 화면**으로 보낸다. 저장된 UTM의 `utm_campaign` 이 `diagnosis` 인 방문만 히어로 버튼이 두 개(주황, 같은 크기)로 바뀐다: 위 **무료 셀프 진단(10문항) 받기** (`click_cta` · `hero_diagnosis`) / 아래 **무료 D-7 체크리스트 받기** (`hero`). 이때 히어로의 진단 글자 링크는 숨긴다. 그 외 유입은 그대로.
+- 셀프 진단 페이지 대신 **랜딩 첫 화면**으로 보낸다. 히어로 버튼 2개(위 **무료 셀프 진단(10문항) 받기** `hero_diagnosis` / 아래 **무료 D-7 체크리스트 받기** `hero`)는 처음엔 이 유입에만 적용했다가, 같은 날 **모든 방문자에게 기본 적용**으로 바꿨다 (유입별 분기 없음).
 - 옛 링크 `diagnosis.html?utm_source=naver_cafe&utm_medium=community&utm_campaign=diagnosis` 도 계속 그대로 동작한다 (진단 시작 화면 + UTM 저장).
 
 ## 박람회 QR 만들 때

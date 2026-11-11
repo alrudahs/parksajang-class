@@ -82,7 +82,7 @@ PARKSAJANG-CLASS/
 
 - **글자 대비 4.5:1** (2026-11-06 PageSpeed 접근성 수정): 원색 `--orange` 는 흰 글자와 3.66:1 이라, 주황 버튼 배경과 작은 주황 글자는 `--orange-dark`(#BD5322), 연주황 칩 글자는 `--orange-deep`(#A8481C), 연초록 칩 글자는 `--green-text`(#2A7062)를 쓴다. 원색은 그래프·테두리·큰 숫자에. 근거는 `docs/qa-report.md` 9-3.
 - 주황은 "지금 행동할 것"에만 쓴다. 한 화면에 주황 버튼은 1개가 원칙 (랜딩은 히어로·최종 CTA의 같은 버튼 2번).
-  - 예외 (2026-11-11 사용자 결정): 네이버 카페 유입(저장된 `utm_campaign=diagnosis`)만 히어로에 같은 크기 주황 버튼 2개 — 위 "무료 셀프 진단(10문항) 받기"(`hero_diagnosis`) · 아래 "무료 D-7 체크리스트 받기"(`hero`). `index.html` 의 인라인 스크립트가 `<html data-entry="diagnosis">` 를 붙이고 CSS로만 바꾼다(CLS 없음). 헤드라인 A/B와 무관, A·B안 똑같이.
+  - 예외 (2026-11-11 사용자 결정): 히어로는 **모든 방문자에게** 같은 크기 주황 버튼 2개 — 위 "무료 셀프 진단(10문항) 받기"(`hero_diagnosis`) · 아래 "무료 D-7 체크리스트 받기"(`hero`). 유입별 분기 없음, 진단 글자 링크는 없앰. 모바일·태블릿 히어로 사진은 300px(두 버튼이 첫 화면 안). 헤드라인 A/B와 무관, A·B안 똑같이.
 - 이미지·자료 자리는 연회색 박스 + 회색 안내 문구 ("대표 사진 / 매장 사진", "실제 쓰던 양식 미리보기"). `images/` 이미지로 바꾸기 쉽게 한 곳에 표시.
 
 ### 폰트
@@ -145,7 +145,7 @@ PARKSAJANG-CLASS/
 | 이벤트명 | 언제 | 파라미터 |
 |---|---|---|
 | `page_view` | 모든 페이지 열람 | (GTM 자동 — 수동 push 하지 않음) |
-| `click_cta` | 히어로·최종 CTA·히어로 셀프 진단 링크·"어느 쪽이세요?" 카드 클릭 | `button_position`: `hero` / `bottom` / `hero_diagnosis` / `split_open` / `split_running` (뒤 3개는 2026-11-10 사용자 결정) |
+| `click_cta` | 히어로(체크리스트·셀프 진단 버튼)·최종 CTA·"어느 쪽이세요?" 카드 클릭 | `button_position`: `hero` / `bottom` / `hero_diagnosis` / `split_open` / `split_running` (뒤 3개는 2026-11-10 사용자 결정) |
 | `generate_lead` | 무료 자료 신청·상담 예약 완료 | `lead_type`: `checklist` / `diagnosis` / `consult`, `marketing_consent`: `true`/`false` |
 | `file_download` | D-7 체크리스트 다운로드 | `file_name` |
 | `view_item` | 템플릿·키트·코칭 상세 열람 | `item_name`, `price` |

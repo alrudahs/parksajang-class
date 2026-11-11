@@ -350,38 +350,19 @@ strong {
 .hero-sub b {
   color: var(--navy);
 }
+/* 히어로 버튼 2개: 위 셀프 진단 · 아래 D-7 체크리스트, 같은 크기·같은 주황 (2026-11-11 사용자 결정 · 주황 1개 원칙의 예외, 모든 방문자) */
 .hero-cta {
   margin-top: 4px;
-}
-.hero-diag-link {
-  margin-top: 8px;
-  font-size: 15px;
-  line-height: 1.45;
-}
-/* 네이버 카페 유입(utm_campaign=diagnosis)만: 주황 버튼 2개, 같은 크기 (2026-11-11 사용자 결정 · 주황 1개 원칙의 예외) */
-.hero-diag-btn {
-  display: none;
-}
-[data-entry='diagnosis'] .hero-cta {
   display: grid;
   gap: 12px;
 }
-[data-entry='diagnosis'] .hero-cta .btn {
+.hero-cta .btn {
   display: flex;
   width: 100%;
 }
-[data-entry='diagnosis'] .hero-diag-link {
-  display: none;
-}
 @media (min-width: 640px) {
-  [data-entry='diagnosis'] .hero-cta {
+  .hero-cta {
     max-width: 360px;
-  }
-}
-/* 모바일·태블릿: 버튼 2개가 첫 화면에 들어오도록 이 유입에서만 사진 폭을 줄임 (375·412px 기준 확인) */
-@media (max-width: 1023px) {
-  [data-entry='diagnosis'] .hero-media {
-    max-width: 300px;
   }
 }
 
@@ -488,7 +469,8 @@ strong {
 /* 폭: 화면 폭 - 좌우 여백 40px, 최대 440px (index.html 의 sizes·preload 와 같은 기준) */
 .hero-media {
   width: 100%;
-  max-width: 440px;
+  /* 모바일·태블릿 300px: 히어로 버튼 2개가 첫 화면에 들어오도록 (375·412px 기준 확인 · 2026-11-11). PC는 아래 1024px 규칙에서 440px */
+  max-width: 300px;
   justify-self: center;
   aspect-ratio: 4 / 5;
 }
@@ -1042,6 +1024,7 @@ strong {
   }
   .hero-media {
     grid-area: media;
+    max-width: 440px;
   }
   .hero-cta {
     grid-area: cta;
