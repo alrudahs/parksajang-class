@@ -420,6 +420,36 @@ strong {
 .photo-title + .photo-grid {
   margin-top: 14px;
 }
+/* 매장 만든 과정: 모바일 2열 · PC 4열, 같은 정사각 칸 */
+.photo-grid--steps {
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+.photo-grid--steps figcaption {
+  font-size: 13px;
+}
+/* 시장 사진 1장: 세로 사진이라 원래 비율로, 넓은 화면에서는 폭 제한 */
+.photo--single {
+  max-width: 360px;
+  margin-top: 24px;
+}
+.photo--single picture {
+  aspect-ratio: auto;
+}
+.photo--single img {
+  height: auto;
+}
+
+/* 히어로 대표 사진 (4:5) */
+.hero-media {
+  aspect-ratio: 4 / 5;
+}
+.hero-media picture {
+  display: block;
+  height: 100%;
+}
 
 /* ---------- ② 문제 공감 ---------- */
 .pain-grid {
@@ -977,6 +1007,14 @@ strong {
   }
   .photo-grid--docs {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .photo-grid--steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .hero-media {
+    width: 100%;
+    max-width: 440px;
+    justify-self: center;
   }
   .hero-sub {
     font-size: 18px;

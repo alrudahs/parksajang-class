@@ -135,9 +135,12 @@
           <p class="hero-sub">혼자 시작해 월 매출 <b class="num">1,567만</b> → <b class="num">4,246만 원</b></p>
         </div>
 
-        <!-- 이미지 교체: 아래 .placeholder 를 <img src="images/hero.jpg" alt="박사장 클라쓰 대표 박미경"> 로 바꾸기 -->
-        <figure class="media media--photo hero-media">
-          <div class="placeholder" role="img" aria-label="대표 사진 / 매장 사진 자리">대표 사진 / 매장 사진</div>
+        <!-- 히어로 대표 사진: 첫 화면(LCP)이라 지연 로딩 없이 우선 불러온다 -->
+        <figure class="media hero-media">
+          <picture>
+            <source srcset="images/site/owner-hero.webp" type="image/webp">
+            <img src="images/site/owner-hero.jpg" width="960" height="1200" fetchpriority="high" decoding="async" alt="직접 오픈해 3년 넘게 운영한 박사장">
+          </picture>
         </figure>
 
         <div class="hero-cta">
@@ -327,6 +330,55 @@
             <figcaption>하루 최고 80건 주문을 소화한 조리 라인</figcaption>
           </figure>
         </div>
+
+        <!-- 매장 만든 과정 4단계 (모바일 2열 · PC 4열) -->
+        <h3 class="photo-title">매장, 이렇게 직접 만들었어요</h3>
+        <ol class="photo-grid photo-grid--steps">
+          <li>
+            <figure class="photo">
+              <picture>
+                <source srcset="images/site/build-equip.webp" type="image/webp">
+                <img src="images/site/build-equip.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="빈 매장에 주방 장비를 들여놓은 모습">
+              </picture>
+              <figcaption>① 빈 매장에 장비를 들이고</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo">
+              <picture>
+                <source srcset="images/site/build-setup.webp" type="image/webp">
+                <img src="images/site/build-setup.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="주방 동선에 맞춰 장비와 선반을 배치하는 모습">
+              </picture>
+              <figcaption>② 주방 동선을 직접 잡고</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo">
+              <picture>
+                <source srcset="images/site/build-diy.webp" type="image/webp">
+                <img src="images/site/build-diy.jpg" width="900" height="1125" loading="lazy" decoding="async" alt="전동 드릴로 수납장을 직접 조립하는 박사장">
+              </picture>
+              <figcaption>③ 가구도 직접 조립하고</figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="photo">
+              <picture>
+                <source srcset="images/site/build-done.webp" type="image/webp">
+                <img src="images/site/build-done.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="오픈 준비를 마친 주방">
+              </picture>
+              <figcaption>④ 오픈 준비를 마친 주방</figcaption>
+            </figure>
+          </li>
+        </ol>
+
+        <figure class="photo photo--single">
+          <picture>
+            <source srcset="images/site/market-run.webp" type="image/webp">
+            <img src="images/site/market-run.jpg" width="900" height="1359" loading="lazy" decoding="async" alt="시장에서 직접 고른 재료를 양손에 들고 가는 박사장">
+          </picture>
+          <figcaption>재료는 직접 시장에서 골랐어요</figcaption>
+        </figure>
 
         <h3 class="photo-title">실제 쓰던 양식 미리보기</h3>
         <div class="photo-grid photo-grid--docs">
