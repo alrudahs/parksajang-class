@@ -8,7 +8,7 @@ window.PSC_PRODUCTS = {
     name: '매장 운영 템플릿',
     price: 19900,
     salePrice: 14900, // 체크리스트 신청 후 3일 한정
-    includes: ['D-30 전체 체크리스트', '재고·발주 시트', '위생 점검표', '알바 교육 매뉴얼'],
+    includes: ['D-30 오픈 체크리스트', '매출 입력 시트', '주재료 재고·발주 시트', '위생 점검표', '요일별 청소 스케줄', '알바 면접 질문지·교육 순서'],
     detailUrl: 'template.html',
     download: { url: 'files/template-sample.pdf', label: '템플릿 다운로드' },
     liveInvite: true, // 구매 완료 화면에 "무료 Zoom 라이브 우선 초대"
