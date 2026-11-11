@@ -500,3 +500,4 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 
 - 헤드리스 브라우저에는 PDF 뷰어가 없어, 받은 파일을 pdf.js로 열어 2쪽이 그려지는지 확인 (근거 `captures/15-d7-download.png`).
 - 배포 주소(`6f474c5` 배포본)에서도 PC·모바일 같은 결과. 단, **저장되는 파일 이름은 `d7-checklist-sample.pdf`** — Vercel이 `Content-Disposition: inline; filename="d7-checklist-sample.pdf"` 를 보내 HTML의 `download="박사장클라쓰_오픈D-7체크리스트.pdf"` 보다 우선한다 (로컬 서버에서는 한글 이름으로 저장). 이번 교체 전부터 같던 동작이며, 한글 이름으로 받게 하려면 `vercel.json` 헤더 설정이 필요하다 (사용자 결정).
+- **→ 해결 (2026-11-11, `291bd1c`):** `vercel.json` 에서 이 PDF 경로에만 `Content-Disposition: attachment; filename="parksajang-class_open-D-7-checklist.pdf"; filename*=UTF-8''(한글 이름 인코딩)` 을 붙임. 배포 후 PC·모바일 모두 `박사장클라쓰_오픈D-7체크리스트.pdf` 로 저장 · 파일 같음 · 2쪽 · `file_name` 은 `d7-checklist-sample.pdf` 그대로 · GA 요청 0건. 다른 응답 헤더(`/`, `checklist-done.html`, `style.css`, `template-sample.pdf`, 사진, `robots.txt`)는 적용 전과 비교해 차이 없음.
