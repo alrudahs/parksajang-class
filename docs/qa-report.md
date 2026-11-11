@@ -531,3 +531,4 @@ GTM은 config.js 의 ID로 tracking.js 가 동적으로 불러옴. HTML 원문�
 | 템플릿 PDF | 받은 파일 = 원본 · 문구 "데모 버전(7쪽)이에요." | 〃 | |
 
 - 캡처: `captures/16-naver-hero.png`, `16-done-sample.png`, `16-template-pdf.png` (PC·모바일).
+- **배포 후 (`562005b` 배포본) 같은 시험 다시 실행 → 전부 통과, GA4·구글폼 요청 0건.** 템플릿 PDF는 PC·모바일 모두 `박사장클라쓰_매장운영템플릿_데모.pdf` 로 저장, pdf.js로 7쪽 확인. 응답 헤더는 `template-sample.pdf` 의 `Content-Disposition` 한 줄만 바뀌고 나머지(`/`, 완료 화면, CSS, D-7 PDF, 사진, `robots.txt`)는 그대로.
