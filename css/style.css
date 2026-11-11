@@ -2027,7 +2027,7 @@ strong {
 .scale--11 {
   grid-template-columns: repeat(6, 1fr);
 }
-/* 글자 선택지 4개: 모바일 2열, 640px 이상 4열 */
+/* 글자 선택지 4개: 2열 (설문 카드가 PC에서도 좁아 4열이면 "창업 관심만 있음" 등이 두 줄로 꺾임) */
 .scale--choice {
   grid-template-columns: repeat(2, 1fr);
 }
@@ -2111,9 +2111,6 @@ strong {
   }
   .scale--11 {
     grid-template-columns: repeat(11, 1fr);
-  }
-  .scale--choice {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
 
