@@ -26,7 +26,21 @@
 | C | `consult.html` | 날짜·시간·대상 고르고 15분 상담 예약 | `generate_lead` | `lead_type: "consult"`, `marketing_consent` (앞 화면 동의 여부, 없으면 false) | `js/path-c.js` |
 | C | `coaching.html?type=open` | 1:1 Zoom 코칭 상세 열람 | `view_item` | `item_name: "1:1 Zoom 코칭"`, `price: 200000`, `currency: "KRW"` | `js/path-c.js` |
 | C | `coaching.html?type=operate` | 프리미엄 컨설팅 상세 열람 | `view_item` | `item_name: "프리미엄 1주 집중 현장 컨설팅"`, `price: 4500000`, `currency: "KRW"` | `js/path-c.js` |
-| 공통 | `survey.html?type=…` | 2문항 고르고 제출 (빈칸이면 안 나감) | `submit_survey` | `survey_type: "checklist" / "live" / "purchase"`, `satisfaction: 1~5`, `recommend: 0~10` | `js/survey.js` |
+| 공통 | `survey.html?type=…` | 필수 2문항(만족도·추천) 고르고 제출 (빈칸이면 안 나감) · 선택 4문항은 GA4로 보내지 않음 | `submit_survey` | `survey_type: "checklist" / "live" / "purchase"`, `satisfaction: 1~5`, `recommend: 0~10` (2026-11-11 문항 추가 후에도 그대로) | `js/survey.js` |
+
+### 만족도 설문 → 구글폼 entry (GA4 아님 · `js/config.js` `surveyForm.entries`)
+
+| 문항 | 값 | entry | 비고 |
+|---|---|---|---|
+| (숨김) 설문 종류 | `checklist` / `live` / `purchase` | `entry.1255429821` | 필수 |
+| 1 만족도 | 1~5 | `entry.1629520359` | 필수 |
+| 2 추천 의향 | 0~10 | `entry.370164772` | 필수 |
+| (숨김) 헤드라인 실험 그룹 | `a` / `b` / 빈칸 | `entry.710186266` | |
+| (숨김) 완료 화면 실험 그룹 | `on` / `off` / 빈칸 | `entry.641282472` | |
+| 3 현재상황 | 오픈 준비 중 / 운영 중 / 창업 관심만 있음 / 해당 없음 (고른 글자 그대로) | `entry.1216887730` | 선택 · 2026-11-11 추가 · 안 고르면 안 보냄 |
+| 4 가장 도움된 자료 | D-7 체크리스트 / 셀프 진단 / 템플릿 미리보기 / 매장 이야기·사진 | `entry.684959752` | 선택 · 〃 |
+| 5 템플릿 구매 의향 | 1~5 | `entry.116918279` | 선택 · 〃 |
+| 6 아쉬운 점 | 자유 서술 최대 500자 | `entry.625266945` | 선택 · 〃 · **구글폼에만 저장, GA4·dataLayer 로 보내지 않음** |
 
 ## 2. 이벤트가 아닌 값 (실험 그룹 · GTM 변수로 사용)
 

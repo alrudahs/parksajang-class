@@ -28,6 +28,11 @@ window.PSC_CONFIG = {
       recommend: 'entry.370164772',
       expHeadline: 'entry.710186266', // 값 없으면 빈칸
       expDoneOffer: 'entry.641282472', // 값 없으면 빈칸
+      // 선택 문항 3~6 (2026-11-11) — 답하지 않으면 보내지 않음. GA4로는 보내지 않는다
+      situation: 'entry.1216887730', // 현재상황: 고른 글자 그대로
+      helpful: 'entry.684959752', // 가장 도움된 자료: 고른 글자 그대로
+      purchaseIntent: 'entry.116918279', // 템플릿 구매 의향: 1~5
+      improvement: 'entry.625266945', // 아쉬운 점: 최대 500자
     },
   },
 

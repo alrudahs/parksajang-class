@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>만족도 설문 · 박사장 클라쓰</title>
-  <meta name="description" content="박사장 클라쓰 만족도 설문 2문항.">
+  <meta name="description" content="박사장 클라쓰 만족도 설문 6문항.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#1F3A5A">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -29,7 +29,7 @@
         <div class="page-head">
           <span class="eyebrow" id="survey-about">오픈 D-7 체크리스트</span>
           <h1 class="page-title">만족도 설문</h1>
-          <p class="page-lead">2문항이에요. 이름·연락처는 묻지 않아요.</p>
+          <p class="page-lead">6문항이에요(1·2번만 필수). 이름·연락처는 묻지 않아요.</p>
         </div>
 
         <form class="card" id="survey-form" novalidate>
@@ -49,6 +49,43 @@
             <div class="scale-ends" aria-hidden="true"><span>0점</span><span>10점</span></div>
             <p class="error-msg" aria-live="polite"></p>
           </fieldset>
+
+          <!-- 문항 3~6: 선택 응답 (2026-11-11). 답은 구글폼에만 저장하고 GA4로 보내지 않는다 -->
+          <div class="survey-sep" aria-hidden="true"></div>
+          <fieldset class="field survey-q" data-group="situation">
+            <legend class="survey-legend"><span class="q-no">문항 3 · 선택</span>지금 어떤 상황이세요?</legend>
+            <div class="scale scale--choice">
+              <label class="scale-item"><input type="radio" name="situation" value="오픈 준비 중"><span>오픈 준비 중</span></label>
+              <label class="scale-item"><input type="radio" name="situation" value="운영 중"><span>운영 중</span></label>
+              <label class="scale-item"><input type="radio" name="situation" value="창업 관심만 있음"><span>창업 관심만 있음</span></label>
+              <label class="scale-item"><input type="radio" name="situation" value="해당 없음"><span>해당 없음</span></label>
+            </div>
+          </fieldset>
+
+          <div class="survey-sep" aria-hidden="true"></div>
+          <fieldset class="field survey-q" data-group="helpful">
+            <legend class="survey-legend"><span class="q-no">문항 4 · 선택</span>가장 도움이 된 자료는 무엇인가요?</legend>
+            <div class="scale scale--choice">
+              <label class="scale-item"><input type="radio" name="helpful" value="D-7 체크리스트"><span>D-7 체크리스트</span></label>
+              <label class="scale-item"><input type="radio" name="helpful" value="셀프 진단"><span>셀프 진단</span></label>
+              <label class="scale-item"><input type="radio" name="helpful" value="템플릿 미리보기"><span>템플릿 미리보기</span></label>
+              <label class="scale-item"><input type="radio" name="helpful" value="매장 이야기·사진"><span>매장 이야기·사진</span></label>
+            </div>
+          </fieldset>
+
+          <div class="survey-sep" aria-hidden="true"></div>
+          <fieldset class="field survey-q" data-group="purchase_intent">
+            <legend class="survey-legend"><span class="q-no">문항 5 · 선택</span>운영 템플릿(19,900원 · 신청 후 3일 한정 14,900원)을 살 의향이 있으세요?</legend>
+            <div class="scale scale--5" id="scale-intent"></div>
+            <div class="scale-ends" aria-hidden="true"><span>1점</span><span>5점</span></div>
+          </fieldset>
+
+          <div class="survey-sep" aria-hidden="true"></div>
+          <div class="field survey-q">
+            <label class="survey-legend" for="s-improve" style="display:block"><span class="q-no">문항 6 · 선택</span>아쉬운 점이 있었나요?</label>
+            <textarea class="input input--area" id="s-improve" name="improvement" rows="4" maxlength="500" placeholder="불편했거나 헷갈렸던 점을 자유롭게 적어 주세요 (선택)"></textarea>
+            <p class="char-count" id="s-improve-count" aria-live="polite">0 / 500자</p>
+          </div>
 
           <div class="btn-row">
             <button class="btn btn--primary btn--block" type="submit">설문 제출하기</button>

@@ -2027,6 +2027,30 @@ strong {
 .scale--11 {
   grid-template-columns: repeat(6, 1fr);
 }
+/* 글자 선택지 4개: 모바일 2열, 640px 이상 4열 */
+.scale--choice {
+  grid-template-columns: repeat(2, 1fr);
+}
+.scale--choice .scale-item span {
+  padding: 8px 6px;
+  font-size: 15px;
+  line-height: 1.35;
+  text-align: center;
+  word-break: keep-all;
+}
+.input--area {
+  height: auto;
+  min-height: 120px;
+  padding: 12px 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+.char-count {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
 .scale-item {
   position: relative;
 }
@@ -2087,6 +2111,9 @@ strong {
   }
   .scale--11 {
     grid-template-columns: repeat(11, 1fr);
+  }
+  .scale--choice {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
