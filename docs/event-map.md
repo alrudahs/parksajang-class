@@ -75,3 +75,4 @@
 - 데이터 영역 변수 18개: `button_position`, `lead_type`, `marketing_consent`, `file_name`, `item_name`, `price`, `value`, `currency`, `discount_applied`, `transaction_id`, `source`, `score_band`, `live_round`, `survey_type`, `satisfaction`, `recommend`, `exp_headline`, `exp_done_offer`
 - 가져오기 파일과 방법: `docs/gtm/gtm-import.json`, `docs/gtm/README.md`
 - GA4 향상된 측정의 "파일 다운로드"는 끈다 (`file_download` 중복 방지 · 2026-11-09 처리).
+- **GTM 버전 5 "내부 트래픽 게시(집·사무실)"** (2026-11-11 밤 게시): 내부 트래픽 규칙 2개(박사장 pc · 박사장 집, 사무실/집 IP 2개) + GA4 데이터 필터 Internal Traffic 활성 → 집 Wi-Fi 방문 제외 확인. 이벤트·변수·트리거는 그대로. 자세히는 `docs/qa-report.md` 9-20.
