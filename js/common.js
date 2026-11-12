@@ -214,6 +214,37 @@
     PSC.offer.bindCountdowns();
   }
 
+  // 카드 떠오르기 (2026-11-12): .reveal 카드가 스크롤로 화면에 들어올 때 한 번만 0.4초 떠오른다.
+  // 처음 화면에 이미 보이는 카드는 건드리지 않고(LCP 보호), 움직임 줄이기 설정·IntersectionObserver 미지원이면 끈다.
+  // transform·opacity 만 쓰므로 자리(레이아웃)는 그대로 → CLS 없음
+  function initReveal() {
+    var els = document.querySelectorAll('.reveal');
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: '0px 0px -40px 0px' }
+    );
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    Array.prototype.forEach.call(els, function (el) {
+      if (el.getBoundingClientRect().top < vh) return;
+      el.classList.add('reveal-wait');
+      io.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+
   // 채널: virtual 이 아니면 링크로 바꾼다
   function applyChannels() {
     var nodes = document.querySelectorAll('[data-channel]');

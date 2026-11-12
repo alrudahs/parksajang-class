@@ -96,7 +96,7 @@
   <!-- 히어로 사진(LCP)을 가장 먼저 받기: index.html 히어로 <picture> 의 webp srcset·sizes 와 같은 값 -->
   <link rel="preload" as="image" type="image/webp" fetchpriority="high"
         imagesrcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
-        imagesizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)">
+        imagesizes="(min-width: 1024px) 440px, (min-width: 310px) 270px, calc(100vw - 40px)">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
   <link rel="stylesheet" href="css/style.css">
@@ -141,22 +141,29 @@
 
         <!-- 히어로 대표 사진: 첫 화면(LCP)이라 지연 로딩 없이 우선 불러온다 -->
         <figure class="media hero-media">
-          <!-- srcset·sizes 는 <head> 의 preload 와 같은 값으로 유지 (사진 폭: PC 440px, 모바일·태블릿 300px — 340px 미만 화면은 화면 폭 - 좌우 여백 40px) -->
+          <!-- srcset·sizes 는 <head> 의 preload 와 같은 값으로 유지 (사진 폭: PC 440px, 모바일·태블릿 270px — 310px 미만 화면은 화면 폭 - 좌우 여백 40px) -->
           <picture>
             <source type="image/webp"
                     srcset="images/site/owner-hero-480.webp 480w, images/site/owner-hero-720.webp 720w, images/site/owner-hero.webp 960w"
-                    sizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)">
+                    sizes="(min-width: 1024px) 440px, (min-width: 310px) 270px, calc(100vw - 40px)">
             <img src="images/site/owner-hero-720.jpg"
                  srcset="images/site/owner-hero-480.jpg 480w, images/site/owner-hero-720.jpg 720w, images/site/owner-hero.jpg 960w"
-                 sizes="(min-width: 1024px) 440px, (min-width: 340px) 300px, calc(100vw - 40px)"
+                 sizes="(min-width: 1024px) 440px, (min-width: 310px) 270px, calc(100vw - 40px)"
                  width="960" height="1200" fetchpriority="high" decoding="async" alt="직접 오픈해 3년 넘게 운영한 박사장">
           </picture>
         </figure>
 
-        <!-- 히어로 버튼 2개 (모든 방문자 · 2026-11-11): 위 셀프 진단 · 아래 D-7 체크리스트. 헤드라인 A/B와 무관 -->
+        <!-- 히어로 버튼 2개 (모든 방문자 · 2026-11-11): 위 셀프 진단 · 아래 D-7 체크리스트. 헤드라인 A/B와 무관
+             버튼 위 굵은 라벨 (2026-11-12 지인 피드백): "어느 쪽이세요?" 갈림길 섹션을 대신함 -->
         <div class="hero-cta">
-          <a class="btn btn--primary" href="diagnosis.html?from=hero" data-cta="hero_diagnosis">무료 셀프 진단(10문항) 받기</a>
-          <a class="btn btn--primary" href="checklist.html" data-cta="hero">무료 D-7 체크리스트 받기</a>
+          <div class="hero-choice">
+            <p class="hero-choice-label" id="hc-running">이미 장사 중이에요</p>
+            <a class="btn btn--primary" href="diagnosis.html?from=hero" data-cta="hero_diagnosis" aria-describedby="hc-running">무료 셀프 진단(10문항) 받기</a>
+          </div>
+          <div class="hero-choice">
+            <p class="hero-choice-label" id="hc-open">곧 오픈해요</p>
+            <a class="btn btn--primary" href="checklist.html" data-cta="hero" aria-describedby="hc-open">무료 D-7 체크리스트 받기</a>
+          </div>
         </div>
       </div>
     </section>
@@ -168,23 +175,6 @@
         <p class="loss-sub">혼자 부딪히기 전에, 박사장이 놓치기 쉬운 것부터 짚어드려요</p>
       </div>
     </aside>
-
-    <!-- 갈림길: 오픈 준비 → 체크리스트(경로 A) / 운영 중 → 셀프 진단(경로 B). A·B안 공통 -->
-    <section class="section split" aria-labelledby="split-title">
-      <div class="container">
-        <h2 class="section-title" id="split-title">어느 쪽이세요?</h2>
-        <div class="split-grid">
-          <article class="split-card">
-            <h3 class="split-name">오픈 준비 중이에요</h3>
-            <a class="btn btn--navy btn--block" href="checklist.html" data-cta="split_open">무료 D-7 체크리스트 받기</a>
-          </article>
-          <article class="split-card split-card--running">
-            <h3 class="split-name">이미 운영 중이에요</h3>
-            <a class="btn btn--green btn--block" href="diagnosis.html" data-cta="split_running">무료 셀프 진단 해보기</a>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <!-- ② 문제 공감 -->
     <section class="section" aria-labelledby="pain-title">
@@ -233,20 +223,22 @@
         </ol>
 
         <h3 class="tiers-title">상품 단계</h3>
+        <!-- 카드 전체를 눌러도 이동 (2026-11-12 지인 피드백): 하단 "자세히 보기 →" 링크가 카드 전체를 덮는다(::after) -->
         <ol class="tiers">
-          <li class="tier">
+          <li class="tier tier--link reveal">
             <div class="tier-head">
               <span class="tier-step" aria-hidden="true">1</span>
               <h4 class="tier-name">오픈 D-7 체크리스트</h4>
               <p class="tier-price">무료<small>(연락처 등록 시)</small></p>
             </div>
+            <a class="tier-more" href="checklist.html" aria-label="오픈 D-7 체크리스트 자세히 보기">자세히 보기 →</a>
           </li>
 
-          <li class="tier">
+          <li class="tier tier--link reveal">
             <div class="tier-head">
               <span class="tier-step" aria-hidden="true">2</span>
               <h4 class="tier-name">매장 운영 템플릿</h4>
-              <p class="tier-price num">19,900원</p>
+              <p class="tier-price num"><s>19,900원</s> <b class="sale">14,900원</b><small>체크리스트 신청 후 3일 한정</small></p>
             </div>
             <div class="tier-body">
               <ul class="chips">
@@ -258,9 +250,11 @@
                 <li>알바 면접 질문지·교육 순서</li>
               </ul>
             </div>
+            <a class="tier-more" href="template.html" aria-label="매장 운영 템플릿 자세히 보기">자세히 보기 →</a>
           </li>
 
-          <li class="tier">
+          <li class="tier tier--link tier--kit reveal">
+            <span class="badge badge--fact tier-badge">오픈 준비 한 번에</span>
             <div class="tier-head">
               <span class="tier-step" aria-hidden="true">3</span>
               <h4 class="tier-name">오픈 올인원 키트</h4>
@@ -271,9 +265,10 @@
               <li>예비 사장님 대상</li>
               <li>템플릿 구매자는 60일 안에 49,100원으로 업그레이드</li>
             </ul>
+            <a class="tier-more" href="kit.html" aria-label="오픈 올인원 키트 자세히 보기">자세히 보기 →</a>
           </li>
 
-          <li class="tier">
+          <li class="tier tier--link reveal">
             <div class="tier-head">
               <span class="tier-step" aria-hidden="true">4</span>
               <h4 class="tier-name">1:1 Zoom 코칭</h4>
@@ -282,9 +277,10 @@
             <ul class="tier-body">
               <li>오픈 준비·초기 운영 상담</li>
             </ul>
+            <a class="tier-more" href="consult.html" aria-label="1:1 Zoom 코칭 상담 신청">자세히 보기 →</a>
           </li>
 
-          <li class="tier tier--premium">
+          <li class="tier tier--premium tier--link reveal">
             <div class="tier-head">
               <span class="tier-step" aria-hidden="true">5</span>
               <h4 class="tier-name">프리미엄 1주 집중 현장 컨설팅</h4>
@@ -298,6 +294,7 @@
               </ul>
               <p class="tier-promise">첫날 함께 정한 목표를 달성할 때까지, 박사장이 매주 직접 점검하며 끝까지 책임지고 관리합니다</p>
             </div>
+            <a class="tier-more" href="consult.html?target=operate" aria-label="프리미엄 1주 집중 현장 컨설팅 상담 신청">자세히 보기 →</a>
           </li>
         </ol>
       </div>

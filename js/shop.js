@@ -74,6 +74,12 @@
     PSC.events.viewItem('template', pr.final);
   }
 
+  // ---------- 오픈 올인원 키트 상세 (kit.html · 2026-11-12) ----------
+  // 할인 없음. 템플릿 구매자 업그레이드(49,100원)는 안내 문구로만 → 주문서 금액은 정가 69,000원
+  if (page === 'kit') {
+    PSC.events.viewItem('kit', pricing('kit').final);
+  }
+
   // ---------- 주문서 (checkout.html?item=...) ----------
   if (page === 'checkout') {
     var id = itemId();
@@ -146,11 +152,21 @@
 
     var dl = document.getElementById('download-block');
     if (dl) {
-      dl.hidden = !item.download;
-      if (item.download) {
+      // download 1개(템플릿) 또는 downloads 여러 개(키트: 템플릿 + 30일 운영 가이드)
+      var files = item.downloads || (item.download ? [item.download] : []);
+      dl.hidden = !files.length;
+      if (files.length) {
         var a = document.getElementById('download-link');
-        a.href = item.download.url;
-        a.textContent = item.download.label;
+        a.href = files[0].url;
+        a.textContent = files[0].label;
+        for (var k = 1; k < files.length; k++) {
+          var more = a.cloneNode(false);
+          more.removeAttribute('id');
+          more.href = files[k].url;
+          more.textContent = files[k].label;
+          a.parentNode.appendChild(more);
+        }
+        if (item.downloadNote) setText('dl-note', item.downloadNote);
       }
     }
     var live = document.getElementById('live-block');

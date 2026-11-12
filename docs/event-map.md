@@ -12,11 +12,13 @@
 | A | `index.html` | 히어로 아래 주황 버튼 "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "hero"` | `js/landing.js` |
 | A | `index.html` | 최종 CTA "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "bottom"` | `js/landing.js` |
 | B | `index.html` | 히어로 위 주황 버튼 "무료 셀프 진단(10문항) 받기" 클릭 (→ `diagnosis.html?from=hero`) · 모든 방문자 (2026-11-11). 그 전에는 같은 값을 보조 글자 링크 "이미 장사 중이세요? …"가 썼음 (11-10 ~ 11-11, 링크는 없앰) | `click_cta` | `button_position: "hero_diagnosis"` | `js/landing.js` |
-| A | `index.html` | "어느 쪽이세요?" 카드 · 오픈 준비 중이에요 "무료 D-7 체크리스트 받기" 클릭 | `click_cta` | `button_position: "split_open"` | `js/landing.js` |
-| B | `index.html` | "어느 쪽이세요?" 카드 · 이미 운영 중이에요 "무료 셀프 진단 해보기" 클릭 | `click_cta` | `button_position: "split_running"` | `js/landing.js` |
+| ~~A~~ | `index.html` | ~~"어느 쪽이세요?" 카드 · 오픈 준비 중이에요~~ — **2026-11-12 섹션 삭제** (히어로 버튼 위 라벨 "곧 오픈해요"가 대신함). 11-10 ~ 11-12 데이터만 남음 | `click_cta` | `button_position: "split_open"` (더 이상 안 나감) | — |
+| ~~B~~ | `index.html` | ~~"어느 쪽이세요?" 카드 · 이미 운영 중이에요~~ — **2026-11-12 섹션 삭제** (라벨 "이미 장사 중이에요"가 대신함) | `click_cta` | `button_position: "split_running"` (더 이상 안 나감) | — |
 | A | `checklist.html` | 이름·연락처 입력 후 신청 (빈칸이면 안 나감) | `generate_lead` | `lead_type: "checklist"`, `marketing_consent: true/false` | `js/checklist.js` |
 | A | `checklist-done.html` | "체크리스트 다운로드" 클릭 | `file_download` | `file_name: "d7-checklist-sample.pdf"` | `js/checklist.js` |
 | A | `template.html` | 운영 템플릿 상세 열람 | `view_item` | `item_name: "매장 운영 템플릿"`, `price: 14900`(할인 기간) / `19900`, `currency: "KRW"` | `js/shop.js` |
+| A | `kit.html` | 오픈 올인원 키트 상세 열람 (2026-11-12 새 페이지 · 랜딩 가격표 키트 카드·템플릿 상세에서 연결) | `view_item` | `item_name: "오픈 올인원 키트"`, `price: 69000`, `currency: "KRW"` | `js/shop.js` |
+| A | `checkout.html?item=kit` → `order-complete.html` | 키트 주문서 진입 → 결제하기(데모) | `begin_checkout` → `purchase` | `item_name: "오픈 올인원 키트"`, `value: 69000`, `discount_applied: false`, `currency: "KRW"` · 새 이벤트 이름 없음, GTM 변경 없음 | `js/shop.js` |
 | A·C | `checkout.html?item=…` | 주문서 진입 | `begin_checkout` | `item_name`, `value: 14900`, `discount_applied: true`, `currency: "KRW"` | `js/shop.js` |
 | A·C | `order-complete.html` | 결제하기(데모) 후 완료 화면 | `purchase` | `transaction_id: "DEMO-20261105-XXXX"`, `item_name`, `value`, `currency: "KRW"` | `js/shop.js` |
 | B | `diagnosis.html` | "진단 시작하기" → 1번 문항 표시 | `start_diagnosis` | `source: "naver_cafe"` (저장된 utm_source, 없으면 `"direct"`) | `js/diagnosis.js` |

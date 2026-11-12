@@ -33,7 +33,7 @@
         <div class="product-price" id="price-box">
           <p class="price-line num">19,900원</p>
         </div>
-        <p class="nudge" id="offer-nudge"><a href="checklist.html">무료 D-7 체크리스트 받기</a> · 신청 후 3일 한정 14,900원</p>
+        <p class="nudge" id="offer-nudge"><a href="checklist.html">무료 D-7 체크리스트 받기</a> · 신청 후 3일 한정 <s class="num">19,900원</s> → <b class="num sale">14,900원</b></p>
 
         <div class="btn-row">
           <a class="btn btn--primary btn--block" href="checkout.html?item=template">구매하기</a>
@@ -42,30 +42,69 @@
 
       <section class="card" aria-labelledby="includes-title">
         <h2 class="card-title" id="includes-title">구성 6가지</h2>
-        <ol class="includes">
-          <li><span class="no" aria-hidden="true">1</span>D-30 오픈 체크리스트</li>
-          <li><span class="no" aria-hidden="true">2</span>매출 입력 시트</li>
-          <li><span class="no" aria-hidden="true">3</span>주재료 재고·발주 시트</li>
-          <li><span class="no" aria-hidden="true">4</span>위생 점검표</li>
-          <li><span class="no" aria-hidden="true">5</span>요일별 청소 스케줄</li>
-          <li><span class="no" aria-hidden="true">6</span>알바 면접 질문지·교육 순서</li>
+        <!-- 구성 카드 6개 (2026-11-12 지인 피드백 · 사용자 결정): 공감 질문(주황 굵게) + 해결 1줄 + 있으면 미리보기 -->
+        <ol class="feature-cards">
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">1</span>D-30 오픈 체크리스트</h3>
+            <p class="empathy">오픈 직전에야 보건증·영업신고가 안 된 걸 알고 당황한 적 없으셨나요?</p>
+            <p class="feature-fix">한 달 전부터 주 단위로 빠짐없이 챙겨요</p>
+          </li>
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">2</span>매출 입력 시트</h3>
+            <p class="empathy">정산은 들어오는데 어느 배달앱이 실제로 남는지 모르셨죠?</p>
+            <p class="feature-fix">앱별로 적으면 객단가·대행료까지 한눈에 보여요</p>
+            <figure class="feature-thumb">
+              <picture>
+                <source srcset="images/site/tpl-sales.webp" type="image/webp">
+                <img src="images/site/tpl-sales.png" width="1080" height="471" loading="lazy" decoding="async" alt="매출 입력 시트 샘플 미리보기">
+              </picture>
+            </figure>
+          </li>
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">3</span>주재료 재고·발주 시트</h3>
+            <p class="empathy">재료가 남아 버리거나, 주말에 떨어져 품절을 띄운 적 없으셨나요?</p>
+            <p class="feature-fix">기존량→사용량→주문량 순서로 다음 발주량이 보여요</p>
+            <figure class="feature-thumb">
+              <picture>
+                <source srcset="images/site/tpl-stock.webp" type="image/webp">
+                <img src="images/site/tpl-stock.png" width="1080" height="426" loading="lazy" decoding="async" alt="주재료 재고·발주 시트 샘플 미리보기">
+              </picture>
+            </figure>
+          </li>
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">4</span>위생 점검표</h3>
+            <p class="empathy">점검 나온다는 소식에 급하게 냉장고 온도부터 확인한 적 없으셨나요?</p>
+            <p class="feature-fix">하루 2번 ○·×로 평소에 관리해요</p>
+          </li>
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">5</span>요일별 청소 스케줄</h3>
+            <p class="empathy">마감 청소가 한꺼번에 몰려 알바가 늦게 퇴근한 적 없으셨나요?</p>
+            <p class="feature-fix">요일별로 나눠 마감이 가벼워져요 (박사장 매장에서 실제로 쓰던 구성)</p>
+            <figure class="feature-thumb">
+              <picture>
+                <source srcset="images/site/tpl-cleaning.webp" type="image/webp">
+                <img src="images/site/tpl-cleaning.png" width="1080" height="438" loading="lazy" decoding="async" alt="요일별 청소 스케줄 샘플 미리보기">
+              </picture>
+            </figure>
+          </li>
+          <li class="feature-card reveal">
+            <h3 class="feature-name"><span class="no" aria-hidden="true">6</span>알바 면접 질문지·교육 순서</h3>
+            <p class="empathy">뽑자마자 그만두는 알바 때문에 다시 공고를 올린 적 없으셨나요?</p>
+            <p class="feature-fix">전체 흐름부터 보여주고 기본 업무부터 차근차근 가르쳐요</p>
+            <figure class="feature-thumb">
+              <picture>
+                <source srcset="images/site/tpl-hiring.webp" type="image/webp">
+                <img src="images/site/tpl-hiring.png" width="1080" height="615" loading="lazy" decoding="async" alt="알바 면접 질문지 샘플 미리보기">
+              </picture>
+            </figure>
+          </li>
         </ol>
       </section>
-
-      <div class="stack" style="margin-top:14px">
-        <!-- 운영 템플릿 샘플 1장: 매출 입력 시트 (2026-11-11) -->
-        <figure class="media media--sample">
-          <picture>
-            <source srcset="images/site/tpl-sales.webp" type="image/webp">
-            <img src="images/site/tpl-sales.png" width="1080" height="471" loading="lazy" decoding="async" alt="매출 입력 시트 샘플 미리보기">
-          </picture>
-        </figure>
-      </div>
 
       <section class="card" aria-label="함께 드리는 것">
         <ul class="info-list">
           <li class="no-dot">+ 무료 Zoom 라이브 우선 초대</li>
-          <li>오픈 올인원 키트: 템플릿 구매자는 60일 안에 49,100원으로 업그레이드</li>
+          <li>오픈 올인원 키트: 템플릿 구매자는 60일 안에 49,100원으로 업그레이드 · <a class="text-link" href="kit.html">키트 자세히 보기 →</a></li>
         </ul>
       </section>
     </div>

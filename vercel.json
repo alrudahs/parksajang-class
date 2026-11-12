@@ -17,6 +17,15 @@
           "value": "attachment; filename=\"parksajang-class_store-template_demo.pdf\"; filename*=UTF-8''%EB%B0%95%EC%82%AC%EC%9E%A5%ED%81%B4%EB%9D%BC%EC%93%B0_%EB%A7%A4%EC%9E%A5%EC%9A%B4%EC%98%81%ED%85%9C%ED%94%8C%EB%A6%BF_%EB%8D%B0%EB%AA%A8.pdf"
         }
       ]
+    },
+    {
+      "source": "/files/kit-30day-guide.pdf",
+      "headers": [
+        {
+          "key": "Content-Disposition",
+          "value": "attachment; filename=\"parksajang-class_open-30day-guide_demo.pdf\"; filename*=UTF-8''%EB%B0%95%EC%82%AC%EC%9E%A5%ED%81%B4%EB%9D%BC%EC%93%B0_%EC%98%A4%ED%94%8830%EC%9D%BC%EC%9A%B4%EC%98%81%EA%B0%80%EC%9D%B4%EB%93%9C_%EB%8D%B0%EB%AA%A8.pdf"
+        }
+      ]
     }
   ]
 }

@@ -17,7 +17,14 @@ window.PSC_PRODUCTS = {
     id: 'kit',
     name: '오픈 올인원 키트',
     price: 69000,
-    upgradePrice: 49100, // 템플릿 구매자 60일 안 업그레이드
+    upgradePrice: 49100, // 템플릿 구매자 60일 안 업그레이드 (안내 문구로만 · 주문서 금액은 정가)
+    detailUrl: 'kit.html',
+    // 구매 완료 화면 다운로드 2개 (2026-11-12)
+    downloads: [
+      { url: 'files/template-sample.pdf', label: '매장 운영 템플릿 (7쪽)' },
+      { url: 'files/kit-30day-guide.pdf', label: '오픈 후 30일 운영 가이드 (6쪽)' },
+    ],
+    downloadNote: '구매하신 키트 자료는 아래 버튼으로 바로 받을 수 있어요. 둘 다 데모 버전이에요.',
   },
   coaching: {
     id: 'coaching',
