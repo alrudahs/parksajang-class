@@ -26,6 +26,7 @@
   --ph: #e5eaf0;
   --ph-text: #56636f; /* 자리표시 박스 안내 글자 (--ph 위 대비 5.1:1) */
   --orange-tint: #fcede5;
+  --hl-mark: rgba(189, 83, 34, 0.18); /* 형광펜 밑줄: --orange-dark #BD5322 의 18% */
   --green-tint: #e6f2ef;
   --on-navy: #ffffff;
   --on-navy-muted: #b9c6d6;
@@ -1503,6 +1504,60 @@ strong {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* 공감 질문 형광펜 밑줄 (2026-11-12): 글자 아래 40%에 연주황. 여러 줄이면 줄마다 이어짐(box-decoration-break).
+   html.fx 일 때만 처음에 숨겼다가 화면에 들어오면(.is-in) 왼쪽→오른쪽 0.6초로 그어짐. 배경만 바뀌어 자리 이동 없음 */
+.hl {
+  background-image: linear-gradient(transparent 60%, var(--hl-mark) 60%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.fx .hl {
+  background-size: 0% 100%;
+}
+.fx .hl.is-in {
+  background-size: 100% 100%;
+  transition: background-size 0.6s ease 0.15s;
+}
+
+/* 할인가 튀어오르기 (2026-11-12): 화면에 들어오면 한 번 scale 1 → 1.12 → 1, 0.5초. transform 이라 CLS 없음.
+   신청 완료 화면 H1 블록(3일 한정 제안)에는 쓰지 않는다 — 실험 조건 유지 */
+.pop {
+  display: inline-block;
+}
+/* 커졌을 때(1.12배) 옆 글자와 겹치지 않게 여유 */
+.tier-price .pop {
+  margin-left: 6px;
+}
+.upgrade-line .pop,
+.nudge .pop {
+  margin: 0 4px 0 2px;
+}
+.fx .pop.is-in {
+  animation: price-pop 0.5s ease-out;
+}
+@keyframes price-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fx .hl {
+    background-size: 100% 100%;
+    transition: none;
+  }
+  .fx .pop.is-in {
+    animation: none;
   }
 }
 

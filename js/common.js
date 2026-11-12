@@ -6,6 +6,14 @@
   var C = window.PSC_CONFIG || {};
   var PSC = (window.PSC = window.PSC || {});
 
+  // 강조 효과 켜기 (2026-11-12): 그리기 전에 <html class="fx"> — 형광펜 밑줄을 처음부터 숨겨 두었다가 그어지게(깜빡임 없음).
+  // 움직임 줄이기 설정·IntersectionObserver 미지원이면 fx 를 붙이지 않음 → 밑줄은 처음부터 보이고 튀어오르기 없음
+  var FX = false;
+  try {
+    FX = 'IntersectionObserver' in window && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  } catch (e) {}
+  if (FX) document.documentElement.classList.add('fx');
+
   // 저장소 — 시크릿 창 등에서 막혀 있어도 페이지가 깨지지 않게
   function area(kind) {
     try {
@@ -237,6 +245,33 @@
       el.classList.add('reveal-wait');
       io.observe(el);
     });
+  }
+
+  // 형광펜 밑줄(.hl, 공감 질문)·할인가 튀어오르기(.pop): 화면에 들어오면 .is-in 한 번 → CSS 가 0.6초 긋기 / 0.5초 튀어오르기.
+  // 처음 화면에 보이는 것도 들어온 것으로 친다. 히어로·신청 완료 화면 H1 블록에는 이 클래스를 쓰지 않는다.
+  function initFx() {
+    if (!FX) return;
+    var els = document.querySelectorAll('.hl, .pop');
+    if (!els.length) return;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        });
+      },
+      { rootMargin: '0px 0px -40px 0px' }
+    );
+    Array.prototype.forEach.call(els, function (el) {
+      io.observe(el);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFx);
+  } else {
+    initFx();
   }
 
   if (document.readyState === 'loading') {

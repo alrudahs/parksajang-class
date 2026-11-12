@@ -65,7 +65,7 @@
     if (box && pr.applied) {
       box.innerHTML =
         '<span class="badge">신청 후 3일 한정</span>' +
-        '<p class="price-line"><s class="num">' + won(pr.list) + '</s> → <b class="num sale">' + won(pr.final) + '</b></p>' +
+        '<p class="price-line"><s class="num">' + won(pr.list) + '</s> → <b class="num sale pop">' + won(pr.final) + '</b></p>' +
         '<p class="countdown" data-countdown></p>';
       PSC.offer.bindCountdowns();
     }
