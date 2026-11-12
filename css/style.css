@@ -697,6 +697,10 @@ strong {
 .tier--kit {
   border-color: var(--orange);
 }
+.tier-note {
+  font-size: 12px;
+  white-space: nowrap;
+}
 .tier-promise {
   margin-top: 12px;
   padding: 12px 14px;
