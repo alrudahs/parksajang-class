@@ -225,24 +225,31 @@
   // 카드 떠오르기 (2026-11-12): .reveal 카드가 스크롤로 화면에 들어올 때 한 번만 0.4초 떠오른다.
   // 처음 화면에 이미 보이는 카드는 건드리지 않고(LCP 보호), 움직임 줄이기 설정·IntersectionObserver 미지원이면 끈다.
   // transform·opacity 만 쓰므로 자리(레이아웃)는 그대로 → CLS 없음
+  // LCP 회복 (2026-11-12): 처음 화면 안/밖 판정을 getBoundingClientRect() 로 하지 않는다 — DOMContentLoaded 에서
+  // 페이지 전체 레이아웃을 강제로 일으켜(글꼴 도착 전) 첫 그리기가 늦어졌다. IntersectionObserver 의 첫 보고로 판정한다
+  // (브라우저가 평소 레이아웃 뒤에 알려줌): 첫 보고에서 보이면 그대로, 안 보이면 그때 숨겼다가 들어올 때 떠오름.
   function initReveal() {
     var els = document.querySelectorAll('.reveal');
-    if (!els.length || !('IntersectionObserver' in window)) return;
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (!e.isIntersecting) return;
-          e.target.classList.add('is-in');
-          io.unobserve(e.target);
-        });
-      },
-      { rootMargin: '0px 0px -40px 0px' }
-    );
-    var vh = window.innerHeight || document.documentElement.clientHeight;
+    if (!els.length || !FX) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var el = e.target;
+        if (!el.hasAttribute('data-reveal-seen')) {
+          el.setAttribute('data-reveal-seen', '');
+          if (e.isIntersecting) {
+            io.unobserve(el); // 처음 화면 안: 효과 없이 그대로
+          } else {
+            el.classList.add('reveal-wait'); // 처음 화면 밖: 숨겨 두고 기다림
+          }
+          return;
+        }
+        if (e.isIntersecting) {
+          el.classList.add('is-in');
+          io.unobserve(el);
+        }
+      });
+    });
     Array.prototype.forEach.call(els, function (el) {
-      if (el.getBoundingClientRect().top < vh) return;
-      el.classList.add('reveal-wait');
       io.observe(el);
     });
   }
