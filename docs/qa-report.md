@@ -747,4 +747,17 @@ H1·H3 A/B 그대로 · 이벤트 그대로 · 가격 그대로.
 - 원본 md(프리미엄 설명 문장, 키트 업그레이드 설명 위치) 같이 고침.
 - **시험** (로컬 · `scripts/block-analytics.js` 로 GA4(`www.google.com/g/collect` 포함)·구글폼 차단 · 375·412·1440 · A·B안) **73개 통과 / 실패 0**: 9-30 시험 71개(새 문장으로 갱신) + html 주석 포함 작업 메모 0 · '보장' 0 · 템플릿 설명 줄. H3 `exp_headline` a/b · H1 `exp_done_offer` on/off 확인 · 금지 문구 0건 · GA4·구글폼 전송 완료 요청 0건.
 - 캡처: `captures/19-after-template-upgrade.png`, 프리미엄 3곳 `19-after-*` 다시 찍음 (README 단계 19).
-- **알아둘 점 (변경 안 함)**: `.vercelignore` 가 없어 저장소의 `docs/*.md` · `CLAUDE.md` 도 배포 주소에서 열림(HTTP 200 확인). 이 문서들에는 금지 표현 목록·예전 문장 기록으로 '보장' 등의 글자가 있음. 사이트 화면(html·js·css)과는 별개.
+- **알아둘 점 (변경 안 함)**: `.vercelignore` 가 없어 저장소의 `docs/*.md` · `CLAUDE.md` 도 배포 주소에서 열림(HTTP 200 확인). 이 문서들에는 금지 표현 목록·예전 문장 기록으로 '보장' 등의 글자가 있음. 사이트 화면(html·js·css)과는 별개. → 9-32 에서 배포 제외.
+
+### 9-32. 내부 문서 배포 제외 (2026-11-15 · 커밋 `278de46` "내부 문서 배포 제외" 16:39 푸시 → 16:40:43 배포 반영 확인)
+
+- **`.vercelignore` 추가**: `/docs` · `/CLAUDE.md` 를 Vercel 배포에서만 뺌. GitHub 저장소에는 그대로(`docs/` 11개 + `CLAUDE.md` 추적 중). CLAUDE.md 폴더 구조에 한 줄 추가.
+- **빼기 전 확인**: 사이트 화면(html·js·css·json·xml·txt)이 `docs/`·`CLAUDE.md` 를 불러오는 곳 **없음** — 나오는 곳은 모두 주석 속 출처 표기(배너 문구 `docs/banner-copy.md`, 상품·진단·이벤트 기준 `docs/landing-content.md` 등). `og.png`·사진은 `images/`, PDF 는 `files/` 에 있어 영향 없음.
+- **배포 확인** (HTTP 요청만, 페이지 스크립트 실행 없음 → GA4 수집 없음 · 캐시 우회 쿼리 + 우회 없이 모두):
+  | 경로 | 전 | 후 |
+  |---|---|---|
+  | `/CLAUDE.md` · `/docs/qa-report.md` · `/docs/landing-content.md` · `/docs/event-map.md` · `/docs/banner-copy.md` · `/docs/gtm/gtm-import.json` · `/docs/wireframe.png` | 200 | **404** |
+  | 모든 html 14개 + `/` · `js/` 10개 · `css/style.css` · `images/site/` 전부 · `images/og.png` · `robots.txt` · `sitemap.xml` (61개) | 200 | **200** |
+  | `files/` PDF 3개 | 200 | **200** · 크기 로컬과 같음(365,619 / 438,329 / 366,041 bytes) · `%PDF-` 시작 · 한국어 저장 이름 그대로("박사장클라쓰_오픈D-7체크리스트.pdf" / "박사장클라쓰_매장운영템플릿_데모.pdf" / "박사장클라쓰_오픈30일운영가이드_데모.pdf") |
+- **자동 시험** (로컬 · `scripts/block-analytics.js` 로 GA4(`www.google.com/g/collect` 포함)·구글폼 차단) **73개 통과 / 실패 0** (9-31 과 같은 시험) · GA4·구글폼 전송 완료 요청 0건.
+- 참고: 이 qa-report 도 `docs/` 안이라 이제 배포 주소에서는 열리지 않음(GitHub 에서 보기).
