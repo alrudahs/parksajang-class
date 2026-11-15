@@ -30,8 +30,10 @@ const re = /<details class="faq-item">[\s\S]*?<span class="text">([\s\S]*?)<\/sp
 let m;
 while ((m = re.exec(html))) items.push({ q: decode(m[1]), a: decode(m[2]) });
 
-if (items.length !== 5) {
-  console.error(`FAQ 를 5개 찾아야 하는데 ${items.length}개를 찾았어요. index.html 의 FAQ 구조를 확인해 주세요.`);
+// FAQ 개수 (2026-11-15 피드백 2차로 5 → 6개: "홀 매장이나 카페도 이용할 수 있나요?" 추가)
+const FAQ_COUNT = 6;
+if (items.length !== FAQ_COUNT) {
+  console.error(`FAQ 를 ${FAQ_COUNT}개 찾아야 하는데 ${items.length}개를 찾았어요. index.html 의 FAQ 구조를 확인해 주세요.`);
   process.exit(1);
 }
 

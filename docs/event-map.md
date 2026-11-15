@@ -22,7 +22,7 @@
 | A·C | `checkout.html?item=…` | 주문서 진입 | `begin_checkout` | `item_name`, `value: 14900`, `discount_applied: true`, `currency: "KRW"` | `js/shop.js` |
 | A·C | `order-complete.html` | 결제하기(데모) 후 완료 화면 | `purchase` | `transaction_id: "DEMO-20261105-XXXX"`, `item_name`, `value`, `currency: "KRW"` | `js/shop.js` |
 | B | `diagnosis.html` | "진단 시작하기" → 1번 문항 표시 | `start_diagnosis` | `source: "naver_cafe"` (저장된 utm_source, 없으면 `"direct"`) | `js/diagnosis.js` |
-| B | `diagnosis.html` | 10번째 문항 응답 | `complete_diagnosis` | `score_band: "high" / "mid" / "low"` | `js/diagnosis.js` |
+| B | `diagnosis.html` | 10번째 문항 응답 | `complete_diagnosis` | `score_band: "high" / "mid" / "low"` (2026-11-15부터 high = 마무리 단계 15~20점 · mid = 진행 단계 9~14점 · low = 시작 단계 0~8점, 3단계 답 + 함정 문항 감점. 이름·값은 그대로, 11-15 배포 전 값(예·아니오 10점 기준)과 GA4에서 섞어 비교하지 말 것) | `js/diagnosis.js` |
 | B | `diagnosis.html` | 결과 미리보기에서 연락처 등록 | `generate_lead` | `lead_type: "diagnosis"`, `marketing_consent` | `js/diagnosis.js` |
 | C | `live.html` | 무료 Zoom 라이브 신청 | `register_live` | `live_round: "2026-11"` | `js/path-c.js` |
 | C | `consult.html` | 날짜·시간·대상 고르고 15분 상담 예약 | `generate_lead` | `lead_type: "consult"`, `marketing_consent` (앞 화면 동의 여부, 없으면 false) | `js/path-c.js` |

@@ -326,12 +326,21 @@ strong {
 
 /* ---------- ① 히어로 ---------- */
 .hero {
-  padding: 28px 0 48px; /* 위 36 → 28px (2026-11-12 히어로 라벨 추가로 첫 화면 확보 · 모바일만, PC는 1024px 규칙) */
+  padding: 20px 0 48px; /* 위 36 → 28px (2026-11-12 버튼 라벨) → 20px (2026-11-15 대상 라벨) · 첫 화면 확보, 모바일만, PC는 1024px 규칙 */
   background: var(--surface);
 }
 .hero-grid {
   display: grid;
-  gap: 20px;
+  gap: 16px; /* 20 → 16px (2026-11-15 대상 라벨 추가로 첫 화면 확보 · PC는 1024px 규칙) */
+}
+/* 대상 라벨 한 줄 (2026-11-15): 헤드라인 바로 위, A/B 공통 */
+.hero-target {
+  margin-bottom: 6px;
+  color: var(--green-text);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 700;
+  word-break: keep-all;
 }
 .hero-title {
   color: var(--ink);
@@ -785,10 +794,22 @@ strong {
 .chart-axis span:first-child {
   transform: none;
 }
+.chart-axis span.is-end {
+  right: 0;
+  transform: none;
+}
 .chart-caption {
   margin-top: 12px;
   color: var(--muted);
   font-size: 13px;
+}
+/* 그래프 기간 (2026-11-15): 캡션 첫 줄, 실제 공백으로 다음 문장과 구분 */
+.chart-period {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .stats {
@@ -1918,6 +1939,78 @@ strong {
   background: var(--danger);
 }
 
+/* 셀프 진단 3단계 답 · 준비 단계 (2026-11-15 개편) */
+.answer-grid--3 {
+  grid-template-columns: 1fr; /* 세 버튼을 세로로: 320px 에서도 글자가 잘리지 않게 */
+}
+.answer-grid--3 .btn--answer {
+  min-height: 56px;
+}
+.btn--answer[aria-pressed='true'] {
+  border-color: var(--navy);
+  background: var(--tint);
+}
+.preview-choices {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.preview-choices b {
+  color: var(--ink);
+}
+.stage-lead {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 600;
+}
+.stage-chip {
+  margin-top: 8px;
+  padding: 8px 20px;
+  font-size: 22px;
+}
+.stage-desc {
+  margin-top: 10px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  word-break: keep-all;
+}
+.stage-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 18px;
+}
+.stage-steps li {
+  padding: 8px 2px;
+  border-radius: 8px;
+  background: var(--tint); /* --muted 글자 대비 4.7:1 */
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.stage-steps li.is-on {
+  background: var(--navy);
+  color: var(--surface);
+}
+.tip-my {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.tip-trap {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--orange-tint);
+  color: var(--orange-deep);
+  font-size: 12px;
+  font-weight: 800;
+}
+
 /* 잠긴 개선 팁 */
 .locked {
   position: relative;
@@ -2197,6 +2290,16 @@ strong {
 }
 .expand[open] summary::after {
   content: '−';
+}
+/* 흰 카드 위 펼쳐보기 (진단 결과 "다른 항목 팁도 보기" · 2026-11-15) */
+.expand--light {
+  background: var(--tint);
+}
+.expand--light summary {
+  color: var(--ink);
+}
+.expand--light .tips {
+  padding: 0 14px 14px;
 }
 .expand p {
   padding: 0 14px 14px;

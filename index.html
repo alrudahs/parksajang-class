@@ -69,6 +69,14 @@
           "@type": "Answer",
           "text": "네. 운영 중인 사장님은 무료 '1인 매장 운영 셀프 진단'으로 동선·배달앱·재고 문제를 먼저 확인할 수 있고, 필요하면 운영 템플릿이나 프리미엄 1주 집중 현장 컨설팅으로 이어서 도와드립니다."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "홀 매장이나 카페도 이용할 수 있나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "지금은 배달·포장 중심 외식 매장에 맞춰 만들었어요. 홀 매장은 이후 확장할 계획이에요. 체크리스트·템플릿 중 업종과 상관없이 쓸 수 있는 항목도 있으니 무료 자료로 먼저 확인해 보세요."
+        }
       }
     ]
   }
@@ -124,6 +132,8 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container container--wide hero-grid">
         <div class="hero-copy">
+          <!-- 대상 라벨 (2026-11-15 피드백 2차): 헤드라인 A/B 와 무관, 두 안 모두 같은 줄. 헤드라인 문장은 그대로 -->
+          <p class="hero-target">배달·포장 중심 외식 매장 오픈 준비 사장님을 위한</p>
           <h1 class="hero-title" id="hero-title">AI가 모르는 오픈 현장,<br>두 번 열어본 박사장이 알려드려요</h1>
           <template id="hero-title-b">알바에서 사장까지 8년,<br>먼저 겪은 박사장이 미리 막아드려요</template>
           <script>
@@ -309,12 +319,12 @@
           <div class="chart-readout" id="chart-readout" aria-live="polite">
             <span class="num">2025.07</span><b class="num">4,246만 원</b><span class="tag">최고 달</span>
           </div>
-          <!-- 막대그래프는 js/landing.js 가 월별 매출 38개월 숫자로 그린다 -->
+          <!-- 막대그래프는 js/landing.js 가 월별 매출 중 오픈 후 성장 구간(2023.03 ~ 최고 달 2025.07, 29개월)만 그린다 (2026-11-15 피드백 2차) -->
           <div class="chart" id="sales-chart" tabindex="0"
                role="img"
-               aria-label="월별 매출 막대그래프, 2023년 3월부터 2026년 4월까지 38개월. 첫 정식 영업 달 2023.03 1,567만 원, 최고 달 2025.07 4,246만 원."></div>
+               aria-label="월별 매출 막대그래프, 오픈 후 성장 구간, 2023년 3월부터 최고 달 2025년 7월까지 29개월. 첫 정식 영업 달 2023.03 1,567만 원, 최고 달 2025.07 4,246만 원."></div>
           <div class="chart-axis" id="chart-axis" aria-hidden="true"></div>
-          <figcaption class="chart-caption">실제 매출일지 · 2023.03 1,567만 원 → 2025.07 4,246만 원 (약 2.7배)</figcaption>
+          <figcaption class="chart-caption"><b class="chart-period">오픈 후 성장 구간 (2023.03 ~ 2025.07)</b> 실제 매출일지 · 2023.03 1,567만 원 → 2025.07 4,246만 원 (약 2.7배)</figcaption>
         </figure>
 
         <ul class="stats">
@@ -474,6 +484,11 @@
           <details class="faq-item">
             <summary class="faq-q"><span class="q">Q.</span><span class="text">이미 장사 중인데도 도움이 되나요?</span><span class="icon" aria-hidden="true"></span></summary>
             <div class="faq-a"><p>네. 운영 중인 사장님은 무료 '1인 매장 운영 셀프 진단'으로 동선·배달앱·재고 문제를 먼저 확인할 수 있고, 필요하면 운영 템플릿이나 프리미엄 1주 집중 현장 컨설팅으로 이어서 도와드립니다.</p></div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q"><span class="q">Q.</span><span class="text">홀 매장이나 카페도 이용할 수 있나요?</span><span class="icon" aria-hidden="true"></span></summary>
+            <div class="faq-a"><p>지금은 배달·포장 중심 외식 매장에 맞춰 만들었어요. 홀 매장은 이후 확장할 계획이에요. 체크리스트·템플릿 중 업종과 상관없이 쓸 수 있는 항목도 있으니 무료 자료로 먼저 확인해 보세요.</p></div>
           </details>
         </div>
       </div>

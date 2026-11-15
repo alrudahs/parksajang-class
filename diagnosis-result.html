@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>셀프 진단 전체 결과 · 박사장 클라쓰</title>
-  <meta name="description" content="1인 매장 운영 셀프 진단 전체 결과. 항목별 개선 팁과 다음 단계 안내.">
+  <meta name="description" content="1인 매장 운영 셀프 진단 전체 결과. 준비 단계와 지금 먼저 챙길 3가지, 다음 단계 안내.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#1F3A5A">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -40,20 +40,30 @@
           <h1 class="page-title">셀프 진단 전체 결과</h1>
         </div>
 
-        <section class="card score-card" aria-label="점수">
-          <p class="score"><b class="num" id="r-score">-</b><span class="num">/ 10점</span></p>
-          <span class="band-chip" id="r-band"></span>
-          <div class="gauge" aria-hidden="true"><div class="gauge-fill" id="r-gauge" style="width:0"></div></div>
+        <!-- 2026-11-15 개편: 점수 대신 준비 단계 + 지금 먼저 챙길 3가지(가장 약한 항목 기준) -->
+        <section class="card score-card" aria-label="준비 단계">
+          <p class="stage-lead">지금 사장님 매장은</p>
+          <span class="band-chip stage-chip" id="r-stage"></span>
+          <p class="stage-desc" id="r-stage-desc"></p>
+          <ol class="stage-steps" id="r-steps" aria-label="준비 단계">
+            <li data-band="low">시작 단계</li>
+            <li data-band="mid">진행 단계</li>
+            <li data-band="high">마무리 단계</li>
+          </ol>
         </section>
 
-        <section class="card" aria-labelledby="tips-title">
-          <h2 class="card-title" id="tips-title">항목별 개선 팁 <span class="count-chip" id="r-tips-count"></span></h2>
-          <ol class="tips" id="r-tips"></ol>
+        <section class="card" aria-labelledby="top-title">
+          <h2 class="card-title" id="top-title">지금 먼저 챙길 <span class="count-chip" id="r-top-count">3가지</span></h2>
+          <ol class="tips" id="r-top"></ol>
+          <details class="expand expand--light" id="r-rest-box" hidden>
+            <summary><span>다른 항목 팁도 보기 <span class="count-chip" id="r-rest-count"></span></span></summary>
+            <ol class="tips" id="r-rest"></ol>
+          </details>
         </section>
 
         <!-- 구간별 안내: diagnosis.js 가 하나만 보여준다 -->
         <section class="card reco reco--premium" id="reco-low" hidden aria-labelledby="reco-low-title">
-          <span class="badge">하 · 구조 점검 필요</span>
+          <span class="badge">시작 단계</span>
           <p class="reco-intro">혼자 고치기 어려운 구조라면, 현장에서 같이 보는 게 빠를 수 있어요.</p>
           <h2 class="reco-title" id="reco-low-title">프리미엄 1주 집중 현장 컨설팅</h2>
           <p class="price-line num">4,500,000원 <small>VAT 별도</small></p>
@@ -67,7 +77,7 @@
         </section>
 
         <section class="card reco" id="reco-mid" hidden aria-labelledby="reco-mid-title">
-          <span class="badge badge--navy">중 · 일부 개선 필요</span>
+          <span class="badge badge--navy">진행 단계</span>
           <p class="reco-intro">비어 있는 부분은 양식으로 먼저 채워보세요.</p>
           <h2 class="reco-title" id="reco-mid-title">매장 운영 템플릿</h2>
           <div class="reco-price" id="reco-template-price"><p class="price-line num">19,900원</p></div>
@@ -83,7 +93,7 @@
         </section>
 
         <section class="card reco invite" id="reco-high" hidden aria-labelledby="reco-high-title">
-          <span class="badge">상 · 잘 운영 중</span>
+          <span class="badge">마무리 단계</span>
           <p class="reco-intro">잘하고 계세요. 더 다듬고 싶은 부분은 라이브에서 직접 물어보세요.</p>
           <h2 class="reco-title" id="reco-high-title">무료 Zoom 라이브 '박사장 오픈 Q&amp;A'</h2>
           <ul class="info-list">

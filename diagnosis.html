@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>1인 매장 운영 셀프 진단 · 박사장 클라쓰</title>
-  <meta name="description" content="이미 장사 중인 사장님을 위한 무료 1인 매장 운영 셀프 진단. 예/아니오 10문항으로 동선·배달앱·재고 문제를 먼저 확인해 보세요.">
+  <meta name="description" content="이미 장사 중인 사장님을 위한 무료 1인 매장 운영 셀프 진단. 10문항(했어요 / 하는 중 / 아직이에요)으로 동선·배달앱·재고 문제를 먼저 확인해 보세요.">
   <meta name="theme-color" content="#1F3A5A">
   <link rel="canonical" href="https://parksajang-class.vercel.app/diagnosis.html">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -43,13 +43,13 @@
         </div>
         <div class="card">
           <ul class="diag-facts">
-            <li><b>10문항</b><span>예 / 아니오</span></li>
-            <li><b>무료</b><span>점수 바로 확인</span></li>
+            <li><b>10문항</b><span>했어요 · 하는 중 · 아직이에요</span></li>
+            <li><b>무료</b><span>준비 단계 바로 확인</span></li>
           </ul>
+          <!-- 결과 안내 (2026-11-15 개편): 점수 대신 준비 단계 + 지금 먼저 챙길 3가지 -->
           <ul class="info-list">
-            <li>8~10점 상 (잘 운영 중)</li>
-            <li>5~7점 중 (일부 개선 필요)</li>
-            <li>0~4점 하 (구조 점검 필요)</li>
+            <li>결과는 시작 단계 · 진행 단계 · 마무리 단계 중 하나로 알려드려요</li>
+            <li>가장 약한 항목 기준으로 지금 먼저 챙길 3가지를 짚어드려요</li>
           </ul>
           <section class="preview" aria-labelledby="start-preview-title">
             <h2 class="card-title" id="start-preview-title">이런 질문을 드려요</h2>
@@ -59,10 +59,11 @@
                 <p>주방 동선이 한 방향으로 흘러, 조리 중 같은 자리를 여러 번 오가지 않는다</p>
               </li>
               <li>
-                <strong>Q4. 배달앱</strong>
+                <strong>Q3. 배달앱</strong>
                 <p>배달앱별 매출과 수수료를 매달 따로 확인한다</p>
               </li>
             </ul>
+            <p class="preview-choices">답은 <b>했어요</b> · <b>하는 중</b> · <b>아직이에요</b> 중에서 골라요</p>
             <p class="preview-more">나머지 8문항은 진단에서 확인하세요</p>
           </section>
           <div class="btn-row">
@@ -83,20 +84,27 @@
         <div class="card quiz-card">
           <span class="q-no" id="q-no">Q1</span>
           <h1 class="q-text" id="q-text" tabindex="-1">주방 동선이 한 방향으로 흘러, 조리 중 같은 자리를 여러 번 오가지 않는다</h1>
-          <div class="answer-grid">
-            <button class="btn btn--answer" type="button" id="q-yes">예</button>
-            <button class="btn btn--answer" type="button" id="q-no-btn">아니오</button>
+          <!-- 3단계 답 (2026-11-15): data-answer 0 했어요 · 1 하는 중 · 2 아직이에요 -->
+          <div class="answer-grid answer-grid--3" role="group" aria-label="답 고르기">
+            <button class="btn btn--answer" type="button" data-answer="0" aria-pressed="false">했어요</button>
+            <button class="btn btn--answer" type="button" data-answer="1" aria-pressed="false">하는 중</button>
+            <button class="btn btn--answer" type="button" data-answer="2" aria-pressed="false">아직이에요</button>
           </div>
         </div>
       </section>
 
-      <!-- ③ 결과 미리보기 (점수·구간만) + 연락처 등록 -->
+      <!-- ③ 결과 미리보기 (준비 단계만) + 연락처 등록 -->
       <section id="view-preview" hidden aria-labelledby="preview-title">
         <div class="card score-card">
           <h1 class="card-title" id="preview-title">셀프 진단 결과</h1>
-          <p class="score"><b class="num" id="p-score">6</b><span class="num">/ 10점</span></p>
-          <span class="band-chip band-chip--mid" id="p-band">중 · 일부 개선 필요</span>
-          <div class="gauge" aria-hidden="true"><div class="gauge-fill gauge-fill--mid" id="p-gauge" style="width:60%"></div></div>
+          <p class="stage-lead">지금 사장님 매장은</p>
+          <span class="band-chip band-chip--mid stage-chip" id="p-stage">진행 단계</span>
+          <p class="stage-desc" id="p-stage-desc">기본은 잡혔고, 비어 있는 곳을 채울 때예요</p>
+          <ol class="stage-steps" id="p-steps" aria-label="준비 단계">
+            <li data-band="low">시작 단계</li>
+            <li data-band="mid" class="is-on" aria-current="step">진행 단계</li>
+            <li data-band="high">마무리 단계</li>
+          </ol>
         </div>
 
         <div class="locked" aria-hidden="true">
@@ -105,7 +113,7 @@
             <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10.5" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="2"/></svg>
           </div>
         </div>
-        <p class="locked-text" id="p-locked">'아니오'라고 답한 항목의 개선 팁은 연락처를 등록하면 바로 볼 수 있어요.</p>
+        <p class="locked-text" id="p-locked">지금 먼저 챙길 3가지와 항목별 팁은 연락처를 등록하면 바로 볼 수 있어요.</p>
 
         <form class="card" id="diag-form" novalidate aria-labelledby="contact-title">
           <h2 class="card-title" id="contact-title">연락처 등록</h2>

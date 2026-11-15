@@ -12,6 +12,9 @@
   ];
   var START_YEAR = 2023;
   var START_MONTH = 3;
+  // 그래프는 오픈 후 성장 구간만: 첫 달 ~ 최고 달 2025.07 (29개월). 최고 달 이후(2025.08 ~ 2026.04)는 그리지 않음
+  // (2026-11-15 피드백 2차 · 사용자 결정). 위 SALES 는 md 원본 그대로 둔다
+  var GROWTH = SALES.slice(0, SALES.indexOf(Math.max.apply(null, SALES)) + 1);
 
   function monthLabel(i) {
     var t = START_MONTH - 1 + i;
@@ -26,8 +29,8 @@
     var readout = document.getElementById('chart-readout');
     if (!host) return;
 
-    var n = SALES.length;
-    var peak = SALES.indexOf(Math.max.apply(null, SALES));
+    var n = GROWTH.length;
+    var peak = GROWTH.indexOf(Math.max.apply(null, GROWTH));
     var W = 380;
     var H = 200;
     var GAP = 3;
@@ -42,7 +45,7 @@
     svg.setAttribute('focusable', 'false');
 
     var bars = [];
-    SALES.forEach(function (v, i) {
+    GROWTH.forEach(function (v, i) {
       var h = Math.max(2, (v / TOP) * H);
       var r = document.createElementNS(NS, 'rect');
       r.setAttribute('x', (i * (BW + GAP)).toFixed(2));
@@ -65,14 +68,16 @@
     svg.appendChild(base);
     host.appendChild(svg);
 
-    // 가로축: 시작 달 + 각 해 1월
+    // 가로축: 시작 달 + 각 해 1월 + 마지막 달(최고 달, 오른쪽 끝)
     if (axis) {
-      SALES.forEach(function (_, i) {
+      GROWTH.forEach(function (_, i) {
         var label = monthLabel(i);
-        if (i !== 0 && label.slice(5) !== '01') return;
+        var last = i === n - 1;
+        if (i !== 0 && !last && label.slice(5) !== '01') return;
         var span = document.createElement('span');
-        span.textContent = i === 0 ? label : label.slice(0, 4);
-        span.style.left = i === 0 ? '0' : (((i * (BW + GAP) + BW / 2) / W) * 100).toFixed(2) + '%';
+        span.textContent = i === 0 || last ? label : label.slice(0, 4);
+        if (last) span.className = 'is-end';
+        else span.style.left = i === 0 ? '0' : (((i * (BW + GAP) + BW / 2) / W) * 100).toFixed(2) + '%';
         axis.appendChild(span);
       });
     }
@@ -87,7 +92,7 @@
       host.classList.add('is-active');
       var tag = i === peak ? '<span class="tag">최고 달</span>' : '';
       readout.innerHTML =
-        '<span class="num">' + monthLabel(i) + '</span><b class="num">' + PSC.won(SALES[i]) + '만 원</b>' + tag;
+        '<span class="num">' + monthLabel(i) + '</span><b class="num">' + PSC.won(GROWTH[i]) + '만 원</b>' + tag;
     }
     function reset() {
       host.classList.remove('is-active');

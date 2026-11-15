@@ -10,7 +10,7 @@
 4. `docs/service-paths.png` — 경로 A·B·C 화면 흐름과 이탈 위험 구간(★) 참고
 5. `docs/vscode-prompts.md` — 단계별 작업 순서(1~10단계)와 단계별 캡처 이름. 단계 번호는 이 파일을 따른다.
 
-> 와이어프레임의 FAQ는 3개만 보이지만 실제로는 md의 5개를 모두 쓴다. 와이어프레임의 "1인 식당"도 md 표기("1인 매장")를 따른다.
+> 와이어프레임의 FAQ는 3개만 보이지만 실제로는 md의 6개를 모두 쓴다 (2026-11-15 5 → 6개). 와이어프레임의 "1인 식당"도 md 표기("1인 매장")를 따른다.
 
 참고 자료 (배경 이해용, 문구 출처로 쓰지 않음):
 - `4단계_프로젝트_가이드북_박사장클라쓰_최종.docx` — 전체 기획. 가이드북과 md의 문구가 다르면(서브 헤드라인, 문제 카드, 신청 폼 안내 등) **md를 따른다.**
@@ -27,7 +27,7 @@ PARKSAJANG-CLASS/
 ├─ kit.html                A 오픈 올인원 키트 상세 (2026-11-12, 주문서 ?item=kit)
 ├─ checkout.html           A·C 주문서 (?item=template|kit|coaching|premium)
 ├─ order-complete.html     A·C 구매·결제 완료
-├─ diagnosis.html          B 시작 → 10문항 → 점수 미리보기 → 연락처 등록
+├─ diagnosis.html          B 시작 → 10문항(했어요·하는 중·아직이에요) → 준비 단계 미리보기 → 연락처 등록
 ├─ diagnosis-result.html   B 전체 결과 + 안내 (?demo=high|mid|low 테스트용)
 ├─ live.html               C 무료 Zoom 라이브 신청
 ├─ live-done.html          C 라이브 신청 완료
@@ -165,7 +165,7 @@ PARKSAJANG-CLASS/
   - `discount_applied`, `marketing_consent`: boolean.
   - `source`: 저장된 `utm_source`, 없으면 `direct`.
   - 같은 이벤트가 새로고침으로 중복 전송되지 않게 한다 (특히 `purchase` — `transaction_id` 기준 1회).
-- 점수 구간 매핑: 8~10점 `high`(상) / 5~7점 `mid`(중) / 0~4점 `low`(하).
+- 점수 구간 매핑 (2026-11-15 진단 개편): 합계 0~20점 중 15~20 `high`(마무리 단계) / 9~14 `mid`(진행 단계) / 0~8 `low`(시작 단계). 화면에는 점수 대신 준비 단계만. 채점은 `docs/landing-content.md` 5장 경로 B · `js/diagnosis.js` 머리말.
 - **디버그:** 주소에 `?debug=1`이 붙으면 이벤트가 나갈 때마다 콘솔에 찍고, 화면 오른쪽 아래에 작은 이벤트 로그 상자를 띄운다 (캡처로 확인용). 이 상태는 페이지를 넘어가도 유지한다(`sessionStorage`).
 
 ### A/B 테스트 (가이드북 H1 · H3)
@@ -192,7 +192,7 @@ PARKSAJANG-CLASS/
 ## 9. AEO · SEO · 채널
 
 - 랜딩 `<title>`, `meta description`은 md 6장 문구 그대로. og 태그(`og:image`는 `images/og.png`)도 같은 문구.
-- 랜딩에 JSON-LD: `FAQPage`(FAQ 5개, 화면 문구와 완전히 동일), `Organization`(이름·한 줄 소개·대표 박미경·채널 URL).
+- 랜딩에 JSON-LD: `FAQPage`(FAQ 6개, 화면 문구와 완전히 동일), `Organization`(이름·한 줄 소개·대표 박미경·채널 URL).
 - 배포 전 사이트 주소는 `https://YOUR-DOMAIN`으로 두고, 배포 후 `node scripts/set-domain.js https://배포주소` 한 번으로 `config.js`·`sitemap.xml`·`robots.txt`·canonical·og 태그·JSON-LD를 모두 바꾼다.
 - FAQPage JSON-LD는 손으로 고치지 않는다. 화면 FAQ 문구를 고친 뒤 `node scripts/build-jsonld.js`를 실행하면 화면 문구 그대로 다시 만들어진다 (`<!--JSONLD:START-->` ~ `<!--JSONLD:END-->` 사이).
 - 검색 노출 페이지(index·checklist·template·diagnosis·live·coaching)에는 canonical, 나머지(완료·주문서·결과·상담 예약·설문)에는 `noindex`.
