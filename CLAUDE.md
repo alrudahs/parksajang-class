@@ -45,6 +45,7 @@ PARKSAJANG-CLASS/
 ├─ files/                  다운로드 PDF (D-7 체크리스트 최종본 · 매장 운영 템플릿 데모 7쪽 · 키트 오픈 후 30일 운영 가이드 데모 6쪽)
 ├─ robots.txt · sitemap.xml
 ├─ vercel.json             D-7 PDF·템플릿 데모 PDF·키트 30일 가이드 PDF 세 경로에만 Content-Disposition 헤더 (한글 저장 이름 · 2026-11-11). 그 밖에는 정적 파일 그대로 배포
+├─ .vercelignore           배포에서만 빼는 파일: docs/ · CLAUDE.md (2026-11-15 · GitHub 에는 그대로). 사이트 화면이 이 안의 파일을 불러오면 안 된다
 ├─ scripts/capture.js      Playwright 캡처 도구 (배포와 무관)
 ├─ captures/               캡처 결과 (.gitignore, GitHub에 올리지 않음)
 ├─ package.json            캡처 도구용 (사이트는 빌드 없음)
