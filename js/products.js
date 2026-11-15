@@ -32,6 +32,9 @@ window.PSC_PRODUCTS = {
     id: 'coaching',
     name: '1:1 Zoom 코칭',
     price: 200000,
+    // 구성 (2026-11-15 사장님이 정한 구성 · 표시용 기준값, 화면 글자는 index.html·coaching.html 에 직접)
+    includes: ['오픈 준비·초기 운영 상담', '60분 화상 상담 × 4회 (주 1회)', '카톡 질문 1개월', '매장 맞춤 체크리스트 1부'],
+    sessions: 4, // 가격 근거: 200,000원 ÷ 4회 = 회당 약 50,000원
     detailUrl: 'coaching.html?type=open',
   },
   premium: {

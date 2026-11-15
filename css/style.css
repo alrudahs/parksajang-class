@@ -711,6 +711,15 @@ strong {
   font-size: 12px;
   white-space: nowrap;
 }
+/* 가격 근거 한 줄 (1:1 코칭 · 2026-11-15) */
+.tier-why {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+}
 .tier-promise {
   margin-top: 12px;
   padding: 12px 14px;
