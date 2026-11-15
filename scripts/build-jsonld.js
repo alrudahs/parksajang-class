@@ -47,7 +47,9 @@ const faq = {
   })),
 };
 
-// 채널 URL 은 js/config.js 와 같은 가상 주소 (계정 개설 후 둘 다 교체)
+// sameAs: 실제로 있는 공식 계정 주소만. 인스타그램·카카오톡 채널은 아직 개설 전(가상 주소)이라
+// 2026-11-15 지인 3차 피드백으로 뺐다. 계정을 만들면 여기에 실제 주소를 넣고 다시 실행한다
+const SAME_AS = [];
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -55,8 +57,8 @@ const org = {
   description: '박사장 클라쓰는 초보 사장님을 위한 오픈·운영 템플릿·코칭 브랜드입니다',
   url: SITE + '/',
   founder: { '@type': 'Person', name: '박미경', jobTitle: '대표' },
-  sameAs: ['https://www.instagram.com/parksajang_class', 'https://pf.kakao.com/_parksajangclass'],
 };
+if (SAME_AS.length) org.sameAs = SAME_AS;
 
 const block = (obj) =>
   '  <script type="application/ld+json">\n' +

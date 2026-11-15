@@ -12,8 +12,9 @@ window.PSC_CONFIG = {
   siteUrl: 'https://parksajang-class.vercel.app',
 
   // 공식 채널 — 실제 계정 개설 전이라 가상 주소.
-  // virtual: true 이면 화면에서 링크를 걸지 않고 "(예정)" 텍스트로만 보여준다.
-  // 계정을 만들면 url 을 고치고 virtual: false 로 바꾸면 링크가 켜진다.
+  // 2026-11-15 지인 3차 피드백: 푸터의 "(예정)" 항목과 JSON-LD sameAs 에서 뺐다 → 지금은 화면 어디에도 안 나옴.
+  // 계정을 만들면 url 을 고치고 virtual: false 로 바꾼 뒤, 푸터에 <span data-channel="kakao|instagram">이름</span> 을
+  // 다시 넣으면 common.js 가 링크로 바꾼다. JSON-LD 는 scripts/build-jsonld.js 의 SAME_AS 에 주소를 넣고 실행.
   channels: {
     instagram: { label: '인스타그램 @parksajang_class', url: 'https://www.instagram.com/parksajang_class', virtual: true },
     kakao: { label: "카카오톡 채널 '박사장 클라쓰'", url: 'https://pf.kakao.com/_parksajangclass', virtual: true },

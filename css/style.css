@@ -848,30 +848,7 @@ strong {
 .stat--peak b:last-of-type {
   color: var(--orange);
 }
-.proof-extra {
-  display: grid;
-  gap: 12px;
-  margin-top: 16px;
-}
-.review-slot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px;
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius);
-  color: var(--muted);
-  font-size: 15px;
-}
-.review-slot .tag {
-  flex: none;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--tint);
-  font-size: 13px;
-  font-weight: 600;
-}
+/* 후기 자리(.proof-extra · .review-slot)는 2026-11-15 지인 3차 피드백으로 화면에서 빼면서 스타일도 지움 */
 
 /* ---------- ⑤ FAQ ---------- */
 .faq {
@@ -1513,6 +1490,15 @@ strong {
   color: var(--orange-dark);
   font-size: 18px;
   font-weight: 800;
+}
+/* 업그레이드 금액 설명 한 줄 (2026-11-15): 키트 상세는 p, 가격표 카드는 li 안 small (다음 줄로) */
+.upgrade-note {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  word-break: keep-all;
 }
 .btn-stack {
   display: grid;
