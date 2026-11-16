@@ -761,3 +761,15 @@ H1·H3 A/B 그대로 · 이벤트 그대로 · 가격 그대로.
   | `files/` PDF 3개 | 200 | **200** · 크기 로컬과 같음(365,619 / 438,329 / 366,041 bytes) · `%PDF-` 시작 · 한국어 저장 이름 그대로("박사장클라쓰_오픈D-7체크리스트.pdf" / "박사장클라쓰_매장운영템플릿_데모.pdf" / "박사장클라쓰_오픈30일운영가이드_데모.pdf") |
 - **자동 시험** (로컬 · `scripts/block-analytics.js` 로 GA4(`www.google.com/g/collect` 포함)·구글폼 차단) **73개 통과 / 실패 0** (9-31 과 같은 시험) · GA4·구글폼 전송 완료 요청 0건.
 - 참고: 이 qa-report 도 `docs/` 안이라 이제 배포 주소에서는 열리지 않음(GitHub 에서 보기).
+
+### 9-33. 1:1 코칭 구성 변경 (2026-11-16 11:33 작업 완료 · 커밋 "1:1 코칭 구성 변경 (30분 × 2회)")
+
+H1·H3 A/B 그대로(양쪽 같은 가격표 카드) · 이벤트 이름·매개변수 그대로 · 가격 200,000원 그대로.
+
+- **구성 변경** (사장님 결정): "60분 화상 상담 × 4회 (주 1회)" → **"30분 화상 상담 × 2회"**, **"카톡 질문 1개월" 삭제**, 가격 근거 "200,000원 ÷ 4회 = 회당 약 50,000원" → **"200,000원 ÷ 2회 = 회당 약 100,000원"**. "오픈 준비·초기 운영 상담" · "매장 맞춤 체크리스트 1부"는 그대로.
+- **고친 곳 4곳**: 랜딩 가격표 카드(`index.html`) · 코칭 상세(`coaching.html?type=open`) · `js/products.js`(`includes` 3개, `sessions: 2`) · 원본 md 4장 ③. 
+- **전체 검색으로 없음 확인**: FAQ·JSON-LD(FAQ 6개·Organization)·주문서(`checkout.html` — 상품명·가격만 표시)·완료 화면·진단 결과에는 코칭 구성 글자가 원래 없음. 
+- **검색 결과** (배포 대상 html·js·css·xml·txt·json, `docs/`·`scripts/` 제외): "60분" · "4회" · "카톡 질문" · "50,000원" → 코칭 관련 **0건**. 남은 "40~60분" 5곳은 무료 Zoom 라이브 시간(`live.html` · `live-done.html` · `order-complete.html` · `diagnosis-result.html`)이고, "주 1회 Zoom 점검"은 프리미엄 관리 범위 문장이라 그대로 둠. `docs/landing-content.md` 의 변경 이력 메모에는 옛 구성이 남아 있음(배포 제외 폴더).
+- **금지 문구** ("매출 보장" · "보장" · "실패 없음" · "무조건 대박" · "누구나 쉽게" · "4배") 모든 html·js 에서 **0건**.
+- **시험** (로컬 · `scripts/block-analytics.js` 로 GA4(`www.google.com/g/collect` 포함)·구글폼 차단 · 375·412·1440 · A·B안) **80개 통과 / 실패 0**: 9-32 시험 73개(코칭 기대값을 새 구성으로 바꿈) + 7개(랜딩 카드·코칭 상세에 옛 글자 없음 · 200,000 ÷ 2 · `products.js` 코칭 값 · 모든 html·js 옛 구성 글자 0 · 주문서 `?item=coaching` 200,000원 · `begin_checkout(1:1 Zoom 코칭, 200000, false)`). H3 `exp_headline` a/b · H1 `exp_done_offer` on/off · `view_item(1:1 Zoom 코칭, 200000)` 그대로 · GA4·구글폼 전송 완료 요청 0건.
+- 캡처: `captures/20-after-coaching-card-mobile412.png` (수정 전 = `18-after-coaching-card-mobile412.png`, README 단계 20).
